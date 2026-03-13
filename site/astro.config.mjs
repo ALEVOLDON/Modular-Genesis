@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://modular-genesis.local"
+  site: "https://alevoldon.github.io",
+  base: "/Modular-Genesis"
 });

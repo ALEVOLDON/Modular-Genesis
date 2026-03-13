@@ -102,6 +102,22 @@ Production build:
 npm run build
 ```
 
+## Deploy
+
+The repository is configured for GitHub Pages deployment through GitHub Actions.
+
+Expected project site URL:
+
+```text
+https://alevoldon.github.io/Modular-Genesis/
+```
+
+Deployment source:
+
+- branch: `main`
+- workflow: `.github/workflows/deploy-pages.yml`
+- build output: `site/dist`
+
 ## Repository Layout
 
 ```text

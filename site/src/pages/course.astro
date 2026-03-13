@@ -12,90 +12,147 @@ const grouped = tracks.map((track) => ({
     .filter((lesson) => lesson.data.track === track.key)
     .sort((a, b) => a.data.order - b.data.order)
 }));
+
+const populatedTracks = grouped.filter((track) => track.lessons.length > 0);
+const totalLessons = lessons.length;
 ---
 
 <BaseLayout title="Course | Modular Genesis" description="Course outline for Modular Genesis.">
-  <section class="hero">
-    <div class="eyebrow">Course Outline</div>
-    <div class="hero-copy">
-      <h1>A documentation-first course scaffold.</h1>
-      <p>
-        The course is not yet written lesson-by-lesson, but the structure is now stable enough
-        to start adding Markdown lessons, patch references, and diagrams in parallel.
-      </p>
-      <div class="track-nav">
-        {grouped.map((track) => (
-          <a class="track-chip" href={`#${track.key}`}>{track.title}</a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="cards-3">
-      {tracks.map((section) => (
-        <article class="card">
-          <span class="card-kicker">Track</span>
-          <h3>{section.title}</h3>
-          <p>{section.description}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section>
-    <div class="panel">
-      <h2>Published lessons</h2>
-      <ul class="flow-list">
-        {grouped.map((track) => (
-          <li>
-            <strong>{track.title}:</strong> {track.lessons.length} lesson(s) available.
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="cards-2">
-      {grouped
-        .filter((track) => track.lessons.length > 0)
-        .map((track) => (
-          <article class="card" id={track.key}>
-            <span class="card-kicker">{track.title}</span>
-            <h3>{track.lessons.length} lesson(s)</h3>
-            <ul class="bullet-list">
-              {track.lessons.map((lesson) => (
-                <li>
-                  <a href={withBase(`/course/${lesson.slug}/`)}>{lesson.data.title}</a>
-                </li>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Course Structure</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
+              A <span class="accent">documentation-first</span> learning path for modular sound and hybrid systems.
+            </h1>
+            <p class="lede">
+              The course is already organized by track, with lessons, notes, patch references, and diagrams
+              designed to grow in parallel instead of becoming disconnected tutorials.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
+              <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+            </div>
+            <div class="track-nav">
+              {grouped.map((track) => (
+                <a class="track-chip" href={`#${track.key}`}>{track.title}</a>
               ))}
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Course status</span>
+              <h3>The curriculum already has a stable skeleton.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{tracks.length}</strong>
+                  tracks defined from foundations to audiovisual
+                </li>
+                <li>
+                  <strong>{totalLessons}</strong>
+                  lessons already published on-site
+                </li>
+                <li>
+                  <strong>{populatedTracks.length}</strong>
+                  tracks already populated with live content
+                </li>
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              <article class="mini-card">
+                <span class="mini-stat">Theory</span>
+                <h4>Concept first</h4>
+                <p>Every lesson starts with a concise model of the idea before any patch file appears.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">Patch</span>
+                <h4>Repository anchor</h4>
+                <p>Lessons are tied to patch entries so content and artifacts evolve together.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Track map</span>
+          <h2>Each track covers a different layer of the same system.</h2>
+          <p>
+            The course is not split by random topics. It moves from core signal logic into sequencing,
+            generative behavior, hybrid routing, and audiovisual output.
+          </p>
+        </div>
+        <div class="stack-grid" style="margin-top: 26px;">
+          {tracks.map((track, index) => (
+            <article class="feature-card">
+              <span class="card-kicker">Track {index + 1}</span>
+              <h3>{track.title}</h3>
+              <p>{track.description}</p>
+              <ul class="feature-list">
+                {track.roadmapTopics.slice(0, 3).map((topic) => (
+                  <li>{topic}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Published lessons</span>
+            <h2>Live lesson groups are separated by track and remain easy to scan.</h2>
+            <p>Each block below can grow independently without collapsing the page into one long mixed list.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" style="margin-top: 10px;">
+          {populatedTracks.map((track) => (
+            <article class="feature-card" id={track.key}>
+              <span class="card-kicker">{track.title}</span>
+              <h3>{track.lessons.length} lesson(s)</h3>
+              <p>{track.description}</p>
+              <ul class="feature-list">
+                {track.lessons.map((lesson) => (
+                  <li>
+                    <a href={withBase(`/course/${lesson.slug}/`)}>{lesson.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="split-hero">
+          <article class="feature-card">
+            <span class="section-label">Lesson format</span>
+            <h2>Every lesson is designed around one repeatable structure.</h2>
+            <ul class="feature-list">
+              <li><strong>Theory:</strong> concise explanation of the concept.</li>
+              <li><strong>Patch idea:</strong> simple routing model or signal chain.</li>
+              <li><strong>Practice:</strong> one concrete task to rebuild or extend the system.</li>
             </ul>
           </article>
-        ))}
-    </div>
-  </section>
 
-  <section>
-    <div class="panel">
-      <h2>Lesson format</h2>
-      <ul class="flow-list">
-        <li><strong>Theory:</strong> concise explanation of the concept.</li>
-        <li><strong>Patch idea:</strong> simple routing model or signal chain.</li>
-        <li><strong>Practice:</strong> one concrete task to rebuild or extend the system.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Lesson anatomy</h2>
-        <p>A cleaned-up version of the strongest lesson structure idea from the earlier presentation material.</p>
+          <div class="media-frame">
+            <img src={withBase("/diagrams/lesson-anatomy.svg")} alt="Lesson anatomy diagram showing theory, patch diagram, patch file, and practice task." />
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="media-frame">
-      <img src={withBase("/diagrams/lesson-anatomy.svg")} alt="Lesson anatomy diagram showing theory, patch diagram, patch file, and practice task." />
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

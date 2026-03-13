@@ -26,7 +26,7 @@ const roadmapStages = tracks.map((track, index) => ({
         <div class="display-grid">
           <div>
             <div class="eyebrow">System Evolution Protocol</div>
-            <h1 class="display-title">
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               Modular <span class="accent">Genesis</span> roadmap from first signal flow to audiovisual systems.
             </h1>
             <p class="lede">
@@ -39,23 +39,45 @@ const roadmapStages = tracks.map((track, index) => ({
             </div>
           </div>
 
-          <div class="feature-card">
-            <span class="section-label">Current roadmap status</span>
-            <h3>Five stages, one connected system.</h3>
-            <ul class="metric-list">
-              <li>
-                <strong>{roadmapStages.length}</strong>
-                stage clusters already defined
-              </li>
-              <li>
-                <strong>{lessons.length}</strong>
-                lessons already connected to those stages
-              </li>
-              <li>
-                <strong>{notes.length}</strong>
-                conceptual notes supporting the sequence
-              </li>
-            </ul>
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Current roadmap status</span>
+              <h3>Five stages, one connected system.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{roadmapStages.length}</strong>
+                  stage clusters already defined
+                </li>
+                <li>
+                  <strong>{lessons.length}</strong>
+                  lessons already connected to those stages
+                </li>
+                <li>
+                  <strong>{notes.length}</strong>
+                  conceptual notes supporting the sequence
+                </li>
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              {roadmapStages.slice(0, 4).map((stage) => (
+                <article class="mini-card">
+                  <span class="mini-stat" style={`color:${stage.tone};`}>0{stage.index + 1}</span>
+                  <h4>{stage.title}</h4>
+                  <p>{stage.roadmapTopics[0]}</p>
+                </article>
+              ))}
+            </div>
+
+            <article class="feature-card">
+              <span class="section-label">Operational view</span>
+              <h3>How the roadmap behaves in practice</h3>
+              <ul class="feature-list">
+                <li><strong>Lessons:</strong> each stage can expand into a focused lesson cluster.</li>
+                <li><strong>Patches:</strong> stage logic maps directly into patch entries and future `.vcv` files.</li>
+                <li><strong>Docs:</strong> notes and diagrams clarify system transitions between stages.</li>
+              </ul>
+            </article>
           </div>
         </div>
       </div>

@@ -2,44 +2,120 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { resources } from "../data/resources";
 import { withBase } from "../lib/paths";
+
+const featuredResources = resources.slice(0, 3);
+const remainingResources = resources.slice(3);
 ---
 
 <BaseLayout title="Resources | Modular Genesis" description="Reference notes and conceptual material for Modular Genesis.">
-  <section class="hero">
-    <div class="eyebrow">Resources</div>
-    <div class="hero-copy">
-      <h1>Reference material behind the course and system design.</h1>
-      <p>
-        These resources capture the stable concepts behind the lessons:
-        hybrid workflow, generative structure, project vision, and visual system planning.
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="cards-2">
-      {resources.map((resource) => (
-        <article class="card">
-          <span class="card-kicker">Reference</span>
-          <h3>{resource.title}</h3>
-          <p>{resource.summary}</p>
-          <div class="actions">
-            <a class="button-secondary" href={withBase(resource.href)}>Open note</a>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Resources</div>
+            <h1 class="display-title">
+              The <span class="accent">reference layer</span> behind the lessons, patches, and diagrams.
+            </h1>
+            <p class="lede">
+              These notes capture the stable concepts behind the course: hybrid workflow, generative structure,
+              project vision, and the visual system planning that extends the modular side of the project.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
+              <a class="button-secondary" href={withBase("/course")}>Browse lessons</a>
+            </div>
           </div>
-        </article>
-      ))}
-    </div>
-  </section>
 
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Hybrid setup reference</h2>
-        <p>This diagram extracts the useful structure from the earlier slide deck without importing the original visual style.</p>
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Reference scope</span>
+              <h3>Notes explain the system, not just isolated techniques.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{resources.length}</strong>
+                  concept notes currently published
+                </li>
+                <li>
+                  <strong>Workflow</strong>
+                  routing, sequencing roles, hybrid capture
+                </li>
+                <li>
+                  <strong>Vision</strong>
+                  repository structure, visual map, future lab direction
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="media-frame">
-      <img src={withBase("/diagrams/hybrid-setup.svg")} alt="Hybrid setup diagram showing controller, Ableton, VCV Rack, visuals, and recording layer." />
-    </div>
-  </section>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Core notes</span>
+            <h2>The first layer focuses on the concepts that hold the project together.</h2>
+            <p>These are the notes most directly connected to the current lessons, roadmap, and patch logic.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" style="margin-top: 10px;">
+          {featuredResources.map((resource) => (
+            <article class="feature-card">
+              <span class="card-kicker">Reference</span>
+              <h3>{resource.title}</h3>
+              <p>{resource.summary}</p>
+              <div class="actions">
+                <a class="button-secondary" href={withBase(resource.href)}>Open note</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="split-hero">
+          <article class="feature-card">
+            <span class="section-label">Hybrid setup reference</span>
+            <h2>A site-native diagram extracted from the original project thinking.</h2>
+            <p>
+              This diagram replaces earlier slide material with a cleaner visual language while preserving
+              the structural idea: controller input, Ableton, VCV Rack, visuals, and recording as one setup.
+            </p>
+          </article>
+
+          <div class="media-frame">
+            <img src={withBase("/diagrams/hybrid-setup.svg")} alt="Hybrid setup diagram showing controller, Ableton, VCV Rack, visuals, and recording layer." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Extended notes</span>
+          <h2>The remaining notes point toward site growth and future system layers.</h2>
+          <p>They are less operational than the core workflow notes, but important for where the project is headed.</p>
+        </div>
+
+        <div class="cards-2" style="margin-top: 26px;">
+          {remainingResources.map((resource) => (
+            <article class="card">
+              <span class="card-kicker">Reference</span>
+              <h3>{resource.title}</h3>
+              <p>{resource.summary}</p>
+              <div class="actions">
+                <a class="button-secondary" href={withBase(resource.href)}>Open note</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { tracks } from "../data/tracks";
+---
+
+<BaseLayout title="Roadmap | Modular Genesis" description="Learning roadmap for Modular Genesis.">
+  <section class="hero">
+    <div class="eyebrow">Roadmap</div>
+    <div class="hero-copy">
+      <h1>Five levels from signal flow to audiovisual systems.</h1>
+      <p>
+        This roadmap turns the original planning notes into a teachable sequence.
+        Each level can become a docs section, lesson cluster, patch folder, and site section.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="cards-2">
+      {tracks.map((level, index) => (
+        <article class="card">
+          <span class="card-kicker">Level {index + 1}</span>
+          <h3>{level.title}</h3>
+          <ul class="bullet-list">
+            {level.roadmapTopics.map((topic) => (
+              <li>{topic}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Hybrid routing diagram</h2>
+        <p>A first visual artifact connecting the audio and course layers.</p>
+      </div>
+    </div>
+    <div class="media-frame">
+      <img src="/diagrams/hybrid-routing.svg" alt="Hybrid routing diagram for Ableton, VCV Rack, recording, and visuals." />
+    </div>
+  </section>
+</BaseLayout>

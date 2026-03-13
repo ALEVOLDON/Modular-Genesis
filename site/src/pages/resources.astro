@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { resources } from "../data/resources";
+---
+
+<BaseLayout title="Resources | Modular Genesis" description="Reference notes and conceptual material for Modular Genesis.">
+  <section class="hero">
+    <div class="eyebrow">Resources</div>
+    <div class="hero-copy">
+      <h1>Reference material behind the course and system design.</h1>
+      <p>
+        These resources capture the stable concepts behind the lessons:
+        hybrid workflow, generative structure, project vision, and visual system planning.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="cards-2">
+      {resources.map((resource) => (
+        <article class="card">
+          <span class="card-kicker">Reference</span>
+          <h3>{resource.title}</h3>
+          <p>{resource.summary}</p>
+          <div class="actions">
+            <a class="button-secondary" href={resource.href}>Planned doc route</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

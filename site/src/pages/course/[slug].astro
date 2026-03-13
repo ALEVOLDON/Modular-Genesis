@@ -1,0 +1,70 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { trackLabelMap } from "../../data/tracks";
+
+export async function getStaticPaths() {
+  const lessons = await getCollection("lessons");
+
+  return lessons.map((lesson) => ({
+    params: { slug: lesson.slug },
+    props: { lesson }
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+const relatedPatches = (await getCollection("patches"))
+  .filter((patch) => patch.data.track === lesson.data.track)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+---
+
+<BaseLayout title={`${lesson.data.title} | Modular Genesis`} description={lesson.data.summary}>
+  <section class="hero">
+    <div class="eyebrow">{trackLabelMap[lesson.data.track]}</div>
+    <div class="hero-copy">
+      <h1>{lesson.data.title}</h1>
+      <p>{lesson.data.summary}</p>
+      <div class="actions">
+        <a class="button-secondary" href="/course">Back to course</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <article class="panel prose-panel">
+      <Content />
+    </article>
+  </section>
+
+  <section>
+    <div class="cards-2">
+      <article class="card">
+        <span class="card-kicker">Related patches</span>
+        <h3>Patch references</h3>
+        <p>Use the linked patch entries below as concrete repository anchors for this lesson track.</p>
+        <ul class="bullet-list">
+          {relatedPatches.map((patch) => (
+            <li>
+              <a href={`/patches/${patch.slug}/`}>{patch.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="card-kicker">Related diagram</span>
+        <h3>Hybrid routing overview</h3>
+        <p>
+          The first system diagram connects the modular engine, DAW layer, and visual output layer.
+        </p>
+        <div class="actions">
+          <a class="button-secondary" href="/roadmap">Open roadmap diagram</a>
+          <a class="button-secondary" href="/patches">Open patch library</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

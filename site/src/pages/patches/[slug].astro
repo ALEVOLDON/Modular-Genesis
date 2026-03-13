@@ -1,0 +1,60 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { trackLabelMap } from "../../data/tracks";
+
+export async function getStaticPaths() {
+  const patches = await getCollection("patches");
+
+  return patches.map((patch) => ({
+    params: { slug: patch.slug },
+    props: { patch }
+  }));
+}
+
+const { patch } = Astro.props;
+const { Content } = await render(patch);
+---
+
+<BaseLayout title={`${patch.data.title} | Modular Genesis`} description={patch.data.summary}>
+  <section class="hero">
+    <div class="eyebrow">{trackLabelMap[patch.data.track === "performances" ? "hybrid" : patch.data.track]}</div>
+    <div class="hero-copy">
+      <h1>{patch.data.title}</h1>
+      <p>{patch.data.summary}</p>
+      <div class="actions">
+        <a class="button-secondary" href="/patches">Back to patches</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cards-2">
+      <article class="card">
+        <span class="card-kicker">Metadata</span>
+        <h3>{patch.data.filename}</h3>
+        <ul class="bullet-list">
+          <li>Status: {patch.data.status}</li>
+          <li>Track: {patch.data.track}</li>
+          <li>Order: {patch.data.order}</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="card-kicker">Repository path</span>
+        <h3>Patch file location</h3>
+        <p>
+          The current linked patch artifact is stored in the repository and can later be replaced
+          with a real `VCV Rack` patch without changing the site route.
+        </p>
+        <div class="code-block">{`patches/${patch.data.track}/${patch.data.filename}`}</div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <article class="panel prose-panel">
+      <Content />
+    </article>
+  </section>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { patchCollections } from "../data/patches";
+
+const patchEntries = await getCollection("patches");
+const groupedEntries = Object.fromEntries(
+  patchCollections.map((collection) => [
+    collection.key,
+    patchEntries
+      .filter((entry) => entry.data.track === collection.key)
+      .sort((a, b) => a.data.order - b.data.order)
+  ])
+);
+---
+
+<BaseLayout title="Patches | Modular Genesis" description="Patch library direction for Modular Genesis.">
+  <section class="hero">
+    <div class="eyebrow">Patch Library</div>
+    <div class="hero-copy">
+      <h1>The future patch library is already structured.</h1>
+      <p>
+        Patch folders exist in the repository and are ready to receive real `.vcv` files,
+        notes, screenshots, and lesson references.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="cards-2">
+      {patchCollections.map((collection) => (
+        <article class="card">
+          <span class="card-kicker">Collection</span>
+          <h3>{collection.title}</h3>
+          <p>{collection.summary}</p>
+          <ul class="bullet-list">
+            {groupedEntries[collection.key]?.map((entry) => (
+              <li>
+                <a href={`/patches/${entry.slug}/`}>{entry.data.title}</a>
+              </li>
+            ))}
+          </ul>
+          <div class="actions">
+            <a class="button-secondary" href={collection.folder}>Repository folder</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

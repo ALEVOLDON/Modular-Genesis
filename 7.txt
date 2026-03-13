@@ -1,0 +1,436 @@
+Отличная идея — сделать **открытую дорожную карту “VCV Rack → Generative Music → Audiovisual System”** и выложить её на GitHub. Это реально может стать полезным репозиторием для других. Я предложу структуру так, чтобы:
+
+* идти **от самого простого к сложному**
+* использовать **только бесплатные инструменты**
+* постепенно освоить **все workflow**
+* подключить **MIDI-клавиатуру**
+* добавить **визуализацию**
+* закончить **профессиональным сетапом**
+
+Я дам структуру, которую можно почти прямо копировать в **README.md**.
+
+---
+
+# Roadmap: Free Modular Music & Generative Audiovisual System
+
+## Stage 0 — Setup Environment
+
+Цель: подготовить полностью бесплатную студию.
+
+### Установить
+
+**Аудио**
+
+* VCV Rack Free
+* Ableton Live Lite
+
+**Модули VCV**
+
+* Bogaudio
+* Audible Instruments
+* Valley
+* Impromptu
+* Fundamental
+
+**Драйвер для routing**
+
+Mac:
+
+* BlackHole
+
+Windows:
+
+* VB-Cable
+* Voicemeeter
+
+**Визуализация**
+
+* Blender
+* Three.js
+* TouchDesigner (free version)
+
+---
+
+# Stage 1 — Первый звук в VCV Rack
+
+Цель: понять базовые принципы модульного синтеза.
+
+### Минимальный патч
+
+```
+VCO → VCF → VCA → AUDIO
+```
+
+Добавить:
+
+```
+LFO → filter cutoff
+```
+
+Что изучаем:
+
+* Oscillator
+* Filter
+* VCA
+* CV сигналы
+
+Задание:
+
+Сделать **3 разных звука**
+
+* bass
+* pad
+* drone
+
+---
+
+# Stage 2 — Sequencer
+
+Теперь добавляем ритм.
+
+### Патч
+
+```
+Clock
+↓
+Sequencer
+↓
+Quantizer
+↓
+Oscillator
+↓
+Filter
+↓
+VCA
+↓
+Audio
+```
+
+Модули:
+
+* Impromptu Clocked
+* Bogaudio SEQ
+* Bogaudio Quantizer
+
+Задание:
+
+Создать:
+
+* bassline
+* melody
+* techno sequence
+
+---
+
+# Stage 3 — Generative Music
+
+Теперь музыка начинает **создаваться сама**.
+
+### Random System
+
+```
+Clock
+↓
+Random
+↓
+Sample & Hold
+↓
+Quantizer
+↓
+Oscillator
+```
+
+Модули:
+
+* Marbles
+* Turing Machine
+* Bogaudio S&H
+
+Задание:
+
+Сделать патч который играет **10 минут без повторений**.
+
+---
+
+# Stage 4 — FX и текстуры
+
+Добавляем атмосферу.
+
+Модули:
+
+* Supercell (Clouds)
+* Plateau Reverb
+* Delay
+
+Патч:
+
+```
+Oscillator
+↓
+Granular
+↓
+Reverb
+↓
+Delay
+```
+
+Задание:
+
+Создать **ambient текстуру**.
+
+---
+
+# Stage 5 — Многоголосный патч
+
+Создаём полноценный трек внутри VCV Rack.
+
+```
+voice1 → mixer
+voice2 → mixer
+voice3 → mixer
+voice4 → mixer
+```
+
+Пример структуры:
+
+```
+kick
+bass
+pad
+lead
+texture
+noise
+drone
+fx
+```
+
+Задание:
+
+Собрать **8-voice modular patch**.
+
+---
+
+# Stage 6 — Ableton Integration
+
+Теперь подключаем DAW.
+
+Workflow:
+
+```
+VCV Rack
+↓
+Virtual Audio Cable
+↓
+Ableton
+```
+
+Ableton используется для:
+
+* запись
+* компрессия
+* arrangement
+
+Задание:
+
+Записать **modular jam**.
+
+---
+
+# Stage 7 — MIDI Controller
+
+Используем **Novation Launchkey 25**.
+
+Подключаем:
+
+```
+MIDI keyboard
+↓
+VCV Rack MIDI module
+↓
+Oscillator
+```
+
+Можно управлять:
+
+* pitch
+* filter
+* effects
+
+Задание:
+
+Сделать **live performance patch**.
+
+---
+
+# Stage 8 — Hybrid System
+
+Теперь соединяем всё.
+
+```
+Ableton (drums)
+↓ MIDI
+VCV Rack (synth)
+↓ audio
+Ableton (effects)
+```
+
+Задание:
+
+Собрать **гибридный трек**.
+
+---
+
+# Stage 9 — Generative System
+
+Создаём самоиграющую систему.
+
+```
+Clock
+↓
+Probability
+↓
+Random
+↓
+Sequencer
+↓
+Quantizer
+↓
+Synth
+↓
+FX
+```
+
+Добавляем:
+
+* slow LFO
+* modulation
+* feedback
+
+Задание:
+
+Система должна играть **1 час без повторений**.
+
+---
+
+# Stage 10 — Audiovisual System
+
+Связываем звук и графику.
+
+Схема:
+
+```
+VCV Rack
+↓
+OSC / MIDI
+↓
+Blender / TouchDesigner
+↓
+Generative Visuals
+```
+
+Примеры:
+
+* частицы реагируют на bass
+* форма реагирует на amplitude
+* цвет реагирует на frequency
+
+Задание:
+
+Создать **аудиовизуальную сцену**.
+
+---
+
+# Stage 11 — Performance Setup
+
+Финальная система.
+
+```
+Launchkey
+↓
+Ableton
+↓
+VCV Rack
+↓
+Visual Engine
+↓
+OBS
+```
+
+Можно делать:
+
+* live set
+* streaming
+* audiovisual performance
+
+---
+
+# Stage 12 — Publishing
+
+Теперь всё публикуем.
+
+### GitHub repository
+
+Структура:
+
+```
+generative-modular-roadmap
+
+README.md
+patches
+audio
+visuals
+tutorials
+resources
+```
+
+Добавить:
+
+* VCV patches
+* Ableton templates
+* визуализации
+* инструкции
+
+---
+
+# Дополнительные разделы
+
+### Лучшие бесплатные модули
+
+* Bogaudio
+* Audible Instruments
+* Valley
+* Surge modules
+* Vult
+
+---
+
+### Референсы
+
+Артисты:
+
+* Autechre
+* Ryoji Ikeda
+* Alva Noto
+* Suzanne Ciani
+
+---
+
+# Финальный результат roadmap
+
+После прохождения ты умеешь:
+
+* modular synthesis
+* generative music
+* DAW integration
+* audiovisual performance
+* live modular setup
+
+---
+
+💡 Если хочешь, я могу ещё сделать **3 очень полезные вещи для этого проекта**:
+
+1️⃣ **идеальную структуру GitHub репозитория** (чтобы он выглядел как серьёзный open-source проект)
+2️⃣ **10 лучших бесплатных модулей для generative музыки**
+3️⃣ **пример большого VCV патча на 8 голосов** — прямо схема как его собрать.
+
+Последний пункт особенно интересный — это уже почти **готовая modular система уровня IDM-артистов**. 🎛️

@@ -1,0 +1,195 @@
+Хороший вопрос. На самом деле там **не два аудио интерфейса в обычном смысле**, а два разных типа **аудио-I/O модулей внутри VCV Rack**. Это нормальная практика. Разберём как это работает. 🎛️
+
+---
+
+## 1. AUDIO модуль (основной интерфейс)
+
+![Image](https://vcvrack.com/manual/images/templatepatch.png)
+
+![Image](https://vcvrack.com/Free/hero.png)
+
+![Image](https://community.vcvrack.com/uploads/default/original/2X/3/3cce710ab6084fc8388253fefa9fa32d7cc21b7e.jpeg)
+
+![Image](https://community.vcvrack.com/uploads/default/original/3X/3/3/33d3654b7511153bdb10b33a8ccf70bce55ff510.png)
+
+Справа на скрине — стандартный модуль **Audio**.
+
+Он делает простую вещь:
+
+**VCV Rack → звуковая карта компьютера**
+
+То есть:
+
+```
+modular patch → Audio module → sound card → speakers
+```
+
+У него обычно:
+
+* L / R вход
+* уровень
+* выбор устройства
+
+Это **финальный выход**.
+
+---
+
+## 2. Многоканальный интерфейс (Bridge / Host)
+
+![Image](https://vcvrack.com/Rack2/browser.webp)
+
+![Image](https://community.vcvrack.com/uploads/default/original/3X/7/4/7433fead3f67d1eefacfff29217c8cc01543d33c.png)
+
+![Image](https://vcvrack.com/VCV-Host/showcase.png)
+
+![Image](https://community.vcvrack.com/uploads/default/f0c04c808cd7cf7989f80d1b06c6ef4617129620)
+
+Слева снизу — другой тип модуля.
+
+Обычно это:
+
+* **Audio-8**
+* **Bridge**
+* **Host Audio**
+* **DAW I/O**
+
+Он нужен для связи с **DAW (Ableton)**.
+
+Тут каналы могут быть:
+
+```
+1–8 outputs
+1–8 inputs
+```
+
+То есть:
+
+```
+VCV Rack → Ableton → отдельные дорожки
+```
+
+---
+
+## 3. Как это используется вместе
+
+Типичный сетап выглядит так:
+
+```
+Ableton Live
+   ↑     ↓
+multi-channel audio module
+   ↑     ↓
+VCV modular patch
+   ↓
+Supercell / effects
+   ↓
+Audio module
+   ↓
+sound card
+```
+
+Но чаще делают так:
+
+### вариант 1 (самый популярный)
+
+```
+VCV Rack plugin inside Ableton
+```
+
+Тогда:
+
+```
+VCV modules → multi-channel → Ableton tracks
+```
+
+Например:
+
+| модуль  | канал |
+| ------- | ----- |
+| kick    | out 1 |
+| bass    | out 2 |
+| texture | out 3 |
+| noise   | out 4 |
+
+В Ableton они приходят **на разные дорожки**.
+
+---
+
+### вариант 2
+
+Иногда один интерфейс используют как:
+
+**мониторинг**
+
+```
+patch → Audio module → speakers
+```
+
+А второй как:
+
+**routing**
+
+```
+patch → multi channel → Ableton
+```
+
+---
+
+## 4. Зачем это нужно
+
+Это даёт огромную гибкость.
+
+Например:
+
+**Supercell texture**
+
+```
+→ channel 3
+→ Ableton reverb
+→ Ableton compressor
+```
+
+**Kick**
+
+```
+→ channel 1
+→ Ableton drum bus
+```
+
+---
+
+## 5. Почему так часто делают
+
+VCV Rack сам по себе **не очень удобен для сведения**.
+
+Поэтому:
+
+VCV = генерация звука
+Ableton = микс + arrangement
+
+---
+
+## 6. Небольшой секрет
+
+Очень многие артисты делают именно так:
+
+```
+modular synth → multi outputs → DAW mixer
+```
+
+Это практически стандарт в:
+
+* generative music
+* IDM
+* ambient
+* modular techno
+
+---
+
+💡 Если интересно, могу ещё показать:
+
+* **как собрать такой сетап VCV Rack + Ableton за 10 минут**
+* **как сделать генеративный патч как у Autechre**
+* **10 лучших бесплатных модулей для таких систем**
+
+Там есть реально безумные штуки — типа **самогенерирующейся музыки, которая может играть часами**.

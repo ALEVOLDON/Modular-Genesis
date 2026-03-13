@@ -1,0 +1,401 @@
+Отлично, тогда сделаем **три фундаментальные вещи**, которые превратят идею в реальный open-source проект:
+1️⃣ структура GitHub
+2️⃣ план курса (40+ уроков)
+3️⃣ архитектура сайта
+
+Я сделаю это так, чтобы **ты реально мог начать завтра**.
+
+---
+
+# 1️⃣ Структура GitHub репозитория
+
+Репозиторий должен выглядеть **как серьёзный open-source проект**, чтобы люди хотели его форкать.
+
+Пример:
+
+```
+generative-modular-lab
+
+README.md
+
+course
+ ├ level1-foundations
+ ├ level2-generative
+ ├ level3-hybrid
+ ├ level4-audiovisual
+
+patches
+ ├ basic-synth
+ ├ sequencers
+ ├ generative
+ ├ performances
+
+ableton
+ ├ templates
+ ├ racks
+
+visuals
+ ├ blender
+ ├ threejs
+ ├ shaders
+
+audio-examples
+
+diagrams
+
+assets
+ ├ images
+ ├ videos
+
+site
+ ├ src
+ ├ content
+```
+
+---
+
+## README.md
+
+Очень важно.
+
+В README должно быть:
+
+* описание проекта
+* дорожная карта
+* ссылки на уроки
+* примеры патчей
+* демо
+
+Пример:
+
+```
+# Generative Modular Lab
+
+Open-source course about modular synthesis,
+generative music and audiovisual systems.
+
+Tools used:
+
+- VCV Rack
+- Ableton Live Lite
+- Blender
+- Three.js
+- MIDI controllers
+```
+
+---
+
+# 2️⃣ Полный план курса
+
+Я сделал **4 уровня**.
+
+Всего примерно **40–50 уроков**.
+
+---
+
+# LEVEL 1 — Modular Foundations
+
+Основы модульного синтеза.
+
+### Уроки
+
+1 — Что такое modular synthesis
+2 — CV и audio сигнал
+3 — Oscillator
+4 — Filter
+5 — VCA
+6 — Envelope
+7 — LFO
+8 — Mixer
+9 — Создание первого синта
+10 — Создание bass sound
+
+Проект уровня:
+
+```
+simple modular synth
+```
+
+---
+
+# LEVEL 2 — Sequencing
+
+Музыка начинает двигаться.
+
+Уроки:
+
+11 — Clock
+12 — Trigger и Gate
+13 — Sequencer
+14 — Quantizer
+15 — Scale
+16 — Melodic sequence
+17 — Drum sequencing
+18 — Probability
+19 — Random generators
+20 — First generative patch
+
+Проект:
+
+```
+generative melody system
+```
+
+---
+
+# LEVEL 3 — Generative Systems
+
+Теперь система начинает **играть сама**.
+
+Уроки:
+
+21 — Sample & Hold
+22 — Turing machine
+23 — Marbles
+24 — Generative rhythms
+25 — Probability sequencers
+26 — Evolving melodies
+27 — Self-generating patches
+28 — Feedback systems
+29 — Slow modulation
+30 — Ambient generative systems
+
+Проект:
+
+```
+self-playing modular system
+```
+
+---
+
+# LEVEL 4 — Hybrid Setup
+
+Теперь добавляем DAW.
+
+Уроки:
+
+31 — VCV Rack + Ableton
+32 — Virtual audio routing
+33 — Multichannel recording
+34 — Hybrid patching
+35 — MIDI integration
+36 — Launchkey controller
+37 — Live performance patches
+
+Проект:
+
+```
+modular jam system
+```
+
+---
+
+# LEVEL 5 — Audiovisual Systems
+
+Самая интересная часть.
+
+Уроки:
+
+38 — Audio reactive visuals
+39 — MIDI → visual control
+40 — OSC communication
+41 — Blender geometry nodes
+42 — Generative visuals
+43 — Synchronizing audio + visuals
+44 — Performance setup
+
+Финальный проект:
+
+```
+Generative Audiovisual Performance System
+```
+
+---
+
+# 3️⃣ Архитектура сайта
+
+Сайт можно сделать **очень лёгким**.
+
+Лучший вариант:
+
+**Astro + Markdown**
+
+---
+
+## Структура сайта
+
+```
+site
+
+src
+ ├ pages
+ ├ layouts
+ ├ components
+
+content
+ ├ lessons
+ ├ tutorials
+ ├ patches
+
+public
+ ├ images
+ ├ videos
+```
+
+---
+
+## Разделы сайта
+
+### Главная
+
+описание проекта
+
+---
+
+### Roadmap
+
+визуальная карта курса
+
+```
+Foundations
+↓
+Sequencing
+↓
+Generative
+↓
+Hybrid
+↓
+Audiovisual
+```
+
+---
+
+### Lessons
+
+список уроков
+
+---
+
+### Patches
+
+библиотека модульных патчей
+
+---
+
+### Visuals
+
+визуальные эксперименты
+
+---
+
+### Resources
+
+полезные ссылки
+
+---
+
+# Как должен выглядеть урок
+
+Каждый урок одинаковый.
+
+---
+
+## 1. Теория
+
+объяснение
+
+---
+
+## 2. Схема
+
+```
+VCO
+ ↓
+VCF
+ ↓
+VCA
+```
+
+---
+
+## 3. Патч
+
+скачать:
+
+```
+lesson01-basic-synth.vcv
+```
+
+---
+
+## 4. Видео
+
+короткий демонстрационный ролик
+
+---
+
+## 5. Задание
+
+например:
+
+> сделать 3 вариации патча.
+
+---
+
+# Самая мощная идея проекта
+
+Сделать **библиотеку генеративных систем**.
+
+Например:
+
+```
+generative-drums.vcv
+generative-ambient.vcv
+generative-idm.vcv
+generative-textures.vcv
+```
+
+Это будет **очень ценная база**.
+
+---
+
+# Как можно развивать проект
+
+Со временем можно добавить:
+
+* community patches
+* визуальные эксперименты
+* live performances
+* AI генерацию патчей
+
+---
+
+# Честно скажу
+
+Если это сделать хорошо, это может стать:
+
+* большим GitHub проектом
+* образовательным сайтом
+* комьюнити вокруг генеративного искусства
+
+Такие проекты иногда становятся **очень популярными**.
+
+---
+
+💡 И у меня есть ещё одна идея, которая может **сильно усилить этот проект**.
+
+Можно добавить **интерактивную карту модульного синтеза** — типа:
+
+```
+Oscillator → Filter → VCA
+```
+
+и человек кликает на модуль и **сразу слышит как он работает**.
+
+Это сделает курс **очень необычным**.
+
+Если хочешь — я могу ещё показать:
+
+* **идеальный дизайн сайта для такого проекта**
+* **визуальную карту всей системы**
+* и **10 очень крутых generative патчей для VCV Rack** (это реально следующий уровень).

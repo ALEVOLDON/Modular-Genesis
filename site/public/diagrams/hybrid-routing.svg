@@ -1,0 +1,79 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="620" fill="#071018"/>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1b2a"/>
+      <stop offset="100%" stop-color="#0a1521"/>
+    </linearGradient>
+    <linearGradient id="lineA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#66F7FF"/>
+      <stop offset="100%" stop-color="#8BFFE4"/>
+    </linearGradient>
+    <linearGradient id="lineB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="100%" stop-color="#FFD780"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <text x="68" y="72" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">
+    Modular Genesis Hybrid Routing
+  </text>
+  <text x="68" y="108" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    Ableton as structure and recording layer, VCV Rack as modular behavior and synthesis engine.
+  </text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="180" rx="28" ry="28" width="220" height="150" fill="url(#panel)" stroke="#1F394D"/>
+    <text x="104" y="232" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">INPUT / CONTROL</text>
+    <text x="104" y="272" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Ableton Live</text>
+    <text x="104" y="306" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">MIDI, clock, drums, arrangement</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="360" y="150" rx="28" ry="28" width="260" height="210" fill="url(#panel)" stroke="#1F394D"/>
+    <text x="394" y="202" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">SYNTHESIS ENGINE</text>
+    <text x="394" y="242" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">VCV Rack</text>
+    <text x="394" y="278" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">sequencers</text>
+    <text x="394" y="306" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">probability</text>
+    <text x="394" y="334" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">voices and effects</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="700" y="180" rx="28" ry="28" width="220" height="150" fill="url(#panel)" stroke="#1F394D"/>
+    <text x="734" y="232" fill="#FFB347" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">STUDIO LAYER</text>
+    <text x="734" y="272" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Recording</text>
+    <text x="734" y="306" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">routing, mix, capture</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="970" y="150" rx="28" ry="28" width="170" height="210" fill="url(#panel)" stroke="#1F394D"/>
+    <text x="1002" y="202" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">OUTPUT</text>
+    <text x="1002" y="246" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Visuals</text>
+    <text x="1002" y="282" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">OSC</text>
+    <text x="1002" y="308" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">MIDI</text>
+    <text x="1002" y="334" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">performance</text>
+  </g>
+
+  <path d="M290 255H360" stroke="url(#lineA)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M620 255H700" stroke="url(#lineB)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M920 255H970" stroke="url(#lineA)" stroke-width="8" stroke-linecap="round"/>
+
+  <circle cx="325" cy="255" r="10" fill="#66F7FF"/>
+  <circle cx="660" cy="255" r="10" fill="#FFB347"/>
+  <circle cx="945" cy="255" r="10" fill="#66F7FF"/>
+
+  <text x="300" y="238" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="15">MIDI / clock</text>
+  <text x="640" y="238" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="15">audio out</text>
+  <text x="915" y="238" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="15">mapping</text>
+
+  <rect x="70" y="430" rx="24" ry="24" width="1070" height="120" fill="#09131D" stroke="#173042"/>
+  <text x="104" y="478" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">
+    Core Idea
+  </text>
+  <text x="104" y="514" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    Use Ableton for arrangement and capture, let Rack handle behavior and sound generation, then expose the result to a visual system.
+  </text>
+</svg>

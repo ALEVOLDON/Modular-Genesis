@@ -1,0 +1,131 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pillars = [
+  {
+    kicker: "System",
+    title: "Hybrid audio architecture",
+    text: "A clear workflow connecting Ableton Live, VCV Rack, routing, recording, and future visual engines."
+  },
+  {
+    kicker: "Library",
+    title: "Reusable generative patches",
+    text: "A structured collection of modular patch ideas for foundations, sequencing, ambient systems, and performances."
+  },
+  {
+    kicker: "Course",
+    title: "Open educational track",
+    text: "A staged learning path from first oscillator patch to full audiovisual performance systems."
+  }
+];
+
+const roadmap = [
+  "Foundations",
+  "Sequencing",
+  "Generative",
+  "Hybrid",
+  "Audiovisual"
+];
+---
+
+<BaseLayout
+  title="Modular Genesis"
+  description="Open modular synthesis, generative music, and audiovisual systems."
+>
+  <section class="hero">
+    <div class="eyebrow">Documentation-first initialization</div>
+    <div class="hero-copy">
+      <h1>Open modular systems for sound, structure, and visuals.</h1>
+      <p>
+        Modular Genesis is an evolving project around VCV Rack, Ableton Live,
+        generative patch design, and audiovisual performance. The repository is
+        now initialized as a real site and documentation base instead of loose notes.
+      </p>
+      <div class="actions">
+        <a class="button" href="/roadmap">View roadmap</a>
+        <a class="button-secondary" href="/course">Open course outline</a>
+      </div>
+    </div>
+
+    <div class="panel-grid hero-grid">
+      <div class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Core pipeline</h2>
+            <p>The project backbone described across the original notes.</p>
+          </div>
+        </div>
+        <div class="code-block">Ableton / MIDI
+  ->
+VCV Rack
+  ->
+Generative Patch
+  ->
+Audio Engine
+  ->
+Visual Engine
+  ->
+Performance</div>
+      </div>
+
+      <div class="panel">
+        <h2>Current status</h2>
+        <ul class="stat-list">
+          <li>
+            <span class="stat-value">12</span>
+            raw note files consolidated into project direction
+          </li>
+          <li>
+            <span class="stat-value">5</span>
+            major learning levels defined
+          </li>
+          <li>
+            <span class="stat-value">1</span>
+            initialized Astro site scaffold
+          </li>
+          <li>
+            <span class="stat-value">Next</span>
+            lessons, patches, and diagrams
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Main pillars</h2>
+        <p>The repository is being organized around three durable outputs.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      {pillars.map((pillar) => (
+        <article class="card">
+          <span class="card-kicker">{pillar.kicker}</span>
+          <h3>{pillar.title}</h3>
+          <p>{pillar.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Roadmap levels</h2>
+        <p>The first stable course and documentation shape.</p>
+      </div>
+      <a class="button-secondary" href="/roadmap">Full roadmap</a>
+    </div>
+    <div class="roadmap-strip">
+      {roadmap.map((step, index) => (
+        <article class="roadmap-step">
+          <span class="index">{index + 1}</span>
+          <h3>{step}</h3>
+          <p>Structured docs, examples, and practice tasks for this layer.</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

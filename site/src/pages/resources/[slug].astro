@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes");
+
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note }
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+---
+
+<BaseLayout title={`${note.data.title} | Modular Genesis`} description={note.data.summary}>
+  <section class="hero">
+    <div class="eyebrow">Reference Note</div>
+    <div class="hero-copy">
+      <h1>{note.data.title}</h1>
+      <p>{note.data.summary}</p>
+      <div class="actions">
+        <a class="button-secondary" href="/resources">Back to resources</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <article class="panel prose-panel">
+      <Content />
+    </article>
+  </section>
+</BaseLayout>

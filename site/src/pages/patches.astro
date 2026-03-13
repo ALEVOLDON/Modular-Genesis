@@ -13,39 +13,121 @@ const groupedEntries = Object.fromEntries(
       .sort((a, b) => a.data.order - b.data.order)
   ])
 );
+
+const placeholderCount = patchEntries.filter((entry) => entry.data.status === "placeholder").length;
 ---
 
 <BaseLayout title="Patches | Modular Genesis" description="Patch library direction for Modular Genesis.">
-  <section class="hero">
-    <div class="eyebrow">Patch Library</div>
-    <div class="hero-copy">
-      <h1>The future patch library is already structured.</h1>
-      <p>
-        Patch folders exist in the repository and are ready to receive real `.vcv` files,
-        notes, screenshots, and lesson references.
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="cards-2">
-      {patchCollections.map((collection) => (
-        <article class="card">
-          <span class="card-kicker">Collection</span>
-          <h3>{collection.title}</h3>
-          <p>{collection.summary}</p>
-          <ul class="bullet-list">
-            {groupedEntries[collection.key]?.map((entry) => (
-              <li>
-                <a href={withBase(`/patches/${entry.slug}/`)}>{entry.data.title}</a>
-              </li>
-            ))}
-          </ul>
-          <div class="actions">
-            <a class="button-secondary" href={collection.folder}>Repository folder</a>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Patch Library</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
+              The <span class="accent">patch layer</span> is already structured for real artifacts.
+            </h1>
+            <p class="lede">
+              Patch folders, entries, routes, and repository anchors already exist. The remaining step is to replace
+              placeholders with real `.vcv` systems, screenshots, and audio examples.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/course")}>Open lessons</a>
+              <a class="button-secondary" href={withBase("/roadmap")}>View roadmap</a>
+            </div>
           </div>
-        </article>
-      ))}
-    </div>
-  </section>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Library status</span>
+              <h3>The structure is ahead of the artifacts.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{patchCollections.length}</strong>
+                  collections already defined
+                </li>
+                <li>
+                  <strong>{patchEntries.length}</strong>
+                  patch entries already published on-site
+                </li>
+                <li>
+                  <strong>{placeholderCount}</strong>
+                  placeholders still waiting for real `.vcv` files
+                </li>
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              {patchCollections.map((collection) => (
+                <article class="mini-card">
+                  <span class="mini-stat">{groupedEntries[collection.key]?.length || 0}</span>
+                  <h4>{collection.title}</h4>
+                  <p>{collection.examples[0]}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Collection map</span>
+          <h2>Each collection corresponds to a different type of patch system.</h2>
+          <p>
+            The patch library follows the same architecture as the course: foundations, sequencing,
+            generative systems, and larger performance-oriented structures.
+          </p>
+        </div>
+        <div class="stack-grid" style="margin-top: 26px;">
+          {patchCollections.map((collection) => (
+            <article class="feature-card">
+              <span class="card-kicker">Collection</span>
+              <h3>{collection.title}</h3>
+              <p>{collection.summary}</p>
+              <ul class="feature-list">
+                {collection.examples.map((example) => (
+                  <li>{example}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Published entries</span>
+            <h2>The current patch entries are grouped cleanly and linked to the repository.</h2>
+            <p>This keeps the section useful now, while leaving room for real patch artifacts later.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" style="margin-top: 10px;">
+          {patchCollections.map((collection) => (
+            <article class="feature-card">
+              <span class="card-kicker">{collection.title}</span>
+              <h3>{groupedEntries[collection.key]?.length || 0} entries</h3>
+              <p>{collection.summary}</p>
+              <ul class="feature-list">
+                {groupedEntries[collection.key]?.map((entry) => (
+                  <li>
+                    <a href={withBase(`/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+              <div class="actions">
+                <a class="button-secondary" href={collection.folder}>Repository folder</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

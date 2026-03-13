@@ -23,10 +23,22 @@ import { resources } from "../data/resources";
           <h3>{resource.title}</h3>
           <p>{resource.summary}</p>
           <div class="actions">
-            <a class="button-secondary" href={resource.href}>Planned doc route</a>
+            <a class="button-secondary" href={resource.href}>Open note</a>
           </div>
         </article>
       ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Hybrid setup reference</h2>
+        <p>This diagram extracts the useful structure from the earlier slide deck without importing the original visual style.</p>
+      </div>
+    </div>
+    <div class="media-frame">
+      <img src="/diagrams/hybrid-setup.svg" alt="Hybrid setup diagram showing controller, Ableton, VCV Rack, visuals, and recording layer." />
     </div>
   </section>
 </BaseLayout>

@@ -1,0 +1,33 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#071018"/>
+  <defs><linearGradient id="panelB" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f1d2b"/><stop offset="100%" stop-color="#091420"/></linearGradient></defs>
+  <text x="72" y="72" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">Hybrid Setup</text>
+  <text x="72" y="108" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="18">One live system combining controller input, modular logic, DAW control, and visual output.</text>
+  <rect x="84" y="180" width="250" height="130" rx="26" fill="url(#panelB)" stroke="#26435A"/>
+  <text x="118" y="224" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">CONTROL</text>
+  <text x="118" y="264" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">MIDI Controller</text>
+  <rect x="474" y="100" width="250" height="140" rx="26" fill="url(#panelB)" stroke="#26435A"/>
+  <text x="508" y="144" fill="#FFB347" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">DAW CONTROL</text>
+  <text x="508" y="184" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Ableton Live</text>
+  <text x="508" y="214" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="16">arps, drums, routing</text>
+  <rect x="474" y="300" width="250" height="150" rx="26" fill="url(#panelB)" stroke="#26435A"/>
+  <text x="508" y="344" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">MODULAR CORE</text>
+  <text x="508" y="384" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">VCV Rack</text>
+  <text x="508" y="414" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="16">voices, sequencing, FX</text>
+  <rect x="866" y="180" width="250" height="130" rx="26" fill="url(#panelB)" stroke="#26435A"/>
+  <text x="900" y="224" fill="#A68BFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">VISUAL OUTPUT</text>
+  <text x="900" y="264" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Visual Engine</text>
+  <rect x="866" y="430" width="250" height="130" rx="26" fill="url(#panelB)" stroke="#26435A"/>
+  <text x="900" y="474" fill="#FFB347" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">MIX / CAPTURE</text>
+  <text x="900" y="514" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Recording Layer</text>
+  <path d="M334 245H474" stroke="#66F7FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M334 245C390 245 390 375 474 375" stroke="#66F7FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M724 170C800 170 800 245 866 245" stroke="#FFB347" stroke-width="8" stroke-linecap="round"/>
+  <path d="M724 375C810 375 810 495 866 495" stroke="#FFB347" stroke-width="8" stroke-linecap="round"/>
+  <path d="M724 375C806 375 806 245 866 245" stroke="#A68BFF" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="404" cy="245" r="10" fill="#66F7FF"/>
+  <circle cx="410" cy="312" r="10" fill="#66F7FF"/>
+  <circle cx="794" cy="170" r="10" fill="#FFB347"/>
+  <circle cx="795" cy="375" r="10" fill="#A68BFF"/>
+  <circle cx="804" cy="454" r="10" fill="#FFB347"/>
+</svg>

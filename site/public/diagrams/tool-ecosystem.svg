@@ -1,0 +1,53 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#071018"/>
+  <defs>
+    <linearGradient id="panelA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1d2b"/>
+      <stop offset="100%" stop-color="#0a1521"/>
+    </linearGradient>
+    <linearGradient id="pipeA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#66F7FF"/>
+      <stop offset="100%" stop-color="#8BFFE4"/>
+    </linearGradient>
+    <linearGradient id="pipeB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="100%" stop-color="#FFD780"/>
+    </linearGradient>
+    <linearGradient id="pipeC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#A68BFF"/>
+      <stop offset="100%" stop-color="#8EC5FF"/>
+    </linearGradient>
+  </defs>
+  <text x="72" y="72" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">Tool Ecosystem</text>
+  <text x="72" y="108" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="18">Core role split across sound generation, control, routing, and visuals.</text>
+  <rect x="72" y="170" width="470" height="180" rx="28" fill="url(#panelA)" stroke="#26435A"/>
+  <text x="106" y="216" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">SOUND ENGINE</text>
+  <text x="106" y="258" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">VCV Rack</text>
+  <text x="106" y="296" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">modular synthesis</text>
+  <text x="106" y="324" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">generative logic</text>
+  <text x="106" y="352" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">voices, modulation, evolving systems</text>
+  <rect x="658" y="170" width="470" height="180" rx="28" fill="url(#panelA)" stroke="#26435A"/>
+  <text x="692" y="216" fill="#FFB347" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">STUDIO LAYER</text>
+  <text x="692" y="258" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">Ableton Live</text>
+  <text x="692" y="296" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">sequencing and arrangement</text>
+  <text x="692" y="324" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">recording and mixing</text>
+  <text x="692" y="352" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">MIDI control and track structure</text>
+  <rect x="72" y="430" width="470" height="180" rx="28" fill="url(#panelA)" stroke="#26435A"/>
+  <text x="106" y="476" fill="#A68BFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">VISUAL LAYER</text>
+  <text x="106" y="518" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">Blender / Three.js</text>
+  <text x="106" y="556" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">reactive graphics</text>
+  <text x="106" y="584" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">geometry and browser output</text>
+  <rect x="658" y="430" width="470" height="180" rx="28" fill="url(#panelA)" stroke="#26435A"/>
+  <text x="692" y="476" fill="#66F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">ROUTING LAYER</text>
+  <text x="692" y="518" fill="#EFF7FF" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">Virtual Audio / OSC / MIDI</text>
+  <text x="692" y="556" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">BlackHole, VB-Cable, OSC bridges</text>
+  <text x="692" y="584" fill="#8FA8BD" font-family="Segoe UI, Arial, sans-serif" font-size="17">glue between engines</text>
+  <path d="M542 260H658" stroke="url(#pipeB)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M307 350V430" stroke="url(#pipeC)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M893 350V430" stroke="url(#pipeA)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M542 520H658" stroke="url(#pipeC)" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="600" cy="260" r="11" fill="#FFB347"/>
+  <circle cx="307" cy="391" r="11" fill="#A68BFF"/>
+  <circle cx="893" cy="391" r="11" fill="#66F7FF"/>
+  <circle cx="600" cy="520" r="11" fill="#8EC5FF"/>
+</svg>

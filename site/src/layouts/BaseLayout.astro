@@ -37,6 +37,7 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         --bg: #081018;
         --panel: rgba(10, 20, 31, 0.72);
         --panel-strong: rgba(14, 27, 42, 0.92);
+        --panel-soft: rgba(9, 18, 28, 0.68);
         --text: #eff7ff;
         --muted: #8fa8bd;
         --line: rgba(135, 190, 214, 0.18);
@@ -44,6 +45,7 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         --accent-2: #ffb347;
         --accent-3: #b3ff66;
         --max: 1180px;
+        --max-wide: 1320px;
         --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
       }
 
@@ -59,9 +61,13 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         margin: 0;
         color: var(--text);
         background:
+          radial-gradient(circle at 20% 0%, rgba(102, 247, 255, 0.12), transparent 28%),
+          radial-gradient(circle at 80% 12%, rgba(24, 120, 255, 0.1), transparent 24%),
+          radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
           radial-gradient(circle at top left, rgba(102, 247, 255, 0.16), transparent 28%),
           radial-gradient(circle at top right, rgba(255, 179, 71, 0.14), transparent 24%),
           linear-gradient(180deg, #071018 0%, #09131d 55%, #060d14 100%);
+        background-size: auto, auto, 28px 28px, auto, auto, auto;
         font-family: "Segoe UI", "Helvetica Neue", sans-serif;
         min-height: 100vh;
       }
@@ -76,13 +82,17 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         margin: 0 auto;
       }
 
+      .wide-shell {
+        width: min(var(--max-wide), calc(100vw - 48px));
+        margin: 0 auto;
+      }
+
       .site-header {
         position: sticky;
         top: 0;
         z-index: 10;
-        backdrop-filter: blur(12px);
-        background: rgba(6, 13, 20, 0.76);
-        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+        background: linear-gradient(180deg, rgba(5, 13, 19, 0.74) 0%, rgba(5, 13, 19, 0.18) 100%);
       }
 
       .site-header .shell {
@@ -90,12 +100,12 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         align-items: center;
         justify-content: space-between;
         gap: 24px;
-        padding: 18px 0;
+        padding: 14px 0;
       }
 
       .brand {
-        font-size: 0.95rem;
-        letter-spacing: 0.18em;
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--accent);
       }
@@ -103,9 +113,9 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
       nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 18px;
+        gap: 20px;
         color: var(--muted);
-        font-size: 0.95rem;
+        font-size: 0.92rem;
       }
 
       .nav-group {
@@ -117,12 +127,12 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
       .locale-link {
         display: inline-flex;
         align-items: center;
-        min-height: 34px;
-        padding: 0 12px;
+        min-height: 38px;
+        padding: 0 14px;
         border-radius: 999px;
         border: 1px solid var(--line);
         color: var(--text);
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.02);
         font-size: 0.88rem;
       }
 
@@ -132,6 +142,334 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
 
       section {
         margin: 24px 0;
+      }
+
+      .page-stack > section:first-child {
+        margin-top: 0;
+      }
+
+      .band {
+        position: relative;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        padding: 84px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .band-shell {
+        width: min(var(--max-wide), calc(100vw - 48px));
+        margin: 0 auto;
+      }
+
+      .band-hero {
+        padding-top: 88px;
+        padding-bottom: 72px;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(102, 247, 255, 0.18), transparent 34%),
+          linear-gradient(180deg, rgba(5, 17, 24, 0.96) 0%, rgba(8, 19, 30, 0.8) 100%);
+      }
+
+      .band-deep {
+        background:
+          radial-gradient(circle at 18% 15%, rgba(102, 247, 255, 0.08), transparent 24%),
+          linear-gradient(180deg, rgba(3, 13, 18, 0.84) 0%, rgba(4, 17, 23, 0.9) 100%);
+      }
+
+      .band-alt {
+        background:
+          radial-gradient(circle at 82% 22%, rgba(255, 179, 71, 0.08), transparent 20%),
+          linear-gradient(180deg, rgba(5, 14, 30, 0.92) 0%, rgba(4, 12, 24, 0.95) 100%);
+      }
+
+      .band-subtle {
+        background:
+          linear-gradient(180deg, rgba(8, 18, 28, 0.78) 0%, rgba(6, 14, 22, 0.8) 100%);
+      }
+
+      .display-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+        gap: 30px;
+        align-items: start;
+      }
+
+      .display-title {
+        margin-top: 18px;
+        font-size: clamp(3.6rem, 9vw, 6.8rem);
+        line-height: 0.94;
+        letter-spacing: -0.04em;
+        max-width: 10ch;
+      }
+
+      .display-title .accent {
+        color: var(--accent);
+        text-shadow: 0 0 28px rgba(102, 247, 255, 0.18);
+      }
+
+      .lede {
+        max-width: 720px;
+        margin-top: 22px;
+        font-size: 1.08rem;
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .hero-dashboard {
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero-dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .mini-card {
+        padding: 20px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(7, 16, 25, 0.78);
+        box-shadow: var(--shadow);
+      }
+
+      .mini-card h4 {
+        margin: 0 0 8px;
+        font-size: 1.02rem;
+      }
+
+      .mini-card p {
+        font-size: 0.95rem;
+      }
+
+      .mini-stat {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--accent);
+        font-size: 1.7rem;
+        font-weight: 700;
+      }
+
+      .hero-stat {
+        padding: 18px 20px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(6, 14, 24, 0.72);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-stat strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.9rem;
+        color: var(--text);
+      }
+
+      .section-label {
+        display: inline-block;
+        margin-bottom: 12px;
+        color: var(--accent);
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .section-copy {
+        max-width: 700px;
+      }
+
+      .split-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+        gap: 28px;
+        align-items: center;
+      }
+
+      .stack-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .stack-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .feature-card {
+        min-height: 100%;
+        padding: 28px;
+        border-radius: 26px;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(180deg, rgba(10, 22, 32, 0.86) 0%, rgba(8, 17, 26, 0.7) 100%);
+        box-shadow: var(--shadow);
+      }
+
+      .feature-card h3 {
+        margin-bottom: 12px;
+        font-size: 1.5rem;
+      }
+
+      .feature-card p {
+        max-width: 42ch;
+      }
+
+      .feature-list,
+      .metric-list {
+        margin: 20px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .feature-list li,
+      .metric-list li {
+        padding-top: 14px;
+        margin-top: 14px;
+        border-top: 1px solid var(--line);
+      }
+
+      .metric-list strong {
+        display: block;
+        color: var(--accent-2);
+        font-size: 1.65rem;
+        margin-bottom: 6px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 28px;
+        align-items: start;
+      }
+
+      .content-column {
+        display: grid;
+        gap: 18px;
+      }
+
+      .card-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .timeline {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 88px minmax(0, 1fr);
+        gap: 22px 28px;
+        align-items: start;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        transform: translateX(-50%);
+        background: linear-gradient(180deg, rgba(102, 247, 255, 0.6), rgba(102, 247, 255, 0.08));
+      }
+
+      .timeline-node {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        margin: 0 auto;
+        border-radius: 999px;
+        border: 2px solid var(--track-tone, var(--accent));
+        background: rgba(6, 14, 24, 0.95);
+        box-shadow: 0 0 0 8px rgba(6, 14, 24, 0.85);
+        color: var(--track-tone, var(--accent));
+        font-weight: 700;
+      }
+
+      .timeline-card {
+        position: relative;
+        min-height: 100%;
+        padding: 24px 24px 22px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 3px solid var(--track-tone, var(--accent));
+        background:
+          linear-gradient(180deg, rgba(9, 21, 31, 0.92) 0%, rgba(8, 16, 25, 0.8) 100%);
+        box-shadow: var(--shadow);
+      }
+
+      .timeline-card.left {
+        grid-column: 1;
+      }
+
+      .timeline-card.right {
+        grid-column: 3;
+      }
+
+      .timeline-marker {
+        grid-column: 2;
+      }
+
+      .timeline-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.45rem;
+      }
+
+      .timeline-topline {
+        display: inline-block;
+        margin-bottom: 12px;
+        color: var(--track-tone, var(--accent));
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .timeline-list {
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline-list li {
+        padding-top: 12px;
+        margin-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+
+      .timeline-summary {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 28px;
+        align-items: start;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .status-pill {
+        padding: 18px 20px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(10, 20, 31, 0.72);
+      }
+
+      .status-pill strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--text);
+        font-size: 1.6rem;
       }
 
       .hero {
@@ -458,11 +796,20 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
       }
 
       @media (max-width: 960px) {
+        .display-grid,
+        .split-hero,
+        .content-grid,
+        .timeline-summary,
         .hero-grid .panel:first-child,
         .hero-grid .panel:last-child,
         .cards-3,
         .cards-2,
-        .roadmap-strip {
+        .roadmap-strip,
+        .stack-grid,
+        .stack-grid-4,
+        .hero-meta,
+        .status-grid,
+        .hero-dashboard-grid {
           grid-template-columns: 1fr;
         }
 
@@ -478,6 +825,24 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         .stat-list {
           grid-template-columns: 1fr;
         }
+
+        .timeline {
+          grid-template-columns: 64px minmax(0, 1fr);
+        }
+
+        .timeline::before {
+          left: 31px;
+          transform: none;
+        }
+
+        .timeline-marker {
+          grid-column: 1;
+        }
+
+        .timeline-card.left,
+        .timeline-card.right {
+          grid-column: 2;
+        }
       }
 
       @media (max-width: 640px) {
@@ -489,6 +854,17 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
 
         h1 {
           max-width: none;
+        }
+
+        .band,
+        .band-hero {
+          padding-top: 72px;
+          padding-bottom: 72px;
+        }
+
+        .band-shell,
+        .wide-shell {
+          width: min(var(--max-wide), calc(100vw - 28px));
         }
       }
     </style>

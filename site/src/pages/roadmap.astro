@@ -1,58 +1,176 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
+
+const lessons = await getCollection("lessons");
+const patches = await getCollection("patches");
+const notes = await getCollection("notes");
+
+const trackTones = ["#66f7ff", "#7cf0c9", "#ff5fcb", "#ffe45c", "#66d9ff"];
+
+const roadmapStages = tracks.map((track, index) => ({
+  ...track,
+  index,
+  tone: trackTones[index % trackTones.length],
+  lessonCount: lessons.filter((lesson) => lesson.data.track === track.key).length,
+  patchCount: patches.filter((patch) => patch.data.track === track.key || (track.key === "hybrid" && patch.data.track === "performances")).length
+}));
 ---
 
 <BaseLayout title="Roadmap | Modular Genesis" description="Learning roadmap for Modular Genesis.">
-  <section class="hero">
-    <div class="eyebrow">Roadmap</div>
-    <div class="hero-copy">
-      <h1>Five levels from signal flow to audiovisual systems.</h1>
-      <p>
-        This roadmap turns the original planning notes into a teachable sequence.
-        Each level can become a docs section, lesson cluster, patch folder, and site section.
-      </p>
-    </div>
-  </section>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">System Evolution Protocol</div>
+            <h1 class="display-title">
+              Modular <span class="accent">Genesis</span> roadmap from first signal flow to audiovisual systems.
+            </h1>
+            <p class="lede">
+              This page turns the planning notes into a staged public blueprint. Each track is treated as a
+              formal phase with its own concepts, lessons, and patch direction.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/course")}>Open lessons</a>
+              <a class="button-secondary" href={withBase("/resources")}>Read reference notes</a>
+            </div>
+          </div>
 
-  <section>
-    <div class="cards-2">
-      {tracks.map((level, index) => (
-        <article class="card">
-          <span class="card-kicker">Level {index + 1}</span>
-          <h3>{level.title}</h3>
-          <ul class="bullet-list">
-            {level.roadmapTopics.map((topic) => (
-              <li>{topic}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Hybrid routing diagram</h2>
-        <p>A first visual artifact connecting the audio and course layers.</p>
+          <div class="feature-card">
+            <span class="section-label">Current roadmap status</span>
+            <h3>Five stages, one connected system.</h3>
+            <ul class="metric-list">
+              <li>
+                <strong>{roadmapStages.length}</strong>
+                stage clusters already defined
+              </li>
+              <li>
+                <strong>{lessons.length}</strong>
+                lessons already connected to those stages
+              </li>
+              <li>
+                <strong>{notes.length}</strong>
+                conceptual notes supporting the sequence
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="media-frame">
-      <img src={withBase("/diagrams/hybrid-routing.svg")} alt="Hybrid routing diagram for Ableton, VCV Rack, recording, and visuals." />
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Tool ecosystem</h2>
-        <p>Redrawn from the earlier slide concept, now adapted to the site language and palette.</p>
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Roadmap Timeline</span>
+          <h2>Each stage shifts the system from isolated modules toward a full performance organism.</h2>
+          <p>
+            The progression is not just pedagogical. It also mirrors how the repository, patch library, and site
+            can evolve in parallel without collapsing into disconnected pieces.
+          </p>
+        </div>
+
+        <div class="timeline" style="margin-top: 34px;">
+          {roadmapStages.map((stage) => (
+            <Fragment>
+              {stage.index % 2 === 0 ? (
+                <article class="timeline-card left" style={`--track-tone:${stage.tone};`}>
+                  <span class="timeline-topline">Stage {stage.index + 1}</span>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.description}</p>
+                  <ul class="timeline-list">
+                    {stage.roadmapTopics.map((topic) => (
+                      <li>{topic}</li>
+                    ))}
+                  </ul>
+                </article>
+              ) : (
+                <div></div>
+              )}
+
+              <div class="timeline-marker" style={`--track-tone:${stage.tone};`}>
+                <div class="timeline-node">{stage.index + 1}</div>
+              </div>
+
+              {stage.index % 2 === 1 ? (
+                <article class="timeline-card right" style={`--track-tone:${stage.tone};`}>
+                  <span class="timeline-topline">Stage {stage.index + 1}</span>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.description}</p>
+                  <ul class="timeline-list">
+                    {stage.roadmapTopics.map((topic) => (
+                      <li>{topic}</li>
+                    ))}
+                  </ul>
+                </article>
+              ) : (
+                <div></div>
+              )}
+            </Fragment>
+          ))}
+        </div>
       </div>
-    </div>
-    <div class="media-frame">
-      <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Tool ecosystem diagram showing VCV Rack, Ableton Live, routing, and visual layer." />
-    </div>
-  </section>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="timeline-summary">
+          <div class="feature-card">
+            <span class="section-label">System diagrams</span>
+            <h2>Two diagrams anchor the roadmap visually.</h2>
+            <p>
+              These diagrams replace the earlier slide language with site-native visuals. They clarify both the
+              routing logic and the broader ecosystem around the project.
+            </p>
+            <div class="actions">
+              <a class="button-secondary" href={withBase("/resources")}>Open resources</a>
+            </div>
+          </div>
+
+          <div class="content-column">
+            <div class="media-frame">
+              <img src={withBase("/diagrams/hybrid-routing.svg")} alt="Hybrid routing diagram for Ableton, VCV Rack, recording, and visuals." />
+            </div>
+            <div class="media-frame">
+              <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Tool ecosystem diagram showing VCV Rack, Ableton Live, routing, and visual layer." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Stage status</span>
+            <h2>Each phase already has a clear relationship to lessons and patches.</h2>
+            <p>This makes the roadmap actionable instead of decorative: every stage can now be expanded into real material.</p>
+          </div>
+          <a class="button-secondary" href={withBase("/patches")}>Open patch library</a>
+        </div>
+
+        <div class="status-grid">
+          {roadmapStages.map((stage) => (
+            <article class="status-pill">
+              <strong>{stage.lessonCount}</strong>
+              {stage.title}: lessons published
+            </article>
+          ))}
+        </div>
+
+        <div class="stack-grid" style="margin-top: 18px;">
+          {roadmapStages.slice(0, 3).map((stage) => (
+            <article class="feature-card" style={`--track-tone:${stage.tone};`}>
+              <span class="timeline-topline">Patch direction</span>
+              <h3>{stage.title}</h3>
+              <p>{stage.patchCount} patch entries currently mapped to this stage or its adjacent performance layer.</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

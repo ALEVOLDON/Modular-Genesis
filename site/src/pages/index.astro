@@ -14,23 +14,45 @@ const patches = (await getCollection("patches")).sort((a, b) => a.data.order - b
 
 const latestLessons = lessons.slice(0, 4);
 const featuredNotes = notes.slice(0, 3);
-const featuredPatches = patches.slice(0, 4);
+const featuredPatches = patches.slice(0, 3);
 
 const pillars = [
   {
     kicker: "System",
     title: "Hybrid audio architecture",
-    text: "Ableton Live, VCV Rack, routing, recording, and visuals are treated as one connected system."
+    text: "Ableton Live, VCV Rack, routing, recording, and visuals are treated as one connected system.",
+    points: ["modular engine + DAW layer", "routing as composition", "visual output as extension"]
   },
   {
     kicker: "Course",
     title: "Structured learning path",
-    text: "The project already has tracks, lessons, notes, and internal logic instead of loose tutorial fragments."
+    text: "The project already has tracks, lessons, notes, and internal logic instead of loose tutorial fragments.",
+    points: ["foundations to audiovisual", "lesson + note + patch model", "roadmap-led curriculum"]
   },
   {
     kicker: "Library",
     title: "Patch-first repository design",
-    text: "Patch entries, repository folders, and future real `.vcv` files already have a stable home."
+    text: "Patch entries, repository folders, and future real `.vcv` files already have a stable home.",
+    points: ["public repo structure", "patch references on pages", "ready for real artifacts"]
+  }
+];
+
+const toolCards = [
+  {
+    title: "VCV Rack",
+    text: "Core modular environment for synthesis, sequencing, probability, and signal design."
+  },
+  {
+    title: "Ableton Live",
+    text: "Arrangement, routing, recording, performance control, and hybrid workflow anchor."
+  },
+  {
+    title: "Visual Layer",
+    text: "Three.js, Blender, and future real-time visual systems connected to sound behavior."
+  },
+  {
+    title: "Repository",
+    text: "Documentation, patches, diagrams, and lessons built as one public knowledge system."
   }
 ];
 ---
@@ -40,31 +62,36 @@ const pillars = [
   description="Open modular synthesis, generative music, and audiovisual systems."
   localeSwitch={{ href: "/ru/", label: "RU" }}
 >
-  <section class="hero">
-    <div class="eyebrow">Public Draft v0.1</div>
-    <div class="hero-copy">
-      <h1>Open modular systems for sound, structure, and audiovisual practice.</h1>
-      <p>
-        Modular Genesis is an open documentation-first project around `VCV Rack`,
-        `Ableton Live`, generative patch design, hybrid routing, and audiovisual systems.
-        It already exists as a real repository and working website, not just a concept.
-      </p>
-      <div class="actions">
-        <a class="button" href={withBase("/roadmap")}>View roadmap</a>
-        <a class="button-secondary" href={withBase("/course")}>Open course outline</a>
-        <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
-      </div>
-    </div>
-
-    <div class="panel-grid hero-grid">
-      <div class="panel">
-        <div class="section-head">
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
           <div>
-            <h2>Core pipeline</h2>
-            <p>The backbone that connects the current course, patch library, and future visual layer.</p>
+            <div class="eyebrow">Public Draft v0.1</div>
+            <h1 class="display-title">
+              Build the <span class="accent">generative</span> bridge between modular sound and visual systems.
+            </h1>
+            <p class="lede">
+              Modular Genesis is an open documentation-first project around `VCV Rack`, `Ableton Live`,
+              generative patch design, hybrid routing, and audiovisual structure. The goal is not to
+              publish scattered tutorials, but to build a coherent public system.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
+              <a class="button-secondary" href={withBase("/course")}>Browse lessons</a>
+              <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+            </div>
           </div>
-        </div>
-        <div class="code-block">Ableton / MIDI
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Core pipeline</span>
+              <h3>From control logic to performance output</h3>
+              <p>
+                The site, lessons, notes, and patch entries already orbit one production backbone:
+                controller input, modular generation, audio capture, and future visual synthesis.
+              </p>
+              <div class="code-block">Ableton / MIDI
   ->
 VCV Rack
   ->
@@ -75,128 +102,182 @@ Audio Engine
 Visual Engine
   ->
 Performance</div>
-      </div>
+            </article>
 
-      <div class="panel">
-        <h2>Current status</h2>
-        <ul class="stat-list">
-          <li>
-            <span class="stat-value">{tracks.length}</span>
-            learning tracks already structured
-          </li>
-          <li>
-            <span class="stat-value">{lessons.length}</span>
-            lesson pages already published
-          </li>
-          <li>
-            <span class="stat-value">{notes.length}</span>
-            reference notes available on-site
-          </li>
-          <li>
-            <span class="stat-value">{patches.length}</span>
-            patch entries prepared for real `.vcv` files
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
+            <div class="hero-dashboard-grid">
+              <article class="mini-card">
+                <span class="mini-stat">{tracks.length}</span>
+                <h4>Structured tracks</h4>
+                <p>Foundations, sequencing, generative, hybrid, and audiovisual are already defined.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{lessons.length}</span>
+                <h4>Published lessons</h4>
+                <p>The course already contains real pages instead of a placeholder syllabus.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{notes.length}</span>
+                <h4>Reference notes</h4>
+                <p>System-level notes explain routing, patch logic, and project direction.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{patches.length}</span>
+                <h4>Patch entries</h4>
+                <p>The repository is prepared for real `.vcv` artifacts without changing site structure.</p>
+              </article>
+            </div>
 
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Main pillars</h2>
-        <p>The repository is being organized around three durable outputs.</p>
-      </div>
-    </div>
-    <div class="cards-3">
-      {pillars.map((pillar) => (
-        <article class="card">
-          <span class="card-kicker">{pillar.kicker}</span>
-          <h3>{pillar.title}</h3>
-          <p>{pillar.text}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>System map</h2>
-        <p>A native diagram extracted from the project structure and redrawn to match the site.</p>
-      </div>
-        <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap</a>
-    </div>
-    <div class="media-frame">
-      <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Tool ecosystem diagram for Modular Genesis." />
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Latest lessons</h2>
-        <p>The course already has live content across multiple tracks.</p>
-      </div>
-      <a class="button-secondary" href={withBase("/course")}>All lessons</a>
-    </div>
-    <div class="cards-2">
-      {latestLessons.map((lesson) => (
-        <article class="card">
-          <span class="card-kicker">{lesson.data.track}</span>
-          <h3>{lesson.data.title}</h3>
-          <p>{lesson.data.summary}</p>
-          <div class="actions">
-            <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Open lesson</a>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section>
-    <div class="cards-2">
-      <div>
-        <div class="section-head">
-          <div>
-            <h2>Core notes</h2>
-            <p>Reference material that explains the system behind the lessons.</p>
+            <article class="feature-card">
+              <span class="section-label">Current focus</span>
+              <h3>What exists now</h3>
+              <ul class="feature-list">
+                <li><strong>Roadmap:</strong> staged structure from signal flow to audiovisual systems.</li>
+                <li><strong>Course:</strong> lessons already grouped by track and route.</li>
+                <li><strong>Resources:</strong> concept notes and system diagrams published on-site.</li>
+              </ul>
+            </article>
           </div>
         </div>
-        <div class="cards-1">
-          {featuredNotes.map((note) => (
-            <article class="card">
-              <span class="card-kicker">Note</span>
-              <h3>{note.data.title}</h3>
-              <p>{note.data.summary}</p>
-              <div class="actions">
-                <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Open note</a>
-              </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Ecosystem</span>
+          <h2>The tools are separated by role, but designed as one organism.</h2>
+          <p>
+            Instead of treating synthesis, arrangement, and visuals as isolated disciplines, the project
+            treats them as linked layers of the same system.
+          </p>
+        </div>
+        <div class="stack-grid-4" style="margin-top: 26px;">
+          {toolCards.map((tool) => (
+            <article class="feature-card">
+              <span class="card-kicker">Tool</span>
+              <h3>{tool.title}</h3>
+              <p>{tool.text}</p>
             </article>
           ))}
         </div>
       </div>
+    </section>
 
-      <div>
-        <div class="section-head">
-          <div>
-            <h2>Patch library</h2>
-            <p>Structured entries are already in place, ready for real patch files.</p>
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="split-hero">
+          <div class="feature-card">
+            <span class="section-label">Why Modular</span>
+            <h2>Not just a sound design workflow, but a framework for discovery.</h2>
+            <p>
+              Modular systems create a rare overlap between composition, logic, improvisation, and
+              engineering. That makes them ideal for building living systems instead of static presets.
+            </p>
+            <ul class="feature-list">
+              <li><strong>Routing as composition:</strong> the signal path becomes part of the musical form.</li>
+              <li><strong>Generative logic:</strong> clocks, probability, mutation, and feedback create evolving behavior.</li>
+              <li><strong>Audiovisual expansion:</strong> sound events can later control geometry, motion, and scenes.</li>
+            </ul>
+          </div>
+
+          <div class="media-frame">
+            <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Tool ecosystem diagram for Modular Genesis." />
           </div>
         </div>
-        <div class="cards-1">
-          {featuredPatches.map((patch) => (
-            <article class="card">
-              <span class="card-kicker">{patch.data.track}</span>
-              <h3>{patch.data.title}</h3>
-              <p>{patch.data.summary}</p>
-              <div class="actions">
-                <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Open patch</a>
-              </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Architecture</span>
+          <h2>Three durable outputs are already in place.</h2>
+          <p>
+            The current public version is not finished content. It is a stable project skeleton:
+            system architecture, learning architecture, and repository architecture.
+          </p>
+        </div>
+        <div class="stack-grid" style="margin-top: 26px;">
+          {pillars.map((pillar) => (
+            <article class="feature-card">
+              <span class="card-kicker">{pillar.kicker}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.text}</p>
+              <ul class="feature-list">
+                {pillar.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Live Content</span>
+            <h2>The site already has usable material, not just placeholders.</h2>
+            <p>Lessons, notes, and patch entries are separated into clear columns so each layer reads as its own system.</p>
+          </div>
+          <a class="button-secondary" href={withBase("/course")}>See all lessons</a>
+        </div>
+
+        <div class="content-grid">
+          <div class="content-column">
+            <article class="feature-card">
+              <span class="card-kicker">Latest lessons</span>
+              <div class="card-stack">
+                {latestLessons.map((lesson) => (
+                  <article class="card">
+                    <span class="card-kicker">{lesson.data.track}</span>
+                    <h3>{lesson.data.title}</h3>
+                    <p>{lesson.data.summary}</p>
+                    <div class="actions">
+                      <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Open lesson</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <div class="content-column">
+            <article class="feature-card">
+              <span class="card-kicker">Core notes</span>
+              <div class="card-stack">
+                {featuredNotes.map((note) => (
+                  <article class="card">
+                    <h3>{note.data.title}</h3>
+                    <p>{note.data.summary}</p>
+                    <div class="actions">
+                      <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Open note</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-kicker">Patch library</span>
+              <div class="card-stack">
+                {featuredPatches.map((patch) => (
+                  <article class="card">
+                    <span class="card-kicker">{patch.data.track}</span>
+                    <h3>{patch.data.title}</h3>
+                    <p>{patch.data.summary}</p>
+                    <div class="actions">
+                      <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Open patch</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

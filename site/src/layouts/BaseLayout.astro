@@ -1,17 +1,32 @@
 ---
+import { withBase } from "../lib/paths";
+
 export interface Props {
   title?: string;
   description?: string;
+  lang?: string;
+  navItems?: { href: string; label: string }[];
+  localeSwitch?: { href: string; label: string } | null;
 }
 
 const {
   title = "Modular Genesis",
-  description = "Open modular synthesis, generative music, and audiovisual systems."
+  description = "Open modular synthesis, generative music, and audiovisual systems.",
+  lang = "en",
+  navItems = [
+    { href: "/roadmap", label: "Roadmap" },
+    { href: "/course", label: "Course" },
+    { href: "/patches", label: "Patches" },
+    { href: "/resources", label: "Resources" }
+  ],
+  localeSwitch = null
 } = Astro.props;
+
+const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,6 +106,24 @@ const {
         gap: 18px;
         color: var(--muted);
         font-size: 0.95rem;
+      }
+
+      .nav-group {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .locale-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.03);
+        font-size: 0.88rem;
       }
 
       main {
@@ -463,13 +496,17 @@ const {
   <body>
     <header class="site-header">
       <div class="shell">
-        <a class="brand" href="/">Modular Genesis</a>
-        <nav>
-          <a href="/roadmap">Roadmap</a>
-          <a href="/course">Course</a>
-          <a href="/patches">Patches</a>
-          <a href="/resources">Resources</a>
-        </nav>
+        <a class="brand" href={brandHref}>Modular Genesis</a>
+        <div class="nav-group">
+          <nav>
+            {navItems.map((item) => (
+              <a href={withBase(item.href)}>{item.label}</a>
+            ))}
+          </nav>
+          {localeSwitch && (
+            <a class="locale-link" href={withBase(localeSwitch.href)}>{localeSwitch.label}</a>
+          )}
+        </div>
       </div>
     </header>
     <main class="shell">

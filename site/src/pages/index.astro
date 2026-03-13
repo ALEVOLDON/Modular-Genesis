@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
+import { withBase } from "../lib/paths";
 
 const lessons = (await getCollection("lessons")).sort((a, b) => {
   if (a.data.track === b.data.track) return a.data.order - b.data.order;
@@ -37,6 +38,7 @@ const pillars = [
 <BaseLayout
   title="Modular Genesis"
   description="Open modular synthesis, generative music, and audiovisual systems."
+  localeSwitch={{ href: "/ru/", label: "RU" }}
 >
   <section class="hero">
     <div class="eyebrow">Public Draft v0.1</div>
@@ -48,9 +50,9 @@ const pillars = [
         It already exists as a real repository and working website, not just a concept.
       </p>
       <div class="actions">
-        <a class="button" href="/roadmap">View roadmap</a>
-        <a class="button-secondary" href="/course">Open course outline</a>
-        <a class="button-secondary" href="/resources">Read notes</a>
+        <a class="button" href={withBase("/roadmap")}>View roadmap</a>
+        <a class="button-secondary" href={withBase("/course")}>Open course outline</a>
+        <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
       </div>
     </div>
 
@@ -123,10 +125,10 @@ Performance</div>
         <h2>System map</h2>
         <p>A native diagram extracted from the project structure and redrawn to match the site.</p>
       </div>
-      <a class="button-secondary" href="/roadmap">Open roadmap</a>
+        <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap</a>
     </div>
     <div class="media-frame">
-      <img src="/diagrams/tool-ecosystem.svg" alt="Tool ecosystem diagram for Modular Genesis." />
+      <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Tool ecosystem diagram for Modular Genesis." />
     </div>
   </section>
 
@@ -136,7 +138,7 @@ Performance</div>
         <h2>Latest lessons</h2>
         <p>The course already has live content across multiple tracks.</p>
       </div>
-      <a class="button-secondary" href="/course">All lessons</a>
+      <a class="button-secondary" href={withBase("/course")}>All lessons</a>
     </div>
     <div class="cards-2">
       {latestLessons.map((lesson) => (
@@ -145,7 +147,7 @@ Performance</div>
           <h3>{lesson.data.title}</h3>
           <p>{lesson.data.summary}</p>
           <div class="actions">
-            <a class="button-secondary" href={`/course/${lesson.slug}/`}>Open lesson</a>
+            <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Open lesson</a>
           </div>
         </article>
       ))}
@@ -168,7 +170,7 @@ Performance</div>
               <h3>{note.data.title}</h3>
               <p>{note.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={`/resources/${note.slug}/`}>Open note</a>
+                <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Open note</a>
               </div>
             </article>
           ))}
@@ -189,7 +191,7 @@ Performance</div>
               <h3>{patch.data.title}</h3>
               <p>{patch.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={`/patches/${patch.slug}/`}>Open patch</a>
+                <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Open patch</a>
               </div>
             </article>
           ))}

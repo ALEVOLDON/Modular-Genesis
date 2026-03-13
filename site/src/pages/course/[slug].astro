@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { trackLabelMap } from "../../data/tracks";
+import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
   const lessons = await getCollection("lessons");
@@ -28,7 +29,7 @@ const relatedPatches = (await getCollection("patches"))
       <h1>{lesson.data.title}</h1>
       <p>{lesson.data.summary}</p>
       <div class="actions">
-        <a class="button-secondary" href="/course">Back to course</a>
+        <a class="button-secondary" href={withBase("/course")}>Back to course</a>
       </div>
     </div>
   </section>
@@ -48,7 +49,7 @@ const relatedPatches = (await getCollection("patches"))
         <ul class="bullet-list">
           {relatedPatches.map((patch) => (
             <li>
-              <a href={`/patches/${patch.slug}/`}>{patch.data.title}</a>
+              <a href={withBase(`/patches/${patch.slug}/`)}>{patch.data.title}</a>
             </li>
           ))}
         </ul>
@@ -61,8 +62,8 @@ const relatedPatches = (await getCollection("patches"))
           The first system diagram connects the modular engine, DAW layer, and visual output layer.
         </p>
         <div class="actions">
-          <a class="button-secondary" href="/roadmap">Open roadmap diagram</a>
-          <a class="button-secondary" href="/patches">Open patch library</a>
+          <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap diagram</a>
+          <a class="button-secondary" href={withBase("/patches")}>Open patch library</a>
         </div>
       </article>
     </div>

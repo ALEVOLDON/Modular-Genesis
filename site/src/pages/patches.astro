@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { patchCollections } from "../data/patches";
+import { withBase } from "../lib/paths";
 
 const patchEntries = await getCollection("patches");
 const groupedEntries = Object.fromEntries(
@@ -36,7 +37,7 @@ const groupedEntries = Object.fromEntries(
           <ul class="bullet-list">
             {groupedEntries[collection.key]?.map((entry) => (
               <li>
-                <a href={`/patches/${entry.slug}/`}>{entry.data.title}</a>
+                <a href={withBase(`/patches/${entry.slug}/`)}>{entry.data.title}</a>
               </li>
             ))}
           </ul>

@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { trackLabelMap } from "../../data/tracks";
+import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
   const patches = await getCollection("patches");
@@ -23,7 +24,7 @@ const { Content } = await render(patch);
       <h1>{patch.data.title}</h1>
       <p>{patch.data.summary}</p>
       <div class="actions">
-        <a class="button-secondary" href="/patches">Back to patches</a>
+        <a class="button-secondary" href={withBase("/patches")}>Back to patches</a>
       </div>
     </div>
   </section>

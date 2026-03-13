@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
+import { withBase } from "../lib/paths";
 
 const lessons = await getCollection("lessons");
 
@@ -66,7 +67,7 @@ const grouped = tracks.map((track) => ({
             <ul class="bullet-list">
               {track.lessons.map((lesson) => (
                 <li>
-                  <a href={`/course/${lesson.slug}/`}>{lesson.data.title}</a>
+                  <a href={withBase(`/course/${lesson.slug}/`)}>{lesson.data.title}</a>
                 </li>
               ))}
             </ul>
@@ -94,7 +95,7 @@ const grouped = tracks.map((track) => ({
       </div>
     </div>
     <div class="media-frame">
-      <img src="/diagrams/lesson-anatomy.svg" alt="Lesson anatomy diagram showing theory, patch diagram, patch file, and practice task." />
+      <img src={withBase("/diagrams/lesson-anatomy.svg")} alt="Lesson anatomy diagram showing theory, patch diagram, patch file, and practice task." />
     </div>
   </section>
 </BaseLayout>

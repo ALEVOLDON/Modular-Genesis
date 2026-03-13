@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { resources } from "../data/resources";
+import { withBase } from "../lib/paths";
 ---
 
 <BaseLayout title="Resources | Modular Genesis" description="Reference notes and conceptual material for Modular Genesis.">
@@ -23,7 +24,7 @@ import { resources } from "../data/resources";
           <h3>{resource.title}</h3>
           <p>{resource.summary}</p>
           <div class="actions">
-            <a class="button-secondary" href={resource.href}>Open note</a>
+            <a class="button-secondary" href={withBase(resource.href)}>Open note</a>
           </div>
         </article>
       ))}
@@ -38,7 +39,7 @@ import { resources } from "../data/resources";
       </div>
     </div>
     <div class="media-frame">
-      <img src="/diagrams/hybrid-setup.svg" alt="Hybrid setup diagram showing controller, Ableton, VCV Rack, visuals, and recording layer." />
+      <img src={withBase("/diagrams/hybrid-setup.svg")} alt="Hybrid setup diagram showing controller, Ableton, VCV Rack, visuals, and recording layer." />
     </div>
   </section>
 </BaseLayout>

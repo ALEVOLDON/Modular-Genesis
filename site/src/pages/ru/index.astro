@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { withBase } from "../../lib/paths";
+
+const lessons = await getCollection("lessons");
+const notes = await getCollection("notes");
+const patches = await getCollection("patches");
+---
+
+<BaseLayout
+  title="Modular Genesis | Русская версия"
+  description="Русскоязычная стартовая страница проекта Modular Genesis."
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/roadmap", label: "Roadmap (EN)" },
+    { href: "/course", label: "Course (EN)" },
+    { href: "/resources", label: "Resources (EN)" }
+  ]}
+  localeSwitch={{ href: "/", label: "EN" }}
+>
+  <section class="hero">
+    <div class="eyebrow">Русская версия · Draft</div>
+    <div class="hero-copy">
+      <h1>Открытая система для модульного звука, генеративной музыки и аудиовизуальной практики.</h1>
+      <p>
+        `Modular Genesis` — это documentation-first проект про `VCV Rack`, `Ableton Live`,
+        генеративные патчи, гибридную маршрутизацию и будущие аудиовизуальные системы.
+        Сейчас это первая русскоязычная точка входа в проект, поверх уже работающего английского сайта.
+      </p>
+      <div class="actions">
+        <a class="button" href={withBase("/roadmap")}>Открыть roadmap (EN)</a>
+        <a class="button-secondary" href={withBase("/course")}>Открыть lessons (EN)</a>
+      </div>
+    </div>
+
+    <div class="panel-grid hero-grid">
+      <div class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Что это за проект</h2>
+            <p>Не просто серия туториалов, а каркас для открытого курса и библиотеки патчей.</p>
+          </div>
+        </div>
+        <div class="code-block">Ableton / MIDI
+  ->
+VCV Rack
+  ->
+Generative Patch
+  ->
+Audio Engine
+  ->
+Visual Layer
+  ->
+Performance</div>
+      </div>
+
+      <div class="panel">
+        <h2>Текущее состояние</h2>
+        <ul class="stat-list">
+          <li>
+            <span class="stat-value">{lessons.length}</span>
+            уже опубликованных lesson pages
+          </li>
+          <li>
+            <span class="stat-value">{notes.length}</span>
+            reference notes на сайте
+          </li>
+          <li>
+            <span class="stat-value">{patches.length}</span>
+            patch entries под будущие реальные `.vcv`
+          </li>
+          <li>
+            <span class="stat-value">EN + RU</span>
+            заложена база для двуязычной структуры
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cards-3">
+      <article class="card">
+        <span class="card-kicker">Система</span>
+        <h3>Гибридная архитектура</h3>
+        <p>
+          `Ableton Live` выступает как sequencer и studio layer, а `VCV Rack` как sound engine и generative core.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="card-kicker">Курс</span>
+        <h3>Структурированное обучение</h3>
+        <p>
+          Foundations, sequencing, generative, hybrid и audiovisual уже разложены по страницам и маршрутам.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="card-kicker">Репозиторий</span>
+        <h3>База для роста</h3>
+        <p>
+          В проекте уже есть notes, patch library, diagrams, site и каркас для будущих реальных артефактов.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Русская локализация</h2>
+        <p>Сейчас русская версия начинается с главной страницы и будет расширяться дальше поэтапно.</p>
+      </div>
+    </div>
+    <div class="cards-2">
+      <article class="card">
+        <span class="card-kicker">Сейчас</span>
+        <h3>Первый вход на русском</h3>
+        <p>
+          Эта страница помогает объяснить проект русскоязычной аудитории, не ломая существующую английскую структуру.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="card-kicker">Дальше</span>
+        <h3>Следующие кандидаты</h3>
+        <p>
+          Логичнее всего переводить дальше `roadmap`, `resources` и 5-7 базовых lessons, а уже потом масштабировать весь сайт.
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

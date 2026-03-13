@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { tracks } from "../data/tracks";
+import { withBase } from "../lib/paths";
 ---
 
 <BaseLayout title="Roadmap | Modular Genesis" description="Learning roadmap for Modular Genesis.">
@@ -39,7 +40,7 @@ import { tracks } from "../data/tracks";
       </div>
     </div>
     <div class="media-frame">
-      <img src="/diagrams/hybrid-routing.svg" alt="Hybrid routing diagram for Ableton, VCV Rack, recording, and visuals." />
+      <img src={withBase("/diagrams/hybrid-routing.svg")} alt="Hybrid routing diagram for Ableton, VCV Rack, recording, and visuals." />
     </div>
   </section>
 
@@ -51,7 +52,7 @@ import { tracks } from "../data/tracks";
       </div>
     </div>
     <div class="media-frame">
-      <img src="/diagrams/tool-ecosystem.svg" alt="Tool ecosystem diagram showing VCV Rack, Ableton Live, routing, and visual layer." />
+      <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Tool ecosystem diagram showing VCV Rack, Ableton Live, routing, and visual layer." />
     </div>
   </section>
 </BaseLayout>

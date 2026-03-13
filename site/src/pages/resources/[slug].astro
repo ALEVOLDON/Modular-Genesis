@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -22,7 +23,7 @@ const { Content } = await render(note);
       <h1>{note.data.title}</h1>
       <p>{note.data.summary}</p>
       <div class="actions">
-        <a class="button-secondary" href="/resources">Back to resources</a>
+        <a class="button-secondary" href={withBase("/resources")}>Back to resources</a>
       </div>
     </div>
   </section>

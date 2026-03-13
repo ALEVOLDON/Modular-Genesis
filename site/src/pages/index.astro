@@ -242,6 +242,24 @@ Performance</div>
                 ))}
               </div>
             </article>
+
+            <article class="feature-card">
+              <span class="card-kicker">Track progression</span>
+              <h3>How the learning system expands</h3>
+              <p>
+                The current content already follows a stable sequence, from signal basics to hybrid and audiovisual output.
+              </p>
+              <ul class="feature-list">
+                {tracks.map((track, index) => (
+                  <li>
+                    <strong>Stage {index + 1}:</strong> {track.title} — {track.description}
+                  </li>
+                ))}
+              </ul>
+              <div class="actions">
+                <a class="button-secondary" href={withBase("/roadmap")}>Open full roadmap</a>
+              </div>
+            </article>
           </div>
 
           <div class="content-column">

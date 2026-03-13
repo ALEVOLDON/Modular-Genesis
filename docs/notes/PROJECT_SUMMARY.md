@@ -1,10 +1,10 @@
 # Project Summary
 
-This document consolidates the content of the raw note files `1.txt` through `12.txt`.
+This document consolidates the content of the original raw project notes that were later normalized into repository documentation.
 
 ## What The Existing Files Contain
 
-### `1.txt`
+### Original note 1
 
 Overview of a hybrid `Ableton Live + VCV Rack` setup:
 
@@ -13,7 +13,7 @@ Overview of a hybrid `Ableton Live + VCV Rack` setup:
 - use of arpeggiators and generative patterns
 - granular processing with `Supercell`
 
-### `2.txt`
+### Original note 2
 
 Clarifies audio I/O roles inside `VCV Rack`:
 
@@ -21,7 +21,7 @@ Clarifies audio I/O roles inside `VCV Rack`:
 - relationship between `VCV Rack`, DAW, and sound card
 - why multichannel routing is useful in generative workflows
 
-### `3.txt`
+### Original note 3
 
 Explains the likely standalone use of `VCV Rack` rather than plugin mode:
 
@@ -29,7 +29,7 @@ Explains the likely standalone use of `VCV Rack` rather than plugin mode:
 - virtual driver routing
 - how standalone and plugin setups differ
 
-### `4.txt`
+### Original note 4
 
 Expands on the same hybrid logic:
 
@@ -37,7 +37,7 @@ Expands on the same hybrid logic:
 - `Ableton Live` as sequencer, drums, and arrangement tool
 - options for recording into DAW or inside Rack
 
-### `5.txt`
+### Original note 5
 
 Describes a classic self-generating patch architecture:
 
@@ -49,7 +49,7 @@ Describes a classic self-generating patch architecture:
 - effects
 - feedback
 
-### `6.txt`
+### Original note 6
 
 Focuses on practical limitations and routing strategies:
 
@@ -58,7 +58,7 @@ Focuses on practical limitations and routing strategies:
 - `Ableton Lite` track constraints
 - a pragmatic 8-channel hybrid layout
 
-### `7.txt`
+### Original note 7
 
 Turns the ideas into a roadmap for an open educational repository:
 
@@ -67,7 +67,7 @@ Turns the ideas into a roadmap for an open educational repository:
 - integration milestones
 - publication structure
 
-### `8.txt`
+### Original note 8
 
 Develops the concept into an educational product:
 
@@ -77,7 +77,7 @@ Develops the concept into an educational product:
 - lesson format
 - GitHub repository concept
 
-### `9.txt`
+### Original note 9
 
 Specifies a stronger project foundation:
 
@@ -86,7 +86,7 @@ Specifies a stronger project foundation:
 - site architecture using `Astro + Markdown`
 - reusable patch library concept
 
-### `10.txt` and `11.txt`
+### Original notes 10 and 11
 
 These two files largely repeat and reinforce:
 
@@ -96,7 +96,7 @@ These two files largely repeat and reinforce:
 - interactive map of the modular ecosystem
 - possible WebAudio-based browser interactivity
 
-### `12.txt`
+### Original note 12
 
 Extends the vision into a 3D educational environment:
 

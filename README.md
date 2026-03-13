@@ -180,14 +180,6 @@ The main missing pieces before a stronger public release are:
 - fuller lesson coverage across all tracks
 - deployment to a public URL
 
-## Source Material
-
-The original raw source notes are still preserved in:
-
-- `1.txt` to `12.txt`
-
-They remain in the repository for traceability while the content is migrated into stable docs and site content.
-
 ## License
 
 This repository is released under the MIT License. See `LICENSE`.

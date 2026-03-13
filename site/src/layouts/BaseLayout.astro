@@ -1,4 +1,6 @@
 ---
+import { getCollection } from "astro:content";
+import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
 
 export interface Props {
@@ -23,6 +25,18 @@ const {
 } = Astro.props;
 
 const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
+const lessons = await getCollection("lessons");
+const notes = await getCollection("notes");
+const patches = await getCollection("patches");
+
+const footerNav = [
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/course", label: "Course" },
+  { href: "/patches", label: "Patches" },
+  { href: "/resources", label: "Resources" }
+];
+
+const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 ---
 
 <!doctype html>
@@ -717,9 +731,69 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
       }
 
       .site-footer {
-        padding: 24px 0 46px;
-        border-top: 1px solid var(--line);
+        margin-top: 18px;
+        padding: 0 0 46px;
         color: var(--muted);
+      }
+
+      .footer-wrap {
+        display: grid;
+        gap: 18px;
+      }
+
+      .footer-summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.8fr) minmax(280px, 1fr);
+        gap: 18px;
+      }
+
+      .footer-links-list,
+      .footer-meta-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .footer-links-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .footer-links-list a {
+        color: var(--text);
+      }
+
+      .footer-status-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .footer-mini {
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .footer-mini strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--accent);
+        font-size: 1.2rem;
+      }
+
+      .footer-tail {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .footer-meta-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
       }
 
       .track-nav {
@@ -799,6 +873,7 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
         .display-grid,
         .split-hero,
         .content-grid,
+        .footer-summary,
         .timeline-summary,
         .hero-grid .panel:first-child,
         .hero-grid .panel:last-child,
@@ -847,7 +922,8 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
 
       @media (max-width: 640px) {
         .site-header .shell,
-        .section-head {
+        .section-head,
+        .footer-tail {
           align-items: flex-start;
           flex-direction: column;
         }
@@ -890,7 +966,63 @@ const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
     </main>
     <footer class="site-footer">
       <div class="shell">
-        Open modular synthesis, generative systems, and audiovisual structure in public.
+        <div class="footer-wrap">
+          <div class="footer-summary">
+            <article class="feature-card">
+              <span class="card-kicker">Modular Genesis</span>
+              <h3>Open modular synthesis, generative systems, and audiovisual structure in public.</h3>
+              <p>
+                Public draft repository and site for modular workflows, patch logic, hybrid routing,
+                and future audiovisual systems.
+              </p>
+              <div class="actions">
+                <a class="button-secondary" href={repoUrl}>Open GitHub</a>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-kicker">Explore</span>
+              <ul class="footer-links-list">
+                {footerNav.map((item) => (
+                  <li><a href={withBase(item.href)}>{item.label}</a></li>
+                ))}
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-kicker">Project State</span>
+              <div class="footer-status-grid">
+                <div class="footer-mini">
+                  <strong>{tracks.length}</strong>
+                  tracks
+                </div>
+                <div class="footer-mini">
+                  <strong>{lessons.length}</strong>
+                  lessons
+                </div>
+                <div class="footer-mini">
+                  <strong>{notes.length}</strong>
+                  notes
+                </div>
+                <div class="footer-mini">
+                  <strong>{patches.length}</strong>
+                  patches
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <article class="feature-card">
+            <div class="footer-tail">
+              <div class="footer-meta-list">
+                <span>MIT License</span>
+                <span>GitHub Pages</span>
+                <span>EN / RU</span>
+              </div>
+              <div>Built in public.</div>
+            </div>
+          </article>
+        </div>
       </div>
     </footer>
   </body>

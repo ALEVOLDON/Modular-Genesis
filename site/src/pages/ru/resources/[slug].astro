@@ -1,0 +1,105 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { withBase } from "../../../lib/paths";
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes");
+
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note }
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const otherNotes = (await getCollection("notes"))
+  .filter((entry) => entry.slug !== note.slug)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={`${note.data.title} | Modular Genesis | RU`}
+  description={note.data.summary}
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/course", label: "Course" },
+    { href: "/ru/resources", label: "Resources" }
+  ]}
+  localeSwitch={{ href: `/resources/${note.slug}/`, label: "EN" }}
+>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Reference Note</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.4rem);">
+              {note.data.title}
+            </h1>
+            <p class="lede">{note.data.summary}</p>
+            <div class="actions">
+              <a class="button" href={withBase("/ru/resources")}>Назад к resources</a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Reference role</span>
+              <h3>Concept layer for the public system</h3>
+              <p>
+                Такие notes объясняют устойчивую логику за lessons, patch references и дальнейшим ростом сайта.
+              </p>
+              <ul class="feature-list">
+                <li>workflow и routing context</li>
+                <li>system architecture и project direction</li>
+                <li>support material for future lessons and artifacts</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <article class="feature-card prose-panel">
+          <Content />
+        </article>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="stack-grid">
+          <article class="feature-card">
+            <span class="card-kicker">More notes</span>
+            <h3>Related references</h3>
+            <ul class="feature-list">
+              {otherNotes.map((entry) => (
+                <li>
+                  <a href={withBase(`/ru/resources/${entry.slug}/`)}>{entry.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <span class="card-kicker">Navigation</span>
+            <h3>Продолжить движение по системе</h3>
+            <p>Reference material должно возвращать тебя в roadmap, lessons и patch library.</p>
+            <div class="actions">
+              <a class="button-secondary" href={withBase("/ru/course")}>Открыть course</a>
+              <a class="button-secondary" href={withBase("/ru/patches")}>Открыть patches</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

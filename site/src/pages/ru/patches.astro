@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { patchCollections } from "../../data/patches";
+import { withBase } from "../../lib/paths";
+
+const patchEntries = await getCollection("patches");
+const groupedEntries = Object.fromEntries(
+  patchCollections.map((collection) => [
+    collection.key,
+    patchEntries
+      .filter((entry) => entry.data.track === collection.key)
+      .sort((a, b) => a.data.order - b.data.order)
+  ])
+);
+
+const placeholderCount = patchEntries.filter((entry) => entry.data.status === "placeholder").length;
+
+const collectionCopy = {
+  foundations: {
+    title: "Foundations",
+    summary: "Стартовые voice structures, первые subtractive patches и modulation basics."
+  },
+  sequencing: {
+    title: "Sequencing",
+    summary: "Clocked systems, quantized melodies и step-based rhythmic structures."
+  },
+  generative: {
+    title: "Generative",
+    summary: "Random, probability, mutation и long-form evolving patch structures."
+  },
+  performances: {
+    title: "Performances",
+    summary: "Более крупные patch systems для jams, routing и live control."
+  }
+};
+---
+
+<BaseLayout
+  title="Patches | Modular Genesis | RU"
+  description="Русский обзор patch library проекта Modular Genesis."
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/course", label: "Course" },
+    { href: "/ru/resources", label: "Resources" }
+  ]}
+  localeSwitch={{ href: "/patches", label: "EN" }}
+>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Patch Library</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
+              <span class="accent">Patch layer</span> уже структурирован под реальные артефакты.
+            </h1>
+            <p class="lede">
+              Папки патчей, entries, routes и repository anchors уже существуют. Следующий шаг - заменить placeholders
+              на реальные `.vcv` systems, screenshots и audio examples.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/ru/course")}>Открыть lessons</a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}>Смотреть roadmap</a>
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Library status</span>
+              <h3>Структура опережает артефакты.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{patchCollections.length}</strong>
+                  collections уже определены
+                </li>
+                <li>
+                  <strong>{patchEntries.length}</strong>
+                  patch entries уже опубликованы на сайте
+                </li>
+                <li>
+                  <strong>{placeholderCount}</strong>
+                  placeholders еще ждут реальные `.vcv` files
+                </li>
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              {patchCollections.map((collection) => (
+                <article class="mini-card">
+                  <span class="mini-stat">{groupedEntries[collection.key]?.length || 0}</span>
+                  <h4>{collectionCopy[collection.key].title}</h4>
+                  <p>{collection.examples[0]}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Collection map</span>
+          <h2>Каждая collection соответствует своему типу patch system.</h2>
+          <p>
+            Patch library следует той же архитектуре, что и course: foundations, sequencing,
+            generative systems и более крупные performance-oriented structures.
+          </p>
+        </div>
+        <div class="stack-grid" style="margin-top: 26px;">
+          {patchCollections.map((collection) => (
+            <article class="feature-card">
+              <span class="card-kicker">Collection</span>
+              <h3>{collectionCopy[collection.key].title}</h3>
+              <p>{collectionCopy[collection.key].summary}</p>
+              <ul class="feature-list">
+                {collection.examples.map((example) => (
+                  <li>{example}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Published entries</span>
+            <h2>Текущие patch entries уже чисто сгруппированы и связаны с репозиторием.</h2>
+            <p>Секция уже полезна сейчас и оставляет место для реальных patch artifacts позже.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" style="margin-top: 10px;">
+          {patchCollections.map((collection) => (
+            <article class="feature-card">
+              <span class="card-kicker">{collectionCopy[collection.key].title}</span>
+              <h3>{groupedEntries[collection.key]?.length || 0} entries</h3>
+              <p>{collectionCopy[collection.key].summary}</p>
+              <ul class="feature-list">
+                {groupedEntries[collection.key]?.map((entry) => (
+                  <li>
+                    <a href={withBase(`/ru/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+              <div class="actions">
+                <a class="button-secondary" href={collection.folder}>Repository folder</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,137 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { tracks, trackLabelMap } from "../../../data/tracks";
+import { withBase } from "../../../lib/paths";
+
+export async function getStaticPaths() {
+  const lessons = await getCollection("lessons");
+
+  return lessons.map((lesson) => ({
+    params: { slug: lesson.slug },
+    props: { lesson }
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+const track = tracks.find((entry) => entry.key === lesson.data.track);
+const relatedPatches = (await getCollection("patches"))
+  .filter((patch) => patch.data.track === lesson.data.track)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const siblingLessons = (await getCollection("lessons"))
+  .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={`${lesson.data.title} | Modular Genesis | RU`}
+  description={lesson.data.summary}
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/course", label: "Course" },
+    { href: "/ru/resources", label: "Resources" }
+  ]}
+  localeSwitch={{ href: `/course/${lesson.slug}/`, label: "EN" }}
+>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">{trackLabelMap[lesson.data.track]}</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
+              {lesson.data.title}
+            </h1>
+            <p class="lede">{lesson.data.summary}</p>
+            <div class="actions">
+              <a class="button" href={withBase("/ru/course")}>Назад к course</a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Track context</span>
+              <h3>{track?.title}</h3>
+              <p>{track?.description}</p>
+              <ul class="feature-list">
+                {track?.roadmapTopics.slice(0, 3).map((topic) => (
+                  <li>{topic}</li>
+                ))}
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              <article class="mini-card">
+                <span class="mini-stat">Lesson</span>
+                <h4>Content layer</h4>
+                <p>Теория, структура и практический контекст управляются из content files.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{relatedPatches.length}</span>
+                <h4>Related patches</h4>
+                <p>Для этого трека уже есть concrete repository anchors.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <article class="feature-card prose-panel">
+          <Content />
+        </article>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="stack-grid">
+          <article class="feature-card">
+            <span class="card-kicker">Related patches</span>
+            <h3>Patch references</h3>
+            <p>Используй эти patch entries как репозиторные якоря для текущего lesson track.</p>
+            <ul class="feature-list">
+              {relatedPatches.map((patch) => (
+                <li>
+                  <a href={withBase(`/ru/patches/${patch.slug}/`)}>{patch.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <span class="card-kicker">Same track</span>
+            <h3>Продолжить внутри {track?.title}</h3>
+            <p>Соседние lessons внутри того же track держат progression связным.</p>
+            <ul class="feature-list">
+              {siblingLessons.map((entry) => (
+                <li>
+                  <a href={withBase(`/ru/course/${entry.slug}/`)}>{entry.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <span class="card-kicker">Related diagram</span>
+            <h3>Hybrid routing overview</h3>
+            <p>Первая system diagram связывает modular engine, DAW layer и visual output layer.</p>
+            <div class="actions">
+              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+              <a class="button-secondary" href={withBase("/ru/patches")}>Открыть patch library</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

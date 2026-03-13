@@ -106,7 +106,7 @@ const remainingResources = resources.slice(3);
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(resource.href)}>Открыть note</a>
+                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть note</a>
               </div>
             </article>
           ))}
@@ -148,7 +148,7 @@ const remainingResources = resources.slice(3);
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(resource.href)}>Открыть note</a>
+                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть note</a>
               </div>
             </article>
           ))}

@@ -1,11 +1,60 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
 
-const lessons = await getCollection("lessons");
-const notes = await getCollection("notes");
-const patches = await getCollection("patches");
+const lessons = (await getCollection("lessons")).sort((a, b) => {
+  if (a.data.track === b.data.track) return a.data.order - b.data.order;
+  return a.data.track.localeCompare(b.data.track);
+});
+
+const notes = (await getCollection("notes")).sort((a, b) => a.data.order - b.data.order);
+const patches = (await getCollection("patches")).sort((a, b) => a.data.order - b.data.order);
+
+const latestLessons = lessons.slice(0, 4);
+const featuredNotes = notes.slice(0, 3);
+const featuredPatches = patches.slice(0, 3);
+
+const pillars = [
+  {
+    kicker: "Система",
+    title: "Гибридная аудиоархитектура",
+    text: "Ableton Live, VCV Rack, маршрутизация, запись и визуальный слой читаются как одна связанная система.",
+    points: ["модульный движок + DAW-слой", "routing как часть композиции", "visual output как продолжение звука"]
+  },
+  {
+    kicker: "Курс",
+    title: "Структурированный путь обучения",
+    text: "В проекте уже есть треки, уроки, заметки и внутренняя логика вместо набора разрозненных туториалов.",
+    points: ["от foundations до audiovisual", "модель lesson + note + patch", "roadmap как каркас курса"]
+  },
+  {
+    kicker: "Репозиторий",
+    title: "Patch-first структура",
+    text: "У patch entries, папок репозитория и будущих реальных `.vcv` файлов уже есть стабильное место.",
+    points: ["публичная структура repo", "patch references на страницах", "готово к реальным артефактам"]
+  }
+];
+
+const toolCards = [
+  {
+    title: "VCV Rack",
+    text: "Главная модульная среда для синтеза, секвенсинга, вероятности и работы с сигналом."
+  },
+  {
+    title: "Ableton Live",
+    text: "Аранжировка, routing, запись, performance-контроль и якорь гибридного workflow."
+  },
+  {
+    title: "Visual Layer",
+    text: "Three.js, Blender и будущие real-time visual systems, связанные с поведением звука."
+  },
+  {
+    title: "Repository",
+    text: "Документация, патчи, диаграммы и уроки, собранные как единая открытая система знаний."
+  }
+];
 ---
 
 <BaseLayout
@@ -14,36 +63,42 @@ const patches = await getCollection("patches");
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/roadmap", label: "Roadmap (EN)" },
-    { href: "/course", label: "Course (EN)" },
-    { href: "/resources", label: "Resources (EN)" }
+    { href: "/roadmap", label: "Roadmap" },
+    { href: "/course", label: "Course" },
+    { href: "/resources", label: "Resources" }
   ]}
   localeSwitch={{ href: "/", label: "EN" }}
 >
-  <section class="hero">
-    <div class="eyebrow">Русская версия · Draft</div>
-    <div class="hero-copy">
-      <h1>Открытая система для модульного звука, генеративной музыки и аудиовизуальной практики.</h1>
-      <p>
-        `Modular Genesis` — это documentation-first проект про `VCV Rack`, `Ableton Live`,
-        генеративные патчи, гибридную маршрутизацию и будущие аудиовизуальные системы.
-        Сейчас это первая русскоязычная точка входа в проект, поверх уже работающего английского сайта.
-      </p>
-      <div class="actions">
-        <a class="button" href={withBase("/roadmap")}>Открыть roadmap (EN)</a>
-        <a class="button-secondary" href={withBase("/course")}>Открыть lessons (EN)</a>
-      </div>
-    </div>
-
-    <div class="panel-grid hero-grid">
-      <div class="panel">
-        <div class="section-head">
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
           <div>
-            <h2>Что это за проект</h2>
-            <p>Не просто серия туториалов, а каркас для открытого курса и библиотеки патчей.</p>
+            <div class="eyebrow">Русская версия v0.1</div>
+            <h1 class="display-title">
+              Открытая <span class="accent">generative</span> система для modular sound и audiovisual practice.
+            </h1>
+            <p class="lede">
+              Modular Genesis - это documentation-first проект про `VCV Rack`, `Ableton Live`,
+              generative patch design, гибридную маршрутизацию и будущие audiovisual systems.
+              Русская версия нужна как понятная точка входа, не ломая уже собранный английский каркас.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/roadmap")}>Открыть roadmap</a>
+              <a class="button-secondary" href={withBase("/course")}>Смотреть lessons</a>
+              <a class="button-secondary" href={withBase("/resources")}>Читать notes</a>
+            </div>
           </div>
-        </div>
-        <div class="code-block">Ableton / MIDI
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Основной pipeline</span>
+              <h3>От control logic к audio и visual output</h3>
+              <p>
+                Сайт, уроки, заметки и patch entries уже строятся вокруг одного backbone:
+                controller input, modular generation, audio capture и будущего visual synthesis.
+              </p>
+              <div class="code-block">Ableton / MIDI
   ->
 VCV Rack
   ->
@@ -51,86 +106,203 @@ Generative Patch
   ->
 Audio Engine
   ->
-Visual Layer
+Visual Engine
   ->
 Performance</div>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              <article class="mini-card">
+                <span class="mini-stat">{tracks.length}</span>
+                <h4>Треков уже собрано</h4>
+                <p>Foundations, sequencing, generative, hybrid и audiovisual уже оформлены как каркас.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{lessons.length}</span>
+                <h4>Уроков опубликовано</h4>
+                <p>На сайте уже есть реальные lesson pages, а не просто syllabus-заглушка.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{notes.length}</span>
+                <h4>Заметок опубликовано</h4>
+                <p>Reference notes объясняют routing, patch logic и общее направление проекта.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{patches.length}</span>
+                <h4>Patch entries готовы</h4>
+                <p>Структура уже готова под реальные `.vcv` артефакты без перестройки сайта.</p>
+              </article>
+            </div>
+
+            <article class="feature-card">
+              <span class="section-label">Что уже работает</span>
+              <h3>Не только идея, но уже собранный фундамент</h3>
+              <ul class="feature-list">
+                <li><strong>Roadmap:</strong> поэтапная структура от signal flow до audiovisual systems.</li>
+                <li><strong>Course:</strong> lessons уже сгруппированы по трекам и маршрутам.</li>
+                <li><strong>Resources:</strong> concept notes и system diagrams уже опубликованы.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="panel">
-        <h2>Текущее состояние</h2>
-        <ul class="stat-list">
-          <li>
-            <span class="stat-value">{lessons.length}</span>
-            уже опубликованных lesson pages
-          </li>
-          <li>
-            <span class="stat-value">{notes.length}</span>
-            reference notes на сайте
-          </li>
-          <li>
-            <span class="stat-value">{patches.length}</span>
-            patch entries под будущие реальные `.vcv`
-          </li>
-          <li>
-            <span class="stat-value">EN + RU</span>
-            заложена база для двуязычной структуры
-          </li>
-        </ul>
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Экосистема</span>
+          <h2>Инструменты разделены по роли, но спроектированы как единый организм.</h2>
+          <p>
+            Проект не разделяет synthesis, arrangement и visuals на отдельные дисциплины.
+            Он собирает их как связанные слои одной системы.
+          </p>
+        </div>
+        <div class="stack-grid-4" style="margin-top: 26px;">
+          {toolCards.map((tool) => (
+            <article class="feature-card">
+              <span class="card-kicker">Инструмент</span>
+              <h3>{tool.title}</h3>
+              <p>{tool.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="cards-3">
-      <article class="card">
-        <span class="card-kicker">Система</span>
-        <h3>Гибридная архитектура</h3>
-        <p>
-          `Ableton Live` выступает как sequencer и studio layer, а `VCV Rack` как sound engine и generative core.
-        </p>
-      </article>
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="split-hero">
+          <div class="feature-card">
+            <span class="section-label">Почему modular</span>
+            <h2>Это не просто sound design workflow, а среда для исследования.</h2>
+            <p>
+              Модульные системы соединяют композицию, логику, импровизацию и инженерию.
+              Именно поэтому они подходят для живых систем, а не только для статичных пресетов.
+            </p>
+            <ul class="feature-list">
+              <li><strong>Routing как композиция:</strong> сам signal path становится частью формы.</li>
+              <li><strong>Generative logic:</strong> clocks, probability, mutation и feedback создают evolving behavior.</li>
+              <li><strong>Audiovisual expansion:</strong> звуковые события позже могут управлять geometry, motion и scenes.</li>
+            </ul>
+          </div>
 
-      <article class="card">
-        <span class="card-kicker">Курс</span>
-        <h3>Структурированное обучение</h3>
-        <p>
-          Foundations, sequencing, generative, hybrid и audiovisual уже разложены по страницам и маршрутам.
-        </p>
-      </article>
-
-      <article class="card">
-        <span class="card-kicker">Репозиторий</span>
-        <h3>База для роста</h3>
-        <p>
-          В проекте уже есть notes, patch library, diagrams, site и каркас для будущих реальных артефактов.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <div>
-        <h2>Русская локализация</h2>
-        <p>Сейчас русская версия начинается с главной страницы и будет расширяться дальше поэтапно.</p>
+          <div class="media-frame">
+            <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Диаграмма экосистемы инструментов Modular Genesis." />
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="cards-2">
-      <article class="card">
-        <span class="card-kicker">Сейчас</span>
-        <h3>Первый вход на русском</h3>
-        <p>
-          Эта страница помогает объяснить проект русскоязычной аудитории, не ломая существующую английскую структуру.
-        </p>
-      </article>
+    </section>
 
-      <article class="card">
-        <span class="card-kicker">Дальше</span>
-        <h3>Следующие кандидаты</h3>
-        <p>
-          Логичнее всего переводить дальше `roadmap`, `resources` и 5-7 базовых lessons, а уже потом масштабировать весь сайт.
-        </p>
-      </article>
-    </div>
-  </section>
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Архитектура</span>
+          <h2>Три устойчивых слоя уже собраны.</h2>
+          <p>
+            Текущая публичная версия - это еще не завершенный контент, а стабильный проектный каркас:
+            архитектура системы, архитектура обучения и архитектура репозитория.
+          </p>
+        </div>
+        <div class="stack-grid" style="margin-top: 26px;">
+          {pillars.map((pillar) => (
+            <article class="feature-card">
+              <span class="card-kicker">{pillar.kicker}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.text}</p>
+              <ul class="feature-list">
+                {pillar.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Живой контент</span>
+            <h2>На сайте уже есть материал, а не просто пустой фасад.</h2>
+            <p>Lessons, notes и patch entries разведены по понятным колонкам, чтобы каждый слой читался отдельно.</p>
+          </div>
+          <a class="button-secondary" href={withBase("/course")}>Все lessons</a>
+        </div>
+
+        <div class="content-grid">
+          <div class="content-column">
+            <article class="feature-card">
+              <span class="card-kicker">Последние lessons</span>
+              <div class="card-stack">
+                {latestLessons.map((lesson) => (
+                  <article class="card">
+                    <span class="card-kicker">{lesson.data.track}</span>
+                    <h3>{lesson.data.title}</h3>
+                    <p>{lesson.data.summary}</p>
+                    <div class="actions">
+                      <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Открыть lesson</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-kicker">Логика треков</span>
+              <h3>Как растет учебная система</h3>
+              <p>
+                Текущий контент уже идет по стабильной последовательности: от базового сигнала к hybrid и audiovisual output.
+              </p>
+              <ul class="feature-list">
+                {tracks.map((track, index) => (
+                  <li>
+                    <strong>Этап {index + 1}:</strong> {track.title} - {track.description}
+                  </li>
+                ))}
+              </ul>
+              <div class="actions">
+                <a class="button-secondary" href={withBase("/roadmap")}>Открыть полный roadmap</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="content-column">
+            <article class="feature-card">
+              <span class="card-kicker">Базовые notes</span>
+              <div class="card-stack">
+                {featuredNotes.map((note) => (
+                  <article class="card">
+                    <h3>{note.data.title}</h3>
+                    <p>{note.data.summary}</p>
+                    <div class="actions">
+                      <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Открыть note</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-kicker">Patch library</span>
+              <div class="card-stack">
+                {featuredPatches.map((patch) => (
+                  <article class="card">
+                    <span class="card-kicker">{patch.data.track}</span>
+                    <h3>{patch.data.title}</h3>
+                    <p>{patch.data.summary}</p>
+                    <div class="actions">
+                      <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Открыть patch</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

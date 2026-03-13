@@ -12,9 +12,15 @@ const lessons = (await getCollection("lessons")).sort((a, b) => {
 const notes = (await getCollection("notes")).sort((a, b) => a.data.order - b.data.order);
 const patches = (await getCollection("patches")).sort((a, b) => a.data.order - b.data.order);
 
-const latestLessons = lessons.slice(0, 4);
+const featuredLessons = lessons.slice(0, 3);
 const featuredNotes = notes.slice(0, 3);
 const featuredPatches = patches.slice(0, 3);
+
+const heroSignals = [
+  "Open roadmap and course skeleton",
+  "Patch library ready for real artifacts",
+  "English and Russian entry points online"
+];
 
 const pillars = [
   {
@@ -80,6 +86,11 @@ const toolCards = [
               <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
               <a class="button-secondary" href={withBase("/course")}>Browse lessons</a>
               <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+            </div>
+            <div class="track-nav">
+              {heroSignals.map((signal) => (
+                <span class="track-chip">{signal}</span>
+              ))}
             </div>
           </div>
 
@@ -197,19 +208,35 @@ Performance</div>
             system architecture, learning architecture, and repository architecture.
           </p>
         </div>
-        <div class="stack-grid" style="margin-top: 26px;">
-          {pillars.map((pillar) => (
-            <article class="feature-card">
-              <span class="card-kicker">{pillar.kicker}</span>
-              <h3>{pillar.title}</h3>
-              <p>{pillar.text}</p>
-              <ul class="feature-list">
-                {pillar.points.map((point) => (
-                  <li>{point}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
+        <div class="timeline-summary" style="margin-top: 26px;">
+          <article class="feature-card">
+            <span class="card-kicker">Blueprint</span>
+            <h3>The site is already split into stable layers.</h3>
+            <p>
+              The current version is strongest when read as infrastructure: one layer explains the system,
+              one layer teaches the workflow, and one layer stores the patch library that future real artifacts will use.
+            </p>
+            <ul class="feature-list">
+              <li><strong>System layer:</strong> diagrams, notes, and roadmap define the structure.</li>
+              <li><strong>Learning layer:</strong> lessons are grouped by track, not published as disconnected pages.</li>
+              <li><strong>Repository layer:</strong> patch entries already map to folders and future media artifacts.</li>
+            </ul>
+          </article>
+
+          <div class="card-stack">
+            {pillars.map((pillar) => (
+              <article class="card">
+                <span class="card-kicker">{pillar.kicker}</span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+                <ul class="feature-list">
+                  {pillar.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -220,80 +247,68 @@ Performance</div>
           <div class="section-copy">
             <span class="section-label">Live Content</span>
             <h2>The site already has usable material, not just placeholders.</h2>
-            <p>Lessons, notes, and patch entries are separated into clear columns so each layer reads as its own system.</p>
+            <p>Tracks define the sequence first, then lessons, notes, and patches fill each layer with public material.</p>
           </div>
           <a class="button-secondary" href={withBase("/course")}>See all lessons</a>
         </div>
 
-        <div class="content-grid">
-          <div class="content-column">
-            <article class="feature-card">
-              <span class="card-kicker">Latest lessons</span>
-              <div class="card-stack">
-                {latestLessons.map((lesson) => (
-                  <article class="card">
-                    <span class="card-kicker">{lesson.data.track}</span>
-                    <h3>{lesson.data.title}</h3>
-                    <p>{lesson.data.summary}</p>
-                    <div class="actions">
-                      <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Open lesson</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
+        <div class="roadmap-strip" style="margin: 26px 0 24px;">
+          {tracks.map((track, index) => (
+            <article class="roadmap-step">
+              <span class="index">{index + 1}</span>
+              <h3>{track.title}</h3>
+              <p>{track.description}</p>
             </article>
+          ))}
+        </div>
 
-            <article class="feature-card">
-              <span class="card-kicker">Track progression</span>
-              <h3>How the learning system expands</h3>
-              <p>
-                The current content already follows a stable sequence, from signal basics to hybrid and audiovisual output.
-              </p>
-              <ul class="feature-list">
-                {tracks.map((track, index) => (
-                  <li>
-                    <strong>Stage {index + 1}:</strong> {track.title} — {track.description}
-                  </li>
-                ))}
-              </ul>
-              <div class="actions">
-                <a class="button-secondary" href={withBase("/roadmap")}>Open full roadmap</a>
-              </div>
-            </article>
-          </div>
+        <div class="cards-3">
+          <article class="feature-card">
+            <span class="card-kicker">Latest lessons</span>
+            <div class="card-stack">
+              {featuredLessons.map((lesson) => (
+                <article class="card">
+                  <span class="card-kicker">{lesson.data.track}</span>
+                  <h3>{lesson.data.title}</h3>
+                  <p>{lesson.data.summary}</p>
+                  <div class="actions">
+                    <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Open lesson</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </article>
 
-          <div class="content-column">
-            <article class="feature-card">
-              <span class="card-kicker">Core notes</span>
-              <div class="card-stack">
-                {featuredNotes.map((note) => (
-                  <article class="card">
-                    <h3>{note.data.title}</h3>
-                    <p>{note.data.summary}</p>
-                    <div class="actions">
-                      <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Open note</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </article>
+          <article class="feature-card">
+            <span class="card-kicker">Core notes</span>
+            <div class="card-stack">
+              {featuredNotes.map((note) => (
+                <article class="card">
+                  <h3>{note.data.title}</h3>
+                  <p>{note.data.summary}</p>
+                  <div class="actions">
+                    <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Open note</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </article>
 
-            <article class="feature-card">
-              <span class="card-kicker">Patch library</span>
-              <div class="card-stack">
-                {featuredPatches.map((patch) => (
-                  <article class="card">
-                    <span class="card-kicker">{patch.data.track}</span>
-                    <h3>{patch.data.title}</h3>
-                    <p>{patch.data.summary}</p>
-                    <div class="actions">
-                      <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Open patch</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </article>
-          </div>
+          <article class="feature-card">
+            <span class="card-kicker">Patch library</span>
+            <div class="card-stack">
+              {featuredPatches.map((patch) => (
+                <article class="card">
+                  <span class="card-kicker">{patch.data.track}</span>
+                  <h3>{patch.data.title}</h3>
+                  <p>{patch.data.summary}</p>
+                  <div class="actions">
+                    <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Open patch</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </article>
         </div>
       </div>
     </section>

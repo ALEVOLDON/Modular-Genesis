@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { tracks } from "../../data/tracks";
+import { withBase } from "../../lib/paths";
+
+const lessons = await getCollection("lessons");
+const patches = await getCollection("patches");
+const notes = await getCollection("notes");
+
+const trackTones = ["#66f7ff", "#7cf0c9", "#ff5fcb", "#ffe45c", "#66d9ff"];
+
+const trackTitleMap = {
+  foundations: "Foundations",
+  sequencing: "Sequencing",
+  generative: "Generative",
+  hybrid: "Hybrid",
+  audiovisual: "Audiovisual"
+};
+
+const trackCopyMap = {
+  foundations: {
+    description: "Стартовая фаза: signal flow, базовая модуляция и первые sound design patches.",
+    topics: ["CV и audio", "oscillator, filter, VCA", "envelopes и LFOs", "первые subtractive patches"]
+  },
+  sequencing: {
+    description: "Переход от статичного звука к clocked motion, ритму и tonal control.",
+    topics: ["clock, trigger, gate", "sequencers и quantizers", "melodic и rhythmic motion", "probability как структура"]
+  },
+  generative: {
+    description: "Системы, которые меняются во времени за счет probability, mutation и feedback.",
+    topics: ["sample and hold", "Turing-style mutation", "feedback и slow modulation", "self-playing ambient systems"]
+  },
+  hybrid: {
+    description: "Связка VCV Rack и Ableton Live для routing, записи и arrangement.",
+    topics: ["VCV Rack + Ableton", "virtual audio routing", "multichannel recording", "MIDI controller workflows"]
+  },
+  audiovisual: {
+    description: "Преобразование поведения звука в visuals и performance-oriented output.",
+    topics: ["OSC и MIDI visual control", "audio-reactive graphics", "Blender / Three.js / TouchDesigner", "live performance architecture"]
+  }
+};
+
+const roadmapStages = tracks.map((track, index) => ({
+  ...track,
+  index,
+  tone: trackTones[index % trackTones.length],
+  title: trackTitleMap[track.key],
+  description: trackCopyMap[track.key].description,
+  roadmapTopics: trackCopyMap[track.key].topics,
+  lessonCount: lessons.filter((lesson) => lesson.data.track === track.key).length,
+  patchCount: patches.filter((patch) => patch.data.track === track.key || (track.key === "hybrid" && patch.data.track === "performances")).length
+}));
+---
+
+<BaseLayout
+  title="Roadmap | Modular Genesis | RU"
+  description="Русская roadmap-страница проекта Modular Genesis."
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/resources", label: "Resources" },
+    { href: "/ru/course", label: "Course" }
+  ]}
+  localeSwitch={{ href: "/roadmap", label: "EN" }}
+>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">System Evolution Protocol</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
+              Roadmap проекта <span class="accent">Modular Genesis</span> от first signal flow до audiovisual systems.
+            </h1>
+            <p class="lede">
+              Эта страница превращает planning notes в staged public blueprint. Каждый трек читается как отдельная
+              фаза со своей логикой, уроками, patch direction и ролью внутри общей системы.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/ru/course")}>Открыть lessons</a>
+              <a class="button-secondary" href={withBase("/ru/resources")}>Читать reference notes</a>
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Текущее состояние roadmap</span>
+              <h3>Пять фаз, одна связанная система.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{roadmapStages.length}</strong>
+                  stage clusters уже определены
+                </li>
+                <li>
+                  <strong>{lessons.length}</strong>
+                  lessons уже привязаны к этим фазам
+                </li>
+                <li>
+                  <strong>{notes.length}</strong>
+                  concept notes поддерживают эту последовательность
+                </li>
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              {roadmapStages.slice(0, 4).map((stage) => (
+                <article class="mini-card">
+                  <span class="mini-stat" style={`color:${stage.tone};`}>0{stage.index + 1}</span>
+                  <h4>{stage.title}</h4>
+                  <p>{stage.roadmapTopics[0]}</p>
+                </article>
+              ))}
+            </div>
+
+            <article class="feature-card">
+              <span class="section-label">Практический слой</span>
+              <h3>Как roadmap работает в реальном проекте</h3>
+              <ul class="feature-list">
+                <li><strong>Lessons:</strong> каждая стадия может расти в отдельный lesson cluster.</li>
+                <li><strong>Patches:</strong> логика стадий напрямую маппится в patch entries и будущие `.vcv` files.</li>
+                <li><strong>Docs:</strong> notes и diagrams объясняют переходы между фазами.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Roadmap Timeline</span>
+          <h2>Каждая стадия сдвигает систему от отдельных модулей к цельному performance organism.</h2>
+          <p>
+            Эта последовательность не только учебная. Она показывает, как параллельно могут развиваться репозиторий,
+            patch library и сайт, не распадаясь на disconnected pieces.
+          </p>
+        </div>
+
+        <div class="timeline" style="margin-top: 34px;">
+          {roadmapStages.map((stage) => (
+            <Fragment>
+              {stage.index % 2 === 0 ? (
+                <article class="timeline-card left" style={`--track-tone:${stage.tone};`}>
+                  <span class="timeline-topline">Stage {stage.index + 1}</span>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.description}</p>
+                  <ul class="timeline-list">
+                    {stage.roadmapTopics.map((topic) => (
+                      <li>{topic}</li>
+                    ))}
+                  </ul>
+                </article>
+              ) : (
+                <div></div>
+              )}
+
+              <div class="timeline-marker" style={`--track-tone:${stage.tone};`}>
+                <div class="timeline-node">{stage.index + 1}</div>
+              </div>
+
+              {stage.index % 2 === 1 ? (
+                <article class="timeline-card right" style={`--track-tone:${stage.tone};`}>
+                  <span class="timeline-topline">Stage {stage.index + 1}</span>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.description}</p>
+                  <ul class="timeline-list">
+                    {stage.roadmapTopics.map((topic) => (
+                      <li>{topic}</li>
+                    ))}
+                  </ul>
+                </article>
+              ) : (
+                <div></div>
+              )}
+            </Fragment>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="timeline-summary">
+          <div class="feature-card">
+            <span class="section-label">System diagrams</span>
+            <h2>Roadmap визуально держат две site-native diagrams.</h2>
+            <p>
+              Эти схемы заменяют старый slide language более чистым визуальным языком сайта, но сохраняют
+              ту же структурную идею: routing logic и общую ecosystem map вокруг проекта.
+            </p>
+            <div class="actions">
+              <a class="button-secondary" href={withBase("/ru/resources")}>Открыть resources</a>
+            </div>
+          </div>
+
+          <div class="content-column">
+            <div class="media-frame">
+              <img src={withBase("/diagrams/hybrid-routing.svg")} alt="Диаграмма гибридной маршрутизации между Ableton, VCV Rack, записью и visuals." />
+            </div>
+            <div class="media-frame">
+              <img src={withBase("/diagrams/tool-ecosystem.svg")} alt="Диаграмма экосистемы инструментов проекта Modular Genesis." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Stage status</span>
+            <h2>У каждой фазы уже есть понятная связь с lessons и patches.</h2>
+            <p>Из-за этого roadmap работает как рабочая структура, а не как декоративная схема.</p>
+          </div>
+          <a class="button-secondary" href={withBase("/patches")}>Открыть patch library</a>
+        </div>
+
+        <div class="status-grid">
+          {roadmapStages.map((stage) => (
+            <article class="status-pill">
+              <strong>{stage.lessonCount}</strong>
+              {stage.title}: lessons опубликовано
+            </article>
+          ))}
+        </div>
+
+        <div class="stack-grid" style="margin-top: 18px;">
+          {roadmapStages.slice(0, 3).map((stage) => (
+            <article class="feature-card" style={`--track-tone:${stage.tone};`}>
+              <span class="timeline-topline">Patch direction</span>
+              <h3>{stage.title}</h3>
+              <p>{stage.patchCount} patch entries сейчас связаны с этой стадией или соседним performance layer.</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

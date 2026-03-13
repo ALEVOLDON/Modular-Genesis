@@ -29,12 +29,53 @@ const lessons = await getCollection("lessons");
 const notes = await getCollection("notes");
 const patches = await getCollection("patches");
 
-const footerNav = [
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/course", label: "Course" },
-  { href: "/patches", label: "Patches" },
-  { href: "/resources", label: "Resources" }
-];
+const footerNav = lang === "ru"
+  ? [
+      { href: "/ru/roadmap", label: "Roadmap" },
+      { href: "/ru/course", label: "Course" },
+      { href: "/patches", label: "Patches" },
+      { href: "/ru/resources", label: "Resources" }
+    ]
+  : [
+      { href: "/roadmap", label: "Roadmap" },
+      { href: "/course", label: "Course" },
+      { href: "/patches", label: "Patches" },
+      { href: "/resources", label: "Resources" }
+    ];
+
+const footerCopy = lang === "ru"
+  ? {
+      kicker: "Modular Genesis",
+      title: "Открытый modular synthesis, generative systems и audiovisual structure в публичной сборке.",
+      text: "Public draft репозиторий и сайт про modular workflows, patch logic, hybrid routing и будущие audiovisual systems.",
+      button: "Открыть GitHub",
+      explore: "Навигация",
+      state: "Состояние проекта",
+      tracks: "tracks",
+      lessons: "lessons",
+      notes: "notes",
+      patches: "patches",
+      license: "MIT License",
+      pages: "GitHub Pages",
+      locales: "EN / RU",
+      built: "Built in public."
+    }
+  : {
+      kicker: "Modular Genesis",
+      title: "Open modular synthesis, generative systems, and audiovisual structure in public.",
+      text: "Public draft repository and site for modular workflows, patch logic, hybrid routing, and future audiovisual systems.",
+      button: "Open GitHub",
+      explore: "Explore",
+      state: "Project State",
+      tracks: "tracks",
+      lessons: "lessons",
+      notes: "notes",
+      patches: "patches",
+      license: "MIT License",
+      pages: "GitHub Pages",
+      locales: "EN / RU",
+      built: "Built in public."
+    };
 
 const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 ---
@@ -1195,19 +1236,16 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         <div class="footer-wrap">
           <div class="footer-summary">
             <article class="feature-card">
-              <span class="card-kicker">Modular Genesis</span>
-              <h3>Open modular synthesis, generative systems, and audiovisual structure in public.</h3>
-              <p>
-                Public draft repository and site for modular workflows, patch logic, hybrid routing,
-                and future audiovisual systems.
-              </p>
+              <span class="card-kicker">{footerCopy.kicker}</span>
+              <h3>{footerCopy.title}</h3>
+              <p>{footerCopy.text}</p>
               <div class="actions">
-                <a class="button-secondary" href={repoUrl}>Open GitHub</a>
+                <a class="button-secondary" href={repoUrl}>{footerCopy.button}</a>
               </div>
             </article>
 
             <article class="feature-card">
-              <span class="card-kicker">Explore</span>
+              <span class="card-kicker">{footerCopy.explore}</span>
               <ul class="footer-links-list">
                 {footerNav.map((item) => (
                   <li><a href={withBase(item.href)}>{item.label}</a></li>
@@ -1216,23 +1254,23 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
             </article>
 
             <article class="feature-card">
-              <span class="card-kicker">Project State</span>
+              <span class="card-kicker">{footerCopy.state}</span>
               <div class="footer-status-grid">
                 <div class="footer-mini">
                   <strong>{tracks.length}</strong>
-                  tracks
+                  {footerCopy.tracks}
                 </div>
                 <div class="footer-mini">
                   <strong>{lessons.length}</strong>
-                  lessons
+                  {footerCopy.lessons}
                 </div>
                 <div class="footer-mini">
                   <strong>{notes.length}</strong>
-                  notes
+                  {footerCopy.notes}
                 </div>
                 <div class="footer-mini">
                   <strong>{patches.length}</strong>
-                  patches
+                  {footerCopy.patches}
                 </div>
               </div>
             </article>
@@ -1241,11 +1279,11 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
           <article class="feature-card">
             <div class="footer-tail">
               <div class="footer-meta-list">
-                <span>MIT License</span>
-                <span>GitHub Pages</span>
-                <span>EN / RU</span>
+                <span>{footerCopy.license}</span>
+                <span>{footerCopy.pages}</span>
+                <span>{footerCopy.locales}</span>
               </div>
-              <div>Built in public.</div>
+              <div>{footerCopy.built}</div>
             </div>
           </article>
         </div>

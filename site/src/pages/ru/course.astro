@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { tracks } from "../../data/tracks";
+import { withBase } from "../../lib/paths";
+
+const lessons = await getCollection("lessons");
+
+const grouped = tracks.map((track) => ({
+  ...track,
+  lessons: lessons
+    .filter((lesson) => lesson.data.track === track.key)
+    .sort((a, b) => a.data.order - b.data.order)
+}));
+
+const populatedTracks = grouped.filter((track) => track.lessons.length > 0);
+const totalLessons = lessons.length;
+
+const trackCopyMap = {
+  foundations: {
+    title: "Foundations",
+    description: "Старт с signal flow, базовой модуляции и первых sound design patches.",
+    topics: ["CV и audio", "oscillator, filter, VCA", "envelopes и LFOs"]
+  },
+  sequencing: {
+    title: "Sequencing",
+    description: "Переход от статичного звука к clocked motion, ритму и tonal control.",
+    topics: ["clock, trigger, gate", "sequencers и quantizers", "melodic и rhythmic motion"]
+  },
+  generative: {
+    title: "Generative",
+    description: "Системы, которые меняются во времени за счет probability, mutation и feedback.",
+    topics: ["sample and hold", "Turing-style mutation", "feedback и slow modulation"]
+  },
+  hybrid: {
+    title: "Hybrid",
+    description: "Связка VCV Rack и Ableton Live для routing, записи и arrangement.",
+    topics: ["VCV Rack + Ableton", "virtual audio routing", "multichannel recording"]
+  },
+  audiovisual: {
+    title: "Audiovisual",
+    description: "Преобразование поведения звука в visuals и performance-oriented output.",
+    topics: ["OSC и MIDI visual control", "audio-reactive graphics", "Blender / Three.js / TouchDesigner"]
+  }
+};
+---
+
+<BaseLayout
+  title="Course | Modular Genesis | RU"
+  description="Русская обзорная страница course-структуры проекта Modular Genesis."
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/course", label: "Course" },
+    { href: "/ru/resources", label: "Resources" }
+  ]}
+  localeSwitch={{ href: "/course", label: "EN" }}
+>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Course Structure</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
+              Documentation-first <span class="accent">learning path</span> для modular sound и hybrid systems.
+            </h1>
+            <p class="lede">
+              Курс уже разложен по tracks, а lessons, notes, patch references и diagrams растут параллельно,
+              не превращаясь в длинный список disconnected tutorials.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+              <a class="button-secondary" href={withBase("/ru/resources")}>Читать notes</a>
+            </div>
+            <div class="track-nav">
+              {grouped.map((track) => (
+                <a class="track-chip" href={`#${track.key}`}>{trackCopyMap[track.key].title}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Course status</span>
+              <h3>У curriculum уже есть стабильный каркас.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{tracks.length}</strong>
+                  tracks определены от foundations до audiovisual
+                </li>
+                <li>
+                  <strong>{totalLessons}</strong>
+                  lessons уже опубликовано на сайте
+                </li>
+                <li>
+                  <strong>{populatedTracks.length}</strong>
+                  tracks уже наполнены живым контентом
+                </li>
+              </ul>
+            </article>
+
+            <div class="hero-dashboard-grid">
+              <article class="mini-card">
+                <span class="mini-stat">Theory</span>
+                <h4>Concept first</h4>
+                <p>Каждый lesson начинается с модели идеи, еще до patch file и практики.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">Patch</span>
+                <h4>Repository anchor</h4>
+                <p>Lessons связаны с patch entries, поэтому контент и артефакты растут вместе.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Track map</span>
+          <h2>Каждый track покрывает отдельный слой одной и той же системы.</h2>
+          <p>
+            Курс разделен не по случайным темам, а движется от core signal logic к sequencing,
+            generative behavior, hybrid routing и audiovisual output.
+          </p>
+        </div>
+        <div class="stack-grid" style="margin-top: 26px;">
+          {tracks.map((track, index) => (
+            <article class="feature-card">
+              <span class="card-kicker">Track {index + 1}</span>
+              <h3>{trackCopyMap[track.key].title}</h3>
+              <p>{trackCopyMap[track.key].description}</p>
+              <ul class="feature-list">
+                {trackCopyMap[track.key].topics.map((topic) => (
+                  <li>{topic}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Published lessons</span>
+            <h2>Lesson groups разделены по tracks и остаются читаемыми.</h2>
+            <p>Каждый блок может расти независимо, не превращая страницу в одну длинную смешанную ленту.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" style="margin-top: 10px;">
+          {populatedTracks.map((track) => (
+            <article class="feature-card" id={track.key}>
+              <span class="card-kicker">{trackCopyMap[track.key].title}</span>
+              <h3>{track.lessons.length} lesson(s)</h3>
+              <p>{trackCopyMap[track.key].description}</p>
+              <ul class="feature-list">
+                {track.lessons.map((lesson) => (
+                  <li>
+                    <a href={withBase(`/course/${lesson.slug}/`)}>{lesson.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="split-hero">
+          <article class="feature-card">
+            <span class="section-label">Lesson format</span>
+            <h2>Каждый lesson строится вокруг одной повторяемой структуры.</h2>
+            <ul class="feature-list">
+              <li><strong>Theory:</strong> короткое объяснение концепта.</li>
+              <li><strong>Patch idea:</strong> простая routing model или signal chain.</li>
+              <li><strong>Practice:</strong> одна конкретная задача на сборку или расширение системы.</li>
+            </ul>
+          </article>
+
+          <div class="media-frame">
+            <img src={withBase("/diagrams/lesson-anatomy.svg")} alt="Диаграмма структуры lesson page: theory, patch diagram, patch file и practice task." />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

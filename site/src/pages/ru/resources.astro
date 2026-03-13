@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/paths";
+
+const resources = [
+  {
+    title: "Hybrid Workflow",
+    summary: "Ключевая заметка о том, как Ableton Live и VCV Rack разделяют роли внутри проекта.",
+    href: "/resources/hybrid-workflow/"
+  },
+  {
+    title: "Generative Patch Design",
+    summary: "Системный разбор clock, probability, quantization и feedback как grammar generative systems.",
+    href: "/resources/generative-patch-design/"
+  },
+  {
+    title: "Course And Repository Vision",
+    summary: "Почему Modular Genesis строится как documentation-first course, patch library и public reference system.",
+    href: "/resources/course-and-repository-vision/"
+  },
+  {
+    title: "Site And Visual Map",
+    summary: "Как сайт должен показывать diagrams, lessons, notes и system structure.",
+    href: "/resources/site-and-visual-map/"
+  },
+  {
+    title: "3D Lab Concept",
+    summary: "Долгосрочная идея для spatial WebGL learning environment и интерактивной лаборатории.",
+    href: "/resources/3d-lab-concept/"
+  }
+];
+
+const featuredResources = resources.slice(0, 3);
+const remainingResources = resources.slice(3);
+---
+
+<BaseLayout
+  title="Resources | Modular Genesis | RU"
+  description="Русскоязычный обзор reference notes проекта Modular Genesis."
+  lang="ru"
+  navItems={[
+    { href: "/ru/", label: "Главная" },
+    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/resources", label: "Resources" },
+    { href: "/ru/course", label: "Course" }
+  ]}
+  localeSwitch={{ href: "/resources", label: "EN" }}
+>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">Resources</div>
+            <h1 class="display-title">
+              <span class="accent">Reference layer</span> за lessons, patches и diagrams.
+            </h1>
+            <p class="lede">
+              Эти заметки фиксируют устойчивые идеи проекта: hybrid workflow, generative structure,
+              project vision и visual system planning, который расширяет модульную сторону проекта.
+            </p>
+            <div class="actions">
+              <a class="button" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+              <a class="button-secondary" href={withBase("/ru/course")}>Смотреть lessons</a>
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Reference scope</span>
+              <h3>Notes объясняют систему, а не только отдельные техники.</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{resources.length}</strong>
+                  concept notes уже опубликовано
+                </li>
+                <li>
+                  <strong>Workflow</strong>
+                  routing, sequencing roles, hybrid capture
+                </li>
+                <li>
+                  <strong>Vision</strong>
+                  repository structure, visual map, future lab direction
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="section-head">
+          <div class="section-copy">
+            <span class="section-label">Core notes</span>
+            <h2>Первый слой концентрируется на идеях, которые держат проект вместе.</h2>
+            <p>Это заметки, которые сильнее всего связаны с текущими lessons, roadmap и patch logic.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid" style="margin-top: 10px;">
+          {featuredResources.map((resource) => (
+            <article class="feature-card">
+              <span class="card-kicker">Reference</span>
+              <h3>{resource.title}</h3>
+              <p>{resource.summary}</p>
+              <div class="actions">
+                <a class="button-secondary" href={withBase(resource.href)}>Открыть note</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="split-hero">
+          <article class="feature-card">
+            <span class="section-label">Hybrid setup reference</span>
+            <h2>Site-native diagram, извлеченная из исходного проектного мышления.</h2>
+            <p>
+              Эта схема заменяет старый slide material более чистым языком сайта, но сохраняет структурную идею:
+              controller input, Ableton, VCV Rack, visuals и recording как единый setup.
+            </p>
+          </article>
+
+          <div class="media-frame">
+            <img src={withBase("/diagrams/hybrid-setup.svg")} alt="Диаграмма гибридного setup с controller, Ableton, VCV Rack, visuals и записью." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <div class="section-copy">
+          <span class="section-label">Extended notes</span>
+          <h2>Оставшиеся notes указывают на рост сайта и будущие слои системы.</h2>
+          <p>Они менее операционные, чем workflow notes, но важны для того, куда проект идет дальше.</p>
+        </div>
+
+        <div class="cards-2" style="margin-top: 26px;">
+          {remainingResources.map((resource) => (
+            <article class="card">
+              <span class="card-kicker">Reference</span>
+              <h3>{resource.title}</h3>
+              <p>{resource.summary}</p>
+              <div class="actions">
+                <a class="button-secondary" href={withBase(resource.href)}>Открыть note</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -117,6 +117,10 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         padding: 14px 0;
       }
 
+      .mobile-menu {
+        display: none;
+      }
+
       .brand {
         font-size: 0.9rem;
         letter-spacing: 0.14em;
@@ -136,6 +140,41 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         display: flex;
         align-items: center;
         gap: 18px;
+      }
+
+      .mobile-nav-panel {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .menu-toggle::-webkit-details-marker,
+      .menu-toggle::marker {
+        display: none;
+      }
+
+      .menu-toggle-bars {
+        display: grid;
+        gap: 4px;
+      }
+
+      .menu-toggle-bars span {
+        display: block;
+        width: 16px;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
       }
 
       .locale-link {
@@ -919,29 +958,194 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         .timeline-card.right {
           grid-column: 2;
         }
+
+        .display-title {
+          max-width: 9ch;
+        }
+
+        .feature-card,
+        .card,
+        .panel {
+          padding: 24px;
+        }
       }
 
       @media (max-width: 640px) {
-        .site-header .shell,
         .section-head,
         .footer-tail {
           align-items: flex-start;
           flex-direction: column;
         }
 
+        .site-header {
+          position: relative;
+        }
+
+        .site-header .shell {
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          padding: 12px 0;
+          flex-wrap: wrap;
+        }
+
+        .nav-group {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: block;
+          margin-left: auto;
+        }
+
+        .mobile-menu[open] .menu-toggle {
+          background: rgba(102, 247, 255, 0.08);
+          border-color: rgba(102, 247, 255, 0.24);
+        }
+
+        .mobile-nav-panel {
+          display: grid;
+          gap: 12px;
+          margin-top: 10px;
+          padding: 16px;
+          border-radius: 20px;
+          border: 1px solid var(--line);
+          background: rgba(7, 16, 25, 0.9);
+          box-shadow: var(--shadow);
+          min-width: min(320px, calc(100vw - 28px));
+          position: absolute;
+          right: 0;
+          top: calc(100% + 8px);
+        }
+
+        .mobile-nav-links {
+          display: grid;
+          gap: 10px;
+        }
+
+        .mobile-nav-links a {
+          width: 100%;
+          padding: 10px 12px;
+          border-radius: 14px;
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          background: rgba(255, 255, 255, 0.02);
+          color: var(--text);
+          font-size: 0.95rem;
+        }
+
+        .mobile-nav-actions {
+          display: grid;
+          gap: 10px;
+        }
+
+        .mobile-nav-actions .locale-link {
+          justify-content: center;
+          width: 100%;
+          min-height: 40px;
+          padding: 0 12px;
+        }
+
         h1 {
           max-width: none;
         }
 
+        .display-title {
+          margin-top: 14px;
+          font-size: clamp(2.6rem, 14vw, 4.25rem);
+          line-height: 0.96;
+          max-width: none;
+        }
+
+        h2 {
+          font-size: clamp(1.6rem, 7vw, 2.2rem);
+        }
+
+        .lede,
+        .hero-copy p,
+        p {
+          font-size: 0.98rem;
+        }
+
         .band,
         .band-hero {
-          padding-top: 72px;
-          padding-bottom: 72px;
+          padding-top: 56px;
+          padding-bottom: 56px;
         }
 
         .band-shell,
         .wide-shell {
           width: min(var(--max-wide), calc(100vw - 28px));
+        }
+
+        main {
+          padding: 12px 0 56px;
+        }
+
+        section {
+          margin: 18px 0;
+        }
+
+        .actions {
+          gap: 10px;
+          margin-top: 22px;
+        }
+
+        .button,
+        .button-secondary {
+          width: 100%;
+          min-height: 44px;
+          padding: 0 16px;
+        }
+
+        .track-nav {
+          gap: 8px;
+        }
+
+        .track-chip {
+          min-height: 34px;
+          padding: 0 12px;
+          font-size: 0.88rem;
+        }
+
+        .feature-card,
+        .card,
+        .panel,
+        .timeline-card {
+          padding: 20px;
+          border-radius: 22px;
+        }
+
+        .mini-card,
+        .footer-mini,
+        .status-pill {
+          padding: 16px;
+          border-radius: 18px;
+        }
+
+        .code-block,
+        .prose-panel pre {
+          padding: 14px;
+          font-size: 0.88rem;
+        }
+
+        .timeline {
+          gap: 18px 16px;
+        }
+
+        .timeline::before {
+          left: 23px;
+        }
+
+        .timeline-node {
+          width: 48px;
+          height: 48px;
+          box-shadow: 0 0 0 6px rgba(6, 14, 24, 0.85);
+          font-size: 0.92rem;
+        }
+
+        .footer-summary,
+        .footer-status-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -960,6 +1164,27 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
             <a class="locale-link" href={withBase(localeSwitch.href)}>{localeSwitch.label}</a>
           )}
         </div>
+        <details class="mobile-menu">
+          <summary class="menu-toggle" aria-label="Open navigation menu">
+            <span class="menu-toggle-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </summary>
+          <div class="mobile-nav-panel">
+            <nav class="mobile-nav-links">
+              {navItems.map((item) => (
+                <a href={withBase(item.href)}>{item.label}</a>
+              ))}
+            </nav>
+            {localeSwitch && (
+              <div class="mobile-nav-actions">
+                <a class="locale-link" href={withBase(localeSwitch.href)}>{localeSwitch.label}</a>
+              </div>
+            )}
+          </div>
+        </details>
       </div>
     </header>
     <main class="shell">

@@ -196,6 +196,21 @@ The main missing pieces before a stronger public release are:
 - fuller lesson coverage across all tracks
 - deployment to a public URL
 
+## Artifact Workflow
+
+The repository now includes a defined artifact path for the first real patch/media pass.
+
+Start here:
+
+- `docs/ARTIFACT_WORKFLOW.md`
+
+Recommended first real artifact set:
+
+- one working `.vcv` patch
+- one screenshot
+- one short demo audio export
+- one updated patch entry with attached media paths
+
 ## License
 
 This repository is released under the MIT License. See `LICENSE`.

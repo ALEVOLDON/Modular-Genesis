@@ -27,7 +27,11 @@ const patches = defineCollection({
     track: z.enum(["foundations", "sequencing", "generative", "performances"]),
     filename: z.string(),
     status: z.enum(["placeholder", "draft", "ready"]),
-    order: z.number()
+    order: z.number(),
+    image: z.string().optional(),
+    audio: z.string().optional(),
+    duration: z.string().optional(),
+    version: z.string().optional()
   })
 });
 

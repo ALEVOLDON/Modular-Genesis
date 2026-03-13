@@ -56,6 +56,10 @@ const siblingPatches = (await getCollection("patches"))
                   <strong>{patch.data.order}</strong>
                   current order inside the library
                 </li>
+                <li>
+                  <strong>{patch.data.version ?? "v0.1"}</strong>
+                  patch entry version label
+                </li>
               </ul>
             </article>
 
@@ -69,6 +73,60 @@ const siblingPatches = (await getCollection("patches"))
               <div class="code-block">{`patches/${patch.data.track}/${patch.data.filename}`}</div>
             </article>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="band-shell">
+        <div class="stack-grid">
+          <article class="feature-card">
+            <span class="card-kicker">Media state</span>
+            <h3>Attached artifact media</h3>
+            <ul class="feature-list">
+              <li>
+                <strong>Screenshot:</strong> {patch.data.image ? "attached" : "not attached yet"}
+              </li>
+              <li>
+                <strong>Demo audio:</strong> {patch.data.audio ? "attached" : "not attached yet"}
+              </li>
+              <li>
+                <strong>Duration:</strong> {patch.data.duration ?? "not specified"}
+              </li>
+            </ul>
+          </article>
+
+          {patch.data.image ? (
+            <div class="media-frame">
+              <img src={withBase(patch.data.image)} alt={`${patch.data.title} screenshot`} />
+            </div>
+          ) : (
+            <article class="feature-card">
+              <span class="card-kicker">Next artifact</span>
+              <h3>Recommended first upload</h3>
+              <p>
+                Add one clean patch screenshot in `assets/images/patches/` and wire it into this patch entry.
+              </p>
+            </article>
+          )}
+
+          {patch.data.audio ? (
+            <article class="feature-card">
+              <span class="card-kicker">Demo audio</span>
+              <h3>Patch preview</h3>
+              <audio controls preload="none" style="width: 100%; margin-top: 8px;">
+                <source src={withBase(patch.data.audio)} />
+              </audio>
+            </article>
+          ) : (
+            <article class="feature-card">
+              <span class="card-kicker">Audio target</span>
+              <h3>Recommended demo</h3>
+              <p>
+                Export a short 20-60 second example and place it in `assets/audio/patches/` to make this entry feel real.
+              </p>
+            </article>
+          )}
         </div>
       </div>
     </section>

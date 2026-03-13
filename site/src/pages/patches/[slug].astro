@@ -15,47 +15,98 @@ export async function getStaticPaths() {
 
 const { patch } = Astro.props;
 const { Content } = await render(patch);
+const displayTrack = patch.data.track === "performances" ? "hybrid" : patch.data.track;
+const siblingPatches = (await getCollection("patches"))
+  .filter((entry) => entry.data.track === patch.data.track && entry.slug !== patch.slug)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
 <BaseLayout title={`${patch.data.title} | Modular Genesis`} description={patch.data.summary}>
-  <section class="hero">
-    <div class="eyebrow">{trackLabelMap[patch.data.track === "performances" ? "hybrid" : patch.data.track]}</div>
-    <div class="hero-copy">
-      <h1>{patch.data.title}</h1>
-      <p>{patch.data.summary}</p>
-      <div class="actions">
-        <a class="button-secondary" href={withBase("/patches")}>Back to patches</a>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">{trackLabelMap[displayTrack]}</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
+              {patch.data.title}
+            </h1>
+            <p class="lede">{patch.data.summary}</p>
+            <div class="actions">
+              <a class="button" href={withBase("/patches")}>Back to patches</a>
+              <a class="button-secondary" href={withBase("/course")}>Open course</a>
+            </div>
+          </div>
+
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Patch metadata</span>
+              <h3>{patch.data.filename}</h3>
+              <ul class="metric-list">
+                <li>
+                  <strong>{patch.data.status}</strong>
+                  current artifact status
+                </li>
+                <li>
+                  <strong>{patch.data.track}</strong>
+                  collection track
+                </li>
+                <li>
+                  <strong>{patch.data.order}</strong>
+                  current order inside the library
+                </li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <span class="section-label">Repository path</span>
+              <h3>Patch file location</h3>
+              <p>
+                The current linked patch artifact is stored in the repository and can later be replaced
+                with a real `VCV Rack` patch without changing the site route.
+              </p>
+              <div class="code-block">{`patches/${patch.data.track}/${patch.data.filename}`}</div>
+            </article>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="cards-2">
-      <article class="card">
-        <span class="card-kicker">Metadata</span>
-        <h3>{patch.data.filename}</h3>
-        <ul class="bullet-list">
-          <li>Status: {patch.data.status}</li>
-          <li>Track: {patch.data.track}</li>
-          <li>Order: {patch.data.order}</li>
-        </ul>
-      </article>
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <article class="feature-card prose-panel">
+          <Content />
+        </article>
+      </div>
+    </section>
 
-      <article class="card">
-        <span class="card-kicker">Repository path</span>
-        <h3>Patch file location</h3>
-        <p>
-          The current linked patch artifact is stored in the repository and can later be replaced
-          with a real `VCV Rack` patch without changing the site route.
-        </p>
-        <div class="code-block">{`patches/${patch.data.track}/${patch.data.filename}`}</div>
-      </article>
-    </div>
-  </section>
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="stack-grid">
+          <article class="feature-card">
+            <span class="card-kicker">Same collection</span>
+            <h3>More patch entries</h3>
+            <ul class="feature-list">
+              {siblingPatches.map((entry) => (
+                <li>
+                  <a href={withBase(`/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
 
-  <section>
-    <article class="panel prose-panel">
-      <Content />
-    </article>
-  </section>
+          <article class="feature-card">
+            <span class="card-kicker">Navigation</span>
+            <h3>Connect the patch back to the system</h3>
+            <p>Patch entries are meant to bridge repository artifacts, course pages, and roadmap logic.</p>
+            <div class="actions">
+              <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap</a>
+              <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

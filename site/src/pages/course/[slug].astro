@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { trackLabelMap } from "../../data/tracks";
+import { tracks, trackLabelMap } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
@@ -15,57 +15,112 @@ export async function getStaticPaths() {
 
 const { lesson } = Astro.props;
 const { Content } = await render(lesson);
+const track = tracks.find((entry) => entry.key === lesson.data.track);
 const relatedPatches = (await getCollection("patches"))
   .filter((patch) => patch.data.track === lesson.data.track)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
+const siblingLessons = (await getCollection("lessons"))
+  .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
 <BaseLayout title={`${lesson.data.title} | Modular Genesis`} description={lesson.data.summary}>
-  <section class="hero">
-    <div class="eyebrow">{trackLabelMap[lesson.data.track]}</div>
-    <div class="hero-copy">
-      <h1>{lesson.data.title}</h1>
-      <p>{lesson.data.summary}</p>
-      <div class="actions">
-        <a class="button-secondary" href={withBase("/course")}>Back to course</a>
-      </div>
-    </div>
-  </section>
+  <div class="page-stack">
+    <section class="band band-hero">
+      <div class="band-shell">
+        <div class="display-grid">
+          <div>
+            <div class="eyebrow">{trackLabelMap[lesson.data.track]}</div>
+            <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
+              {lesson.data.title}
+            </h1>
+            <p class="lede">{lesson.data.summary}</p>
+            <div class="actions">
+              <a class="button" href={withBase("/course")}>Back to course</a>
+              <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap</a>
+            </div>
+          </div>
 
-  <section>
-    <article class="panel prose-panel">
-      <Content />
-    </article>
-  </section>
+          <div class="hero-dashboard">
+            <article class="feature-card">
+              <span class="section-label">Track context</span>
+              <h3>{track?.title}</h3>
+              <p>{track?.description}</p>
+              <ul class="feature-list">
+                {track?.roadmapTopics.slice(0, 3).map((topic) => (
+                  <li>{topic}</li>
+                ))}
+              </ul>
+            </article>
 
-  <section>
-    <div class="cards-2">
-      <article class="card">
-        <span class="card-kicker">Related patches</span>
-        <h3>Patch references</h3>
-        <p>Use the linked patch entries below as concrete repository anchors for this lesson track.</p>
-        <ul class="bullet-list">
-          {relatedPatches.map((patch) => (
-            <li>
-              <a href={withBase(`/patches/${patch.slug}/`)}>{patch.data.title}</a>
-            </li>
-          ))}
-        </ul>
-      </article>
-
-      <article class="card">
-        <span class="card-kicker">Related diagram</span>
-        <h3>Hybrid routing overview</h3>
-        <p>
-          The first system diagram connects the modular engine, DAW layer, and visual output layer.
-        </p>
-        <div class="actions">
-          <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap diagram</a>
-          <a class="button-secondary" href={withBase("/patches")}>Open patch library</a>
+            <div class="hero-dashboard-grid">
+              <article class="mini-card">
+                <span class="mini-stat">Lesson</span>
+                <h4>Markdown content</h4>
+                <p>Theory, structure, and practical context are all driven from content files.</p>
+              </article>
+              <article class="mini-card">
+                <span class="mini-stat">{relatedPatches.length}</span>
+                <h4>Related patches</h4>
+                <p>Concrete repository anchors already exist for this lesson track.</p>
+              </article>
+            </div>
+          </div>
         </div>
-      </article>
-    </div>
-  </section>
+      </div>
+    </section>
+
+    <section class="band band-subtle">
+      <div class="band-shell">
+        <article class="feature-card prose-panel">
+          <Content />
+        </article>
+      </div>
+    </section>
+
+    <section class="band band-deep">
+      <div class="band-shell">
+        <div class="stack-grid">
+          <article class="feature-card">
+            <span class="card-kicker">Related patches</span>
+            <h3>Patch references</h3>
+            <p>Use the linked patch entries below as concrete repository anchors for this lesson track.</p>
+            <ul class="feature-list">
+              {relatedPatches.map((patch) => (
+                <li>
+                  <a href={withBase(`/patches/${patch.slug}/`)}>{patch.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <span class="card-kicker">Same track</span>
+            <h3>Continue inside {track?.title}</h3>
+            <p>Adjacent lessons in the same track keep the topic progression coherent.</p>
+            <ul class="feature-list">
+              {siblingLessons.map((entry) => (
+                <li>
+                  <a href={withBase(`/course/${entry.slug}/`)}>{entry.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <span class="card-kicker">Related diagram</span>
+            <h3>Hybrid routing overview</h3>
+            <p>The first system diagram connects the modular engine, DAW layer, and visual output layer.</p>
+            <div class="actions">
+              <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap diagram</a>
+              <a class="button-secondary" href={withBase("/patches")}>Open patch library</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

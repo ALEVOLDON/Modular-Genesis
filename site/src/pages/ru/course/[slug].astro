@@ -130,18 +130,18 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
         <article class="feature-card prose-panel">
           <Content />
           
-          <div class="lesson-navigation" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+          <div class="lesson-navigation">
             {prevLesson ? (
-              <a href={withBase(`/ru/course/${prevLesson.slug}/`)} class="button-secondary" style="text-align: left; max-width: 48%;">
-                <span style="display: block; font-size: 0.8rem; opacity: 0.7; margin-bottom: 0.2rem;">← Предыдущий урок</span>
-                {prevLesson.data.title}
+              <a href={withBase(`/ru/course/${prevLesson.slug}/`)} class="button-secondary lesson-nav-link prev">
+                <span class="lesson-nav-label">← Предыдущий урок</span>
+                <span>{prevLesson.data.title}</span>
               </a>
             ) : <div />}
             
             {nextLesson ? (
-              <a href={withBase(`/ru/course/${nextLesson.slug}/`)} class="button" style="text-align: right; margin-left: auto; max-width: 48%;">
-                <span style="display: block; font-size: 0.8rem; opacity: 0.8; margin-bottom: 0.2rem;">Следующий урок →</span>
-                {nextLesson.data.title}
+              <a href={withBase(`/ru/course/${nextLesson.slug}/`)} class="button lesson-nav-link next">
+                <span class="lesson-nav-label">Следующий урок →</span>
+                <span>{nextLesson.data.title}</span>
               </a>
             ) : <div />}
           </div>

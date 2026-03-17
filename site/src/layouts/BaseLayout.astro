@@ -1,4 +1,4 @@
-﻿---
+---
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
@@ -1171,7 +1171,6 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         .timeline {
           gap: 18px 16px;
         }
-
         .timeline::before {
           left: 23px;
         }
@@ -1182,10 +1181,54 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
           box-shadow: 0 0 0 6px rgba(6, 14, 24, 0.85);
           font-size: 0.92rem;
         }
-
         .footer-summary,
         .footer-status-grid {
           grid-template-columns: 1fr;
+        }
+      }
+
+      .lesson-navigation {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .lesson-nav-link {
+        display: flex;
+        flex-direction: column;
+        max-width: 48%;
+        height: auto;
+        padding: 12px 18px;
+        line-height: 1.4;
+      }
+      .lesson-nav-link.prev {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .lesson-nav-link.next {
+        align-items: flex-end;
+        text-align: right;
+        margin-left: auto;
+      }
+      .lesson-nav-label {
+        font-size: 0.8rem;
+        opacity: 0.7;
+        margin-bottom: 4px;
+      }
+      @media (max-width: 500px) {
+        .lesson-navigation {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .lesson-nav-link.prev,
+        .lesson-nav-link.next {
+          max-width: 100%;
+          width: 100%;
+          align-items: flex-start;
+          text-align: left;
+          margin-left: 0;
         }
       }
     </style>

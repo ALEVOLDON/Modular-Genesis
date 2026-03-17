@@ -811,23 +811,24 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         color: #d7f7ff;
         font-family: Consolas, monospace;
         white-space: pre-wrap;
+        word-wrap: break-word;
       }
 
       .site-footer {
-        margin-top: 18px;
-        padding: 0 0 46px;
-        color: var(--muted);
+        padding: 40px 0;
+        border-top: 1px solid var(--line);
+        background: var(--bg);
       }
 
       .footer-wrap {
         display: grid;
-        gap: 18px;
+        gap: 20px;
       }
 
       .footer-summary {
         display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.8fr) minmax(280px, 1fr);
-        gap: 18px;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr) minmax(0, 1.1fr);
+        gap: 20px;
       }
 
       .footer-links-list,
@@ -853,17 +854,18 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       .footer-mini {
-        padding: 14px 16px;
+        padding: 16px;
         border-radius: 18px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: linear-gradient(180deg, rgba(8, 17, 26, 0.6) 0%, rgba(6, 12, 18, 0.9) 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
       }
 
       .footer-mini strong {
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         color: var(--accent);
-        font-size: 1.2rem;
+        font-size: 1.4rem;
       }
 
       .footer-tail {

@@ -17,7 +17,11 @@ const groupedEntries = Object.fromEntries(
 const placeholderCount = patchEntries.filter((entry) => entry.data.status === "placeholder").length;
 ---
 
-<BaseLayout title="Patches | Modular Genesis" description="Patch library direction for Modular Genesis.">
+<BaseLayout
+  title="Patches | Modular Genesis"
+  description="Patch library direction for Modular Genesis."
+  localeSwitch={{ href: "/ru/patches", label: "RU" }}
+>
   <div class="page-stack">
     <section class="band band-hero">
       <div class="band-shell">

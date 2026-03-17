@@ -17,7 +17,11 @@ const populatedTracks = grouped.filter((track) => track.lessons.length > 0);
 const totalLessons = lessons.length;
 ---
 
-<BaseLayout title="Course | Modular Genesis" description="Course outline for Modular Genesis.">
+<BaseLayout
+  title="Course | Modular Genesis"
+  description="Course outline for Modular Genesis."
+  localeSwitch={{ href: "/ru/course", label: "RU" }}
+>
   <div class="page-stack">
     <section class="band band-hero">
       <div class="band-shell">

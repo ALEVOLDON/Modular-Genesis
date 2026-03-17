@@ -27,7 +27,11 @@ const siblingLessons = (await getCollection("lessons"))
   .slice(0, 3);
 ---
 
-<BaseLayout title={`${lesson.data.title} | Modular Genesis`} description={lesson.data.summary}>
+<BaseLayout
+  title={`${lesson.data.title} | Modular Genesis`}
+  description={lesson.data.summary}
+  localeSwitch={{ href: `/ru/course/${lesson.slug}/`, label: "RU" }}
+>
   <div class="page-stack">
     <section class="band band-hero">
       <div class="band-shell">

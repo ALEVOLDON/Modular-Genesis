@@ -27,8 +27,8 @@ const otherNotes = (await getCollection("notes"))
   navItems={[
     { href: "/ru/", label: "Главная" },
     { href: "/ru/roadmap", label: "Roadmap" },
-    { href: "/ru/course", label: "Course" },
-    { href: "/ru/resources", label: "Resources" }
+    { href: "/ru/course", label: "Курс" },
+    { href: "/ru/resources", label: "Материалы" }
   ]}
   localeSwitch={{ href: `/resources/${note.slug}/`, label: "EN" }}
 >
@@ -37,28 +37,26 @@ const otherNotes = (await getCollection("notes"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Reference Note</div>
+            <div class="eyebrow">Опорная заметка</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.4rem);">
               {note.data.title}
             </h1>
             <p class="lede">{note.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/resources")}>Назад к resources</a>
+              <a class="button" href={withBase("/ru/resources")}>Назад к материалам</a>
               <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Reference role</span>
-              <h3>Concept layer for the public system</h3>
-              <p>
-                Такие notes объясняют устойчивую логику за lessons, patch references и дальнейшим ростом сайта.
-              </p>
+              <span class="section-label">Роль заметки</span>
+              <h3>Концептуальный слой для публичной системы</h3>
+              <p>Такие notes объясняют устойчивую логику за уроками, patch references и дальнейшим ростом сайта.</p>
               <ul class="feature-list">
                 <li>workflow и routing context</li>
-                <li>system architecture и project direction</li>
-                <li>support material for future lessons and artifacts</li>
+                <li>system architecture и направление проекта</li>
+                <li>поддержка для будущих уроков и артефактов</li>
               </ul>
             </article>
           </div>
@@ -78,8 +76,8 @@ const otherNotes = (await getCollection("notes"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">More notes</span>
-            <h3>Related references</h3>
+            <span class="card-kicker">Другие заметки</span>
+            <h3>Связанные материалы</h3>
             <ul class="feature-list">
               {otherNotes.map((entry) => (
                 <li>
@@ -90,12 +88,12 @@ const otherNotes = (await getCollection("notes"))
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Navigation</span>
+            <span class="card-kicker">Навигация</span>
             <h3>Продолжить движение по системе</h3>
-            <p>Reference material должно возвращать тебя в roadmap, lessons и patch library.</p>
+            <p>Reference material должно возвращать тебя в roadmap, к урокам и в библиотеку патчей.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/ru/course")}>Открыть course</a>
-              <a class="button-secondary" href={withBase("/ru/patches")}>Открыть patches</a>
+              <a class="button-secondary" href={withBase("/ru/course")}>Открыть курс</a>
+              <a class="button-secondary" href={withBase("/ru/patches")}>Открыть патчи</a>
             </div>
           </article>
         </div>

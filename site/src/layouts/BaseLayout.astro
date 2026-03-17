@@ -1,4 +1,4 @@
----
+﻿---
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
@@ -46,19 +46,19 @@ const footerNav = lang === "ru"
 const footerCopy = lang === "ru"
   ? {
       kicker: "Modular Genesis",
-      title: "Открытый modular synthesis, generative systems и audiovisual structure в публичной сборке.",
-      text: "Public draft репозиторий и сайт про modular workflows, patch logic, hybrid routing и будущие audiovisual systems.",
+      title: "Открытая платформа о модульном синтезе, генеративных системах и аудиовизуальной структуре.",
+      text: "Публичный репозиторий и сайт о modular workflows, patch logic, hybrid routing и будущих аудиовизуальных системах.",
       button: "Открыть GitHub",
       explore: "Навигация",
       state: "Состояние проекта",
-      tracks: "tracks",
-      lessons: "lessons",
-      notes: "notes",
-      patches: "patches",
+      tracks: "треки",
+      lessons: "уроки",
+      notes: "заметки",
+      patches: "патчи",
       license: "MIT License",
       pages: "GitHub Pages",
       locales: "EN / RU",
-      built: "Built in public."
+      built: "Собирается публично."
     }
   : {
       kicker: "Modular Genesis",
@@ -76,7 +76,6 @@ const footerCopy = lang === "ru"
       locales: "EN / RU",
       built: "Built in public."
     };
-
 const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 ---
 

@@ -20,7 +20,11 @@ const otherNotes = (await getCollection("notes"))
   .slice(0, 3);
 ---
 
-<BaseLayout title={`${note.data.title} | Modular Genesis`} description={note.data.summary}>
+<BaseLayout
+  title={`${note.data.title} | Modular Genesis`}
+  description={note.data.summary}
+  localeSwitch={{ href: `/ru/resources/${note.slug}/`, label: "RU" }}
+>
   <div class="page-stack">
     <section class="band band-hero">
       <div class="band-shell">

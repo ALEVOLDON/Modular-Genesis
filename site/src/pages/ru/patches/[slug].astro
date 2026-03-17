@@ -29,8 +29,8 @@ const siblingPatches = (await getCollection("patches"))
   navItems={[
     { href: "/ru/", label: "Главная" },
     { href: "/ru/roadmap", label: "Roadmap" },
-    { href: "/ru/course", label: "Course" },
-    { href: "/ru/resources", label: "Resources" }
+    { href: "/ru/course", label: "Курс" },
+    { href: "/ru/resources", label: "Материалы" }
   ]}
   localeSwitch={{ href: `/patches/${patch.slug}/`, label: "EN" }}
 >
@@ -45,38 +45,38 @@ const siblingPatches = (await getCollection("patches"))
             </h1>
             <p class="lede">{patch.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/patches")}>Назад к patches</a>
-              <a class="button-secondary" href={withBase("/ru/course")}>Открыть course</a>
+              <a class="button" href={withBase("/ru/patches")}>Назад к патчам</a>
+              <a class="button-secondary" href={withBase("/ru/course")}>Открыть курс</a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Patch metadata</span>
+              <span class="section-label">Метаданные патча</span>
               <h3>{patch.data.filename}</h3>
               <ul class="metric-list">
                 <li>
                   <strong>{patch.data.status}</strong>
-                  текущий artifact status
+                  текущий статус артефакта
                 </li>
                 <li>
                   <strong>{patch.data.track}</strong>
-                  collection track
+                  трек коллекции
                 </li>
                 <li>
                   <strong>{patch.data.order}</strong>
-                  текущий порядок внутри library
+                  текущий порядок внутри библиотеки
                 </li>
                 <li>
                   <strong>{patch.data.version ?? "v0.1"}</strong>
-                  patch entry version
+                  версия patch entry
                 </li>
               </ul>
             </article>
 
             <article class="feature-card">
-              <span class="section-label">Repository path</span>
-              <h3>Patch file location</h3>
+              <span class="section-label">Путь в репозитории</span>
+              <h3>Расположение patch file</h3>
               <p>
                 Связанный patch artifact лежит в репозитории и позже может быть заменен реальным `VCV Rack` patch
                 без изменения site route.
@@ -92,17 +92,17 @@ const siblingPatches = (await getCollection("patches"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">Media state</span>
-            <h3>Attached artifact media</h3>
+            <span class="card-kicker">Состояние медиа</span>
+            <h3>Подключенные материалы</h3>
             <ul class="feature-list">
               <li>
-                <strong>Screenshot:</strong> {patch.data.image ? "attached" : "not attached yet"}
+                <strong>Скриншот:</strong> {patch.data.image ? "подключен" : "еще не добавлен"}
               </li>
               <li>
-                <strong>Demo audio:</strong> {patch.data.audio ? "attached" : "not attached yet"}
+                <strong>Демо-аудио:</strong> {patch.data.audio ? "подключено" : "еще не добавлено"}
               </li>
               <li>
-                <strong>Duration:</strong> {patch.data.duration ?? "not specified"}
+                <strong>Длительность:</strong> {patch.data.duration ?? "не указана"}
               </li>
             </ul>
           </article>
@@ -113,24 +113,24 @@ const siblingPatches = (await getCollection("patches"))
             </div>
           ) : (
             <article class="feature-card">
-              <span class="card-kicker">Next artifact</span>
-              <h3>Recommended first upload</h3>
+              <span class="card-kicker">Следующий артефакт</span>
+              <h3>Рекомендуемый первый файл</h3>
               <p>Добавь один clean patch screenshot в `assets/images/patches/` и подключи его к этому entry.</p>
             </article>
           )}
 
           {patch.data.audio ? (
             <article class="feature-card">
-              <span class="card-kicker">Demo audio</span>
-              <h3>Patch preview</h3>
+              <span class="card-kicker">Демо-аудио</span>
+              <h3>Предпросмотр патча</h3>
               <audio controls preload="none" style="width: 100%; margin-top: 8px;">
                 <source src={withBase(patch.data.audio)} />
               </audio>
             </article>
           ) : (
             <article class="feature-card">
-              <span class="card-kicker">Audio target</span>
-              <h3>Recommended demo</h3>
+              <span class="card-kicker">Аудиоцель</span>
+              <h3>Рекомендуемое демо</h3>
               <p>Экспортируй короткий 20-60 second example и положи его в `assets/audio/patches/`.</p>
             </article>
           )}
@@ -150,8 +150,8 @@ const siblingPatches = (await getCollection("patches"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">Same collection</span>
-            <h3>More patch entries</h3>
+            <span class="card-kicker">Та же коллекция</span>
+            <h3>Другие patch entries</h3>
             <ul class="feature-list">
               {siblingPatches.map((entry) => (
                 <li>
@@ -162,12 +162,12 @@ const siblingPatches = (await getCollection("patches"))
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Navigation</span>
+            <span class="card-kicker">Навигация</span>
             <h3>Связать patch обратно с системой</h3>
             <p>Patch entries должны связывать repository artifacts, course pages и roadmap logic.</p>
             <div class="actions">
               <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
-              <a class="button-secondary" href={withBase("/ru/resources")}>Читать notes</a>
+              <a class="button-secondary" href={withBase("/ru/resources")}>Читать заметки</a>
             </div>
           </article>
         </div>

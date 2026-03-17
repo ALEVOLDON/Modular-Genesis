@@ -20,8 +20,8 @@ const pillars = [
   {
     kicker: "Система",
     title: "Гибридная аудиоархитектура",
-    text: "Ableton Live, VCV Rack, маршрутизация, запись и визуальный слой читаются как одна связанная система.",
-    points: ["модульный движок + DAW-слой", "routing как часть композиции", "visual output как продолжение звука"]
+    text: "Ableton Live, VCV Rack, маршрутизация, запись и визуальный слой собраны как единая рабочая система.",
+    points: ["модульный движок и DAW-слой", "маршрутизация как часть композиции", "визуальный вывод как продолжение звука"]
   },
   {
     kicker: "Курс",
@@ -32,8 +32,8 @@ const pillars = [
   {
     kicker: "Репозиторий",
     title: "Patch-first структура",
-    text: "У patch entries, папок репозитория и будущих реальных `.vcv` файлов уже есть стабильное место.",
-    points: ["публичная структура repo", "patch references на страницах", "готово к реальным артефактам"]
+    text: "У patch entries, папок репозитория и будущих `.vcv` файлов уже есть понятное и стабильное место.",
+    points: ["публичная структура репозитория", "patch references на страницах", "готово к реальным артефактам"]
   }
 ];
 
@@ -44,7 +44,7 @@ const toolCards = [
   },
   {
     title: "Ableton Live",
-    text: "Аранжировка, routing, запись, performance-контроль и якорь гибридного workflow."
+    text: "Аранжировка, маршрутизация, запись, performance-контроль и опорный слой гибридного workflow."
   },
   {
     title: "Visual Layer",
@@ -80,8 +80,8 @@ const toolCards = [
             </h1>
             <p class="lede">
               Modular Genesis - это documentation-first проект про `VCV Rack`, `Ableton Live`,
-              generative patch design, гибридную маршрутизацию и будущие audiovisual systems.
-              Русская версия нужна как понятная точка входа, не ломая уже собранный английский каркас.
+              генеративный patch design, гибридную маршрутизацию и будущие audiovisual systems.
+              Русская версия нужна как понятная точка входа без разрыва с уже собранной английской структурой.
             </p>
             <div class="actions">
               <a class="button" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
@@ -95,7 +95,7 @@ const toolCards = [
               <span class="section-label">Основной pipeline</span>
               <h3>От control logic к audio и visual output</h3>
               <p>
-                Сайт, уроки, заметки и patch entries уже строятся вокруг одного backbone:
+                Сайт, lessons, notes и patch entries уже строятся вокруг одного backbone:
                 controller input, modular generation, audio capture и будущего visual synthesis.
               </p>
               <div class="code-block">Ableton / MIDI
@@ -115,7 +115,7 @@ Performance</div>
               <article class="mini-card">
                 <span class="mini-stat">{tracks.length}</span>
                 <h4>Треков уже собрано</h4>
-                <p>Foundations, sequencing, generative, hybrid и audiovisual уже оформлены как каркас.</p>
+                <p>Foundations, sequencing, generative, hybrid и audiovisual уже оформлены как рабочий каркас.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{lessons.length}</span>
@@ -125,7 +125,7 @@ Performance</div>
               <article class="mini-card">
                 <span class="mini-stat">{notes.length}</span>
                 <h4>Заметок опубликовано</h4>
-                <p>Reference notes объясняют routing, patch logic и общее направление проекта.</p>
+                <p>Опорные заметки объясняют routing, patch logic и общее направление проекта.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{patches.length}</span>
@@ -154,7 +154,7 @@ Performance</div>
           <span class="section-label">Экосистема</span>
           <h2>Инструменты разделены по роли, но спроектированы как единый организм.</h2>
           <p>
-            Проект не разделяет synthesis, arrangement и visuals на отдельные дисциплины.
+            Проект не делит synthesis, arrangement и visuals на отдельные дисциплины.
             Он собирает их как связанные слои одной системы.
           </p>
         </div>
@@ -178,7 +178,7 @@ Performance</div>
             <h2>Это не просто sound design workflow, а среда для исследования.</h2>
             <p>
               Модульные системы соединяют композицию, логику, импровизацию и инженерию.
-              Именно поэтому они подходят для живых систем, а не только для статичных пресетов.
+              Поэтому они подходят для живых систем, а не только для статичных пресетов.
             </p>
             <ul class="feature-list">
               <li><strong>Routing как композиция:</strong> сам signal path становится частью формы.</li>
@@ -243,7 +243,7 @@ Performance</div>
                     <h3>{lesson.data.title}</h3>
                     <p>{lesson.data.summary}</p>
                     <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть lesson</a>
+                      <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть lesson</a>
                     </div>
                   </article>
                 ))}

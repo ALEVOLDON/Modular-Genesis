@@ -22,7 +22,11 @@ const siblingPatches = (await getCollection("patches"))
   .slice(0, 3);
 ---
 
-<BaseLayout title={`${patch.data.title} | Modular Genesis`} description={patch.data.summary}>
+<BaseLayout
+  title={`${patch.data.title} | Modular Genesis`}
+  description={patch.data.summary}
+  localeSwitch={{ href: `/ru/patches/${patch.slug}/`, label: "RU" }}
+>
   <div class="page-stack">
     <section class="band band-hero">
       <div class="band-shell">

@@ -287,6 +287,12 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         align-items: start;
       }
 
+      .display-grid > * {
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+
       .display-title {
         margin-top: 18px;
         font-size: clamp(3.6rem, 9vw, 6.8rem);
@@ -610,6 +616,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         margin: 0;
         line-height: 1.65;
         color: var(--muted);
+        overflow-wrap: break-word;
+        word-break: break-word;
+        min-width: 0;
       }
 
       .hero-copy {

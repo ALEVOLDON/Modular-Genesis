@@ -908,6 +908,31 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         box-shadow: var(--shadow);
       }
 
+      .bg-media-frame {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .bg-media-frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(8, 17, 26, 0.5) 0%, rgba(6, 12, 18, 0.9) 100%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .bg-media-frame > * {
+        position: relative;
+        z-index: 1;
+      }
+
       .media-frame img {
         display: block;
         width: 100%;

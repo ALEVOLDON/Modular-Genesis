@@ -282,7 +282,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 
       .display-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
         gap: 30px;
         align-items: start;
       }
@@ -638,6 +638,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         border-radius: 999px;
         border: 1px solid transparent;
         transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
       }
 
       .button {
@@ -1085,15 +1088,20 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         .timeline-summary,
         .hero-grid .panel:first-child,
         .hero-grid .panel:last-child,
+        .hero-meta,
+        .status-grid,
+        .hero-dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
         .cards-3,
         .cards-2,
         .roadmap-strip,
         .stack-grid,
         .stack-grid-4,
-        .hero-meta,
-        .status-grid,
-        .hero-dashboard-grid {
+        .content-grid {
           grid-template-columns: 1fr;
+          gap: 20px;
         }
 
         .panel-grid {
@@ -1143,6 +1151,16 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         .footer-tail {
           align-items: flex-start;
           flex-direction: column;
+        }
+
+        .actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .button,
+        .button-secondary {
+          width: 100%;
         }
 
         .site-header {

@@ -25,6 +25,18 @@ const siblingLessons = (await getCollection("lessons"))
   .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
+
+const allLessons = await getCollection("lessons");
+const sortedLessons = allLessons.sort((a, b) => {
+  const trackIndexA = tracks.findIndex(t => t.key === a.data.track);
+  const trackIndexB = tracks.findIndex(t => t.key === b.data.track);
+  if (trackIndexA !== trackIndexB) return trackIndexA - trackIndexB;
+  return a.data.order - b.data.order;
+});
+
+const currentIndex = sortedLessons.findIndex(l => l.slug === lesson.slug);
+const prevLesson = currentIndex > 0 ? sortedLessons[currentIndex - 1] : null;
+const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[currentIndex + 1] : null;
 ---
 
 <BaseLayout
@@ -81,6 +93,22 @@ const siblingLessons = (await getCollection("lessons"))
       <div class="band-shell">
         <article class="feature-card prose-panel">
           <Content />
+
+          <div class="lesson-navigation" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+            {prevLesson ? (
+              <a href={withBase(`/course/${prevLesson.slug}/`)} class="button-secondary" style="text-align: left; max-width: 48%;">
+                <span style="display: block; font-size: 0.8rem; opacity: 0.7; margin-bottom: 0.2rem;">← Previous Lesson</span>
+                {prevLesson.data.title}
+              </a>
+            ) : <div />}
+            
+            {nextLesson ? (
+              <a href={withBase(`/course/${nextLesson.slug}/`)} class="button" style="text-align: right; margin-left: auto; max-width: 48%;">
+                <span style="display: block; font-size: 0.8rem; opacity: 0.8; margin-bottom: 0.2rem;">Next Lesson →</span>
+                {nextLesson.data.title}
+              </a>
+            ) : <div />}
+          </div>
         </article>
       </div>
     </section>

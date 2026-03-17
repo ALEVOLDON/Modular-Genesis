@@ -69,9 +69,12 @@ const toolCards = [
   localeSwitch={{ href: "/ru/", label: "RU" }}
 >
   <div class="page-stack">
-    <section class="band band-hero" style={`background-image: linear-gradient(180deg, rgba(5,12,20,0.85) 0%, rgba(3,9,15,0.95) 100%), url(${withBase("/images/hero_modular_cables.png")}); background-size: cover; background-position: center; border-bottom: 1px solid var(--line);`}>
+    <section class="band band-hero">
       <div class="band-shell">
-        <div class="display-grid">
+        <div style="position: relative; padding: clamp(24px, 5vw, 48px); border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; box-shadow: var(--shadow);">
+          <div style={`position: absolute; inset: 0; background-image: url(${withBase("/images/hero_modular_cables.png")}); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0;`}></div>
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,13,20,0.5) 0%, rgba(4,10,16,0.95) 100%); z-index: 1;"></div>
+          <div class="display-grid" style="position: relative; z-index: 2;">
           <div>
             <div class="eyebrow">Public Draft v0.1</div>
             <h1 class="display-title">
@@ -149,6 +152,7 @@ Performance</div>
             </article>
           </div>
         </div>
+        </div>
       </div>
     </section>
 
@@ -174,10 +178,13 @@ Performance</div>
       </div>
     </section>
 
-    <section class="band band-alt bg-media-frame" style={`background-image: url(${withBase("/images/generative_abstract_mesh.png")}); border-radius: 0; border-left: none; border-right: none;`}>
+    <section class="band band-alt">
       <div class="band-shell">
-        <div class="split-hero">
-          <div class="feature-card" style="background: rgba(3, 9, 15, 0.85); backdrop-filter: blur(12px);">
+        <div style="position: relative; padding: clamp(24px, 5vw, 48px); border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; box-shadow: var(--shadow);">
+          <div style={`position: absolute; inset: 0; background-image: url(${withBase("/images/generative_abstract_mesh.png")}); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0;`}></div>
+          <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,10,16,0.95) 0%, rgba(6,13,20,0.4) 100%); z-index: 1;"></div>
+          <div class="split-hero" style="position: relative; z-index: 2;">
+            <div class="feature-card" style="background: rgba(3, 9, 15, 0.65); backdrop-filter: blur(12px); border-color: rgba(255, 255, 255, 0.08);">
             <span class="section-label">Why Modular</span>
             <h2>Not just a sound design workflow, but a framework for discovery.</h2>
             <p>
@@ -191,8 +198,9 @@ Performance</div>
             </ul>
           </div>
 
-          <div>
-            <!-- Empty column to let the background mesh breathe -->
+            <div>
+              <!-- Empty column to let the background mesh breathe -->
+            </div>
           </div>
         </div>
       </div>

@@ -98,14 +98,14 @@ const toolCards = [
           </div>
 
           <div class="hero-dashboard">
-            <article class="feature-card">
+            <article class="feature-card bg-media-frame" style={`background-image: url(${withBase("/images/hero_modular_cables.png")}); padding-bottom: 24px;`}>
               <span class="section-label">Core pipeline</span>
               <h3>From control logic to performance output</h3>
-              <p>
+              <p style="margin-bottom: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
                 The site, lessons, notes, and patch entries already orbit one production backbone:
                 controller input, modular generation, audio capture, and future visual synthesis.
               </p>
-              <div class="code-block">Ableton / MIDI
+              <div class="code-block" style="margin-top: auto; opacity: 0.95;">Ableton / MIDI
   ->
 VCV Rack
   ->
@@ -177,10 +177,10 @@ Performance</div>
       </div>
     </section>
 
-    <section class="band band-alt">
+    <section class="band band-alt bg-media-frame" style={`background-image: url(${withBase("/images/generative_abstract_mesh.png")}); border-radius: 0; border-left: none; border-right: none;`}>
       <div class="band-shell">
         <div class="split-hero">
-          <div class="feature-card">
+          <div class="feature-card" style="background: rgba(3, 9, 15, 0.85); backdrop-filter: blur(12px);">
             <span class="section-label">Why Modular</span>
             <h2>Not just a sound design workflow, but a framework for discovery.</h2>
             <p>
@@ -194,8 +194,8 @@ Performance</div>
             </ul>
           </div>
 
-          <div class="media-frame">
-            <img src={withBase("/images/generative_abstract_mesh.png")} alt="Abstract generative mesh representing audiovisual data" />
+          <div>
+            <!-- Empty column to let the background mesh breathe -->
           </div>
         </div>
       </div>

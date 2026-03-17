@@ -1081,9 +1081,6 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       @media (max-width: 960px) {
-        .display-grid,
-        .split-hero,
-        .content-grid,
         .footer-summary,
         .timeline-summary,
         .hero-grid .panel:first-child,
@@ -1098,8 +1095,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         .cards-2,
         .roadmap-strip,
         .stack-grid,
-        .stack-grid-4,
-        .content-grid {
+        .stack-grid-4 {
           grid-template-columns: 1fr;
           gap: 20px;
         }
@@ -1143,6 +1139,28 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         .card,
         .panel {
           padding: 24px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .display-grid,
+        .split-hero,
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .terminal-window {
+          max-width: 100%;
+        }
+
+        .band {
+          padding: 52px 0;
+        }
+
+        .band-hero {
+          padding-top: 48px;
+          padding-bottom: 48px;
         }
       }
 

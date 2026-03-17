@@ -124,6 +124,10 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         background-size: auto, auto, 28px 28px, auto, auto, auto;
         font-family: "Segoe UI", "Helvetica Neue", sans-serif;
         min-height: 100vh;
+      }
+
+      html, body {
+        max-width: 100%;
         overflow-x: hidden;
       }
 
@@ -232,6 +236,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 
       main {
         padding: 32px 0 72px;
+        overflow: hidden;
       }
 
       section {
@@ -244,8 +249,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 
       .band {
         position: relative;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
+        width: 100%;
         padding: 84px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.04);
       }

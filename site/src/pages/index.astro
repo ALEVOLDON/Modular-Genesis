@@ -105,17 +105,22 @@ const toolCards = [
                 The site, lessons, notes, and patch entries already orbit one production backbone:
                 controller input, modular generation, audio capture, and future visual synthesis.
               </p>
-              <div class="code-block">Ableton / MIDI
-  ->
-VCV Rack
-  ->
-Generative Patch
-  ->
-Audio Engine
-  ->
-Visual Engine
-  ->
-Performance</div>
+              <div class="terminal-window">
+                <div class="terminal-header">
+                  <span class="terminal-dot red"></span>
+                  <span class="terminal-dot yellow"></span>
+                  <span class="terminal-dot green"></span>
+                  <span class="terminal-title">~/pipeline/run.sh</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-line"><span class="terminal-prompt">></span> <span class="terminal-command">connect Ableton / MIDI</span></div>
+                  <div class="terminal-line"><span class="terminal-output">  ↳ sending clock to VCV Rack... [OK]</span></div>
+                  <div class="terminal-line"><span class="terminal-prompt">></span> <span class="terminal-command">compile Generative Patch</span></div>
+                  <div class="terminal-line"><span class="terminal-output">  ↳ running Audio Engine...      [OK]</span></div>
+                  <div class="terminal-line"><span class="terminal-output">  ↳ rendering Visual Engine...   [OK]</span></div>
+                  <div class="terminal-line"><span class="terminal-prompt">></span> <span class="terminal-command">start Performance</span><span class="terminal-cursor"></span></div>
+                </div>
+              </div>
             </article>
 
             <div class="hero-dashboard-grid">

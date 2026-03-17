@@ -814,6 +814,100 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         word-wrap: break-word;
       }
 
+      .terminal-window {
+        margin-top: 18px;
+        border-radius: 12px;
+        background: rgba(4, 9, 14, 0.95);
+        border: 1px solid rgba(102, 247, 255, 0.15);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        backdrop-filter: blur(8px);
+      }
+
+      .terminal-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .terminal-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .terminal-dot.red { background: #ff5f56; }
+      .terminal-dot.yellow { background: #ffbd2e; }
+      .terminal-dot.green { background: #27c93f; }
+
+      .terminal-title {
+        margin-left: 8px;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        user-select: none;
+      }
+
+      .terminal-body {
+        padding: 16px;
+        color: #d7f7ff;
+      }
+
+      .terminal-line {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 6px;
+        opacity: 0;
+        animation: fadeUpLine 0.4s ease forwards;
+        white-space: pre;
+      }
+
+      .terminal-line:nth-child(1) { animation-delay: 0.2s; }
+      .terminal-line:nth-child(2) { animation-delay: 0.9s; }
+      .terminal-line:nth-child(3) { animation-delay: 1.6s; }
+      .terminal-line:nth-child(4) { animation-delay: 2.3s; }
+      .terminal-line:nth-child(5) { animation-delay: 2.7s; }
+      .terminal-line:nth-child(6) { animation-delay: 3.4s; }
+
+      .terminal-prompt {
+        color: var(--accent);
+        user-select: none;
+      }
+
+      .terminal-command {
+        color: #fff;
+      }
+
+      .terminal-output {
+        color: #8892b0;
+      }
+
+      .terminal-cursor {
+        display: inline-block;
+        width: 8px;
+        height: 15px;
+        background: var(--accent);
+        animation: blinkCursor 1s step-end infinite;
+        vertical-align: middle;
+        margin-left: 6px;
+      }
+
+      @keyframes fadeUpLine {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes blinkCursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
       .site-footer {
         padding: 40px 0;
         border-top: 1px solid var(--line);

@@ -5,7 +5,7 @@ import { trackLabelMap } from "../../../data/tracks";
 import { withBase } from "../../../lib/paths";
 
 export async function getStaticPaths() {
-  const patches = await getCollection("patches");
+  const patches = await getCollection("ru-patches");
 
   return patches.map((patch) => ({
     params: { slug: patch.slug },
@@ -16,7 +16,17 @@ export async function getStaticPaths() {
 const { patch } = Astro.props;
 const { Content } = await render(patch);
 const displayTrack = patch.data.track === "performances" ? "hybrid" : patch.data.track;
-const siblingPatches = (await getCollection("patches"))
+
+const collectionCopy = {
+  foundations: { title: "Foundations" },
+  sequencing: { title: "Sequencing" },
+  generative: { title: "Generative" },
+  performances: { title: "Performances" },
+  hybrid: { title: "Hybrid" }
+};
+const translatedTrackTitle = collectionCopy[displayTrack as keyof typeof collectionCopy]?.title || "Foundations";
+
+const siblingPatches = (await getCollection("ru-patches"))
   .filter((entry) => entry.data.track === patch.data.track && entry.slug !== patch.slug)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
@@ -28,7 +38,7 @@ const siblingPatches = (await getCollection("patches"))
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/roadmap", label: "План" },
     { href: "/ru/course", label: "Курс" },
     { href: "/ru/resources", label: "Материалы" }
   ]}
@@ -39,7 +49,7 @@ const siblingPatches = (await getCollection("patches"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">{trackLabelMap[displayTrack]}</div>
+            <div class="eyebrow">{translatedTrackTitle}</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
               {patch.data.title}
             </h1>

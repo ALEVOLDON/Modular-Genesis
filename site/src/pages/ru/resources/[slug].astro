@@ -4,7 +4,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { withBase } from "../../../lib/paths";
 
 export async function getStaticPaths() {
-  const notes = await getCollection("notes");
+  const notes = await getCollection("ru-notes");
 
   return notes.map((note) => ({
     params: { slug: note.slug },
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
-const otherNotes = (await getCollection("notes"))
+const otherNotes = (await getCollection("ru-notes"))
   .filter((entry) => entry.slug !== note.slug)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
@@ -26,7 +26,7 @@ const otherNotes = (await getCollection("notes"))
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/roadmap", label: "План" },
     { href: "/ru/course", label: "Курс" },
     { href: "/ru/resources", label: "Материалы" }
   ]}
@@ -52,10 +52,10 @@ const otherNotes = (await getCollection("notes"))
             <article class="feature-card">
               <span class="section-label">Роль заметки</span>
               <h3>Концептуальный слой для публичной системы</h3>
-              <p>Такие notes объясняют устойчивую логику за уроками, patch references и дальнейшим ростом сайта.</p>
+              <p>Такие заметки объясняют устойчивую логику за уроками, патчами и дальнейшим ростом сайта.</p>
               <ul class="feature-list">
-                <li>workflow и routing context</li>
-                <li>system architecture и направление проекта</li>
+                <li>контекст рабочего процесса и маршрутизации</li>
+                <li>системная архитектура и направление проекта</li>
                 <li>поддержка для будущих уроков и артефактов</li>
               </ul>
             </article>
@@ -90,7 +90,7 @@ const otherNotes = (await getCollection("notes"))
           <article class="feature-card">
             <span class="card-kicker">Навигация</span>
             <h3>Продолжить движение по системе</h3>
-            <p>Reference material должно возвращать тебя в roadmap, к урокам и в библиотеку патчей.</p>
+            <p>Справочные материалы должны возвращать тебя в roadmap, к урокам и в библиотеку патчей.</p>
             <div class="actions">
               <a class="button-secondary" href={withBase("/ru/course")}>Открыть курс</a>
               <a class="button-secondary" href={withBase("/ru/patches")}>Открыть патчи</a>

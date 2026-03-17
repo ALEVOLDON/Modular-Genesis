@@ -5,7 +5,7 @@ import { tracks, trackLabelMap } from "../../../data/tracks";
 import { withBase } from "../../../lib/paths";
 
 export async function getStaticPaths() {
-  const lessons = await getCollection("lessons");
+  const lessons = await getCollection("ru-lessons");
 
   return lessons.map((lesson) => ({
     params: { slug: lesson.slug },
@@ -15,13 +15,42 @@ export async function getStaticPaths() {
 
 const { lesson } = Astro.props;
 const { Content } = await render(lesson);
-const track = tracks.find((entry) => entry.key === lesson.data.track);
-const relatedPatches = (await getCollection("patches"))
+const trackCopyMap = {
+  foundations: {
+    title: "Foundations",
+    description: "Старт с signal flow, базовой модуляции и первых sound design patches.",
+    topics: ["CV и audio", "oscillator, filter, VCA", "envelopes и LFOs"]
+  },
+  sequencing: {
+    title: "Sequencing",
+    description: "Переход от статичного звука к clocked motion, ритму и tonal control.",
+    topics: ["clock, trigger, gate", "sequencers и quantizers", "melodic и rhythmic motion"]
+  },
+  generative: {
+    title: "Generative",
+    description: "Системы, которые меняются во времени за счет probability, mutation и feedback.",
+    topics: ["sample and hold", "Turing-style mutation", "feedback и slow modulation"]
+  },
+  hybrid: {
+    title: "Hybrid",
+    description: "Связка VCV Rack и Ableton Live для routing, записи и arrangement.",
+    topics: ["VCV Rack + Ableton", "virtual audio routing", "multichannel recording"]
+  },
+  audiovisual: {
+    title: "Audiovisual",
+    description: "Преобразование поведения звука в visuals и performance-oriented output.",
+    topics: ["OSC и MIDI visual control", "audio-reactive graphics", "Blender / Three.js / TouchDesigner"]
+  }
+};
+
+const translatedTrack = trackCopyMap[lesson.data.track as keyof typeof trackCopyMap] || trackCopyMap.foundations;
+
+const relatedPatches = (await getCollection("ru-patches"))
   .filter((patch) => patch.data.track === lesson.data.track)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const siblingLessons = (await getCollection("lessons"))
+const siblingLessons = (await getCollection("ru-lessons"))
   .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
@@ -33,7 +62,7 @@ const siblingLessons = (await getCollection("lessons"))
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/roadmap", label: "План" },
     { href: "/ru/course", label: "Курс" },
     { href: "/ru/resources", label: "Материалы" }
   ]}
@@ -44,7 +73,7 @@ const siblingLessons = (await getCollection("lessons"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">{trackLabelMap[lesson.data.track]}</div>
+            <div class="eyebrow">{translatedTrack.title}</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
               {lesson.data.title}
             </h1>
@@ -58,10 +87,10 @@ const siblingLessons = (await getCollection("lessons"))
           <div class="hero-dashboard">
             <article class="feature-card">
               <span class="section-label">Контекст трека</span>
-              <h3>{track?.title}</h3>
-              <p>{track?.description}</p>
+              <h3>{translatedTrack.title}</h3>
+              <p>{translatedTrack.description}</p>
               <ul class="feature-list">
-                {track?.roadmapTopics.slice(0, 3).map((topic) => (
+                {translatedTrack.topics.slice(0, 3).map((topic) => (
                   <li>{topic}</li>
                 ))}
               </ul>
@@ -110,8 +139,8 @@ const siblingLessons = (await getCollection("lessons"))
 
           <article class="feature-card">
             <span class="card-kicker">Тот же трек</span>
-            <h3>Продолжить внутри {track?.title}</h3>
-            <p>Соседние уроки внутри того же трека удерживают progression связным и не дают материалу распасться.</p>
+            <h3>Продолжить внутри {translatedTrack.title}</h3>
+            <p>Соседние уроки внутри того же трека удерживают развитие связным и не дают материалу распасться.</p>
             <ul class="feature-list">
               {siblingLessons.map((entry) => (
                 <li>
@@ -123,8 +152,8 @@ const siblingLessons = (await getCollection("lessons"))
 
           <article class="feature-card">
             <span class="card-kicker">Связанная диаграмма</span>
-            <h3>Обзор hybrid routing</h3>
-            <p>Эта system diagram связывает modular engine, DAW-слой и visual output в одну читаемую схему.</p>
+            <h3>Обзор гибридной маршрутизации</h3>
+            <p>Эта системная диаграмма связывает модульный движок, DAW и визуальный вывод в одну читаемую схему.</p>
             <div class="actions">
               <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
               <a class="button-secondary" href={withBase("/ru/patches")}>Открыть библиотеку патчей</a>

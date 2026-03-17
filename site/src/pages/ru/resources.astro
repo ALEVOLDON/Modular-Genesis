@@ -40,9 +40,9 @@ const remainingResources = resources.slice(3);
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
-    { href: "/ru/resources", label: "Resources" },
-    { href: "/ru/course", label: "Course" }
+    { href: "/ru/roadmap", label: "План" },
+    { href: "/ru/resources", label: "Материалы" },
+    { href: "/ru/course", label: "Курс" }
   ]}
   localeSwitch={{ href: "/resources", label: "EN" }}
 >
@@ -51,9 +51,9 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Resources</div>
+            <div class="eyebrow">Материалы</div>
             <h1 class="display-title">
-              <span class="accent">Reference layer</span> за lessons, patches и diagrams.
+              <span class="accent">Слой материалов</span> за lessons, patches и diagrams.
             </h1>
             <p class="lede">
               Эти заметки фиксируют устойчивые идеи проекта: hybrid workflow, generative structure,
@@ -67,8 +67,8 @@ const remainingResources = resources.slice(3);
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Reference scope</span>
-              <h3>Notes объясняют систему, а не только отдельные техники.</h3>
+              <span class="section-label">Охват заметок</span>
+              <h3>Заметки объясняют систему, а не только отдельные техники.</h3>
               <ul class="metric-list">
                 <li>
                   <strong>{resources.length}</strong>
@@ -93,7 +93,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Core notes</span>
+            <span class="section-label">Основные заметки</span>
             <h2>Первый слой концентрируется на идеях, которые держат проект вместе.</h2>
             <p>Это заметки, которые сильнее всего связаны с текущими lessons, roadmap и patch logic.</p>
           </div>
@@ -102,7 +102,7 @@ const remainingResources = resources.slice(3);
         <div class="stack-grid" style="margin-top: 10px;">
           {featuredResources.map((resource) => (
             <article class="feature-card">
-              <span class="card-kicker">Reference</span>
+              <span class="card-kicker">Материал</span>
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
@@ -118,7 +118,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="split-hero">
           <article class="feature-card">
-            <span class="section-label">Hybrid setup reference</span>
+            <span class="section-label">Гибридный setup: справочник</span>
             <h2>Site-native diagram, извлеченная из исходного проектного мышления.</h2>
             <p>
               Эта схема заменяет старый slide material более чистым языком сайта, но сохраняет структурную идею:
@@ -136,7 +136,7 @@ const remainingResources = resources.slice(3);
     <section class="band band-subtle">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Extended notes</span>
+          <span class="section-label">Дополнительные заметки</span>
           <h2>Оставшиеся notes указывают на рост сайта и будущие слои системы.</h2>
           <p>Они менее операционные, чем workflow notes, но важны для того, куда проект идет дальше.</p>
         </div>
@@ -144,7 +144,7 @@ const remainingResources = resources.slice(3);
         <div class="cards-2" style="margin-top: 26px;">
           {remainingResources.map((resource) => (
             <article class="card">
-              <span class="card-kicker">Reference</span>
+              <span class="card-kicker">Материал</span>
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">

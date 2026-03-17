@@ -59,9 +59,9 @@ const roadmapStages = tracks.map((track, index) => ({
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
-    { href: "/ru/resources", label: "Resources" },
-    { href: "/ru/course", label: "Course" }
+    { href: "/ru/roadmap", label: "План" },
+    { href: "/ru/resources", label: "Материалы" },
+    { href: "/ru/course", label: "Курс" }
   ]}
   localeSwitch={{ href: "/roadmap", label: "EN" }}
 >
@@ -70,7 +70,7 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">System Evolution Protocol</div>
+            <div class="eyebrow">Протокол эволюции системы</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               Roadmap проекта <span class="accent">Modular Genesis</span> от first signal flow до audiovisual systems.
             </h1>
@@ -131,7 +131,7 @@ const roadmapStages = tracks.map((track, index) => ({
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Roadmap Timeline</span>
+          <span class="section-label">Хронология roadmap</span>
           <h2>Каждая стадия сдвигает систему от отдельных модулей к цельному performance organism.</h2>
           <p>
             Эта последовательность не только учебная. Она показывает, как параллельно могут развиваться репозиторий,
@@ -144,7 +144,7 @@ const roadmapStages = tracks.map((track, index) => ({
             <Fragment>
               {stage.index % 2 === 0 ? (
                 <article class="timeline-card left" style={`--track-tone:${stage.tone};`}>
-                  <span class="timeline-topline">Stage {stage.index + 1}</span>
+                  <span class="timeline-topline">Этап {stage.index + 1}</span>
                   <h3>{stage.title}</h3>
                   <p>{stage.description}</p>
                   <ul class="timeline-list">
@@ -163,7 +163,7 @@ const roadmapStages = tracks.map((track, index) => ({
 
               {stage.index % 2 === 1 ? (
                 <article class="timeline-card right" style={`--track-tone:${stage.tone};`}>
-                  <span class="timeline-topline">Stage {stage.index + 1}</span>
+                  <span class="timeline-topline">Этап {stage.index + 1}</span>
                   <h3>{stage.title}</h3>
                   <p>{stage.description}</p>
                   <ul class="timeline-list">
@@ -185,7 +185,7 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="timeline-summary">
           <div class="feature-card">
-            <span class="section-label">System diagrams</span>
+            <span class="section-label">Системные диаграммы</span>
             <h2>Roadmap визуально держат две site-native diagrams.</h2>
             <p>
               Эти схемы заменяют старый slide language более чистым визуальным языком сайта, но сохраняют
@@ -212,7 +212,7 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Stage status</span>
+            <span class="section-label">Статус этапов</span>
             <h2>У каждой фазы уже есть понятная связь с lessons и patches.</h2>
             <p>Из-за этого roadmap работает как рабочая структура, а не как декоративная схема.</p>
           </div>
@@ -231,7 +231,7 @@ const roadmapStages = tracks.map((track, index) => ({
         <div class="stack-grid" style="margin-top: 18px;">
           {roadmapStages.slice(0, 3).map((stage) => (
             <article class="feature-card" style={`--track-tone:${stage.tone};`}>
-              <span class="timeline-topline">Patch direction</span>
+              <span class="timeline-topline">Направление patch</span>
               <h3>{stage.title}</h3>
               <p>{stage.patchCount} patch entries сейчас связаны с этой стадией или соседним performance layer.</p>
             </article>

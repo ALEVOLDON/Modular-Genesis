@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
 
-const lessons = await getCollection("lessons");
+const lessons = await getCollection("ru-lessons");
 
 const grouped = tracks.map((track) => ({
   ...track,
@@ -51,9 +51,9 @@ const trackCopyMap = {
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
-    { href: "/ru/course", label: "Course" },
-    { href: "/ru/resources", label: "Resources" }
+    { href: "/ru/roadmap", label: "План" },
+    { href: "/ru/course", label: "Курс" },
+    { href: "/ru/resources", label: "Материалы" }
   ]}
   localeSwitch={{ href: "/course", label: "EN" }}
 >
@@ -62,7 +62,7 @@ const trackCopyMap = {
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Course Structure</div>
+            <div class="eyebrow">Структура курса</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               Documentation-first <span class="accent">learning path</span> для modular sound и hybrid systems.
             </h1>
@@ -83,7 +83,7 @@ const trackCopyMap = {
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Course status</span>
+              <span class="section-label">Состояние курса</span>
               <h3>У curriculum уже есть стабильный каркас.</h3>
               <ul class="metric-list">
                 <li>
@@ -103,13 +103,13 @@ const trackCopyMap = {
 
             <div class="hero-dashboard-grid">
               <article class="mini-card">
-                <span class="mini-stat">Theory</span>
-                <h4>Concept first</h4>
+                <span class="mini-stat">Теория</span>
+                <h4>Концепция перва</h4>
                 <p>Каждый lesson начинается с модели идеи, еще до patch file и практики.</p>
               </article>
               <article class="mini-card">
-                <span class="mini-stat">Patch</span>
-                <h4>Repository anchor</h4>
+                <span class="mini-stat">Патч</span>
+                <h4>Якорь репозитория</h4>
                 <p>Lessons связаны с patch entries, поэтому контент и артефакты растут вместе.</p>
               </article>
             </div>
@@ -121,7 +121,7 @@ const trackCopyMap = {
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Track map</span>
+          <span class="section-label">Карта треков</span>
           <h2>Каждый track покрывает отдельный слой одной и той же системы.</h2>
           <p>
             Курс разделен не по случайным темам, а движется от core signal logic к sequencing,
@@ -131,7 +131,7 @@ const trackCopyMap = {
         <div class="stack-grid" style="margin-top: 26px;">
           {tracks.map((track, index) => (
             <article class="feature-card">
-              <span class="card-kicker">Track {index + 1}</span>
+              <span class="card-kicker">Трек {index + 1}</span>
               <h3>{trackCopyMap[track.key].title}</h3>
               <p>{trackCopyMap[track.key].description}</p>
               <ul class="feature-list">
@@ -149,7 +149,7 @@ const trackCopyMap = {
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Published lessons</span>
+            <span class="section-label">Опубликованные уроки</span>
             <h2>Lesson groups разделены по tracks и остаются читаемыми.</h2>
             <p>Каждый блок может расти независимо, не превращая страницу в одну длинную смешанную ленту.</p>
           </div>
@@ -159,7 +159,7 @@ const trackCopyMap = {
           {populatedTracks.map((track) => (
             <article class="feature-card" id={track.key}>
               <span class="card-kicker">{trackCopyMap[track.key].title}</span>
-              <h3>{track.lessons.length} lesson(s)</h3>
+              <h3>{track.lessons.length} урок(а)</h3>
               <p>{trackCopyMap[track.key].description}</p>
               <ul class="feature-list">
                 {track.lessons.map((lesson) => (
@@ -178,7 +178,7 @@ const trackCopyMap = {
       <div class="band-shell">
         <div class="split-hero">
           <article class="feature-card">
-            <span class="section-label">Lesson format</span>
+            <span class="section-label">Формат урока</span>
             <h2>Каждый lesson строится вокруг одной повторяемой структуры.</h2>
             <ul class="feature-list">
               <li><strong>Theory:</strong> короткое объяснение концепта.</li>

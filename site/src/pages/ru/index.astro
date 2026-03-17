@@ -4,13 +4,13 @@ import { getCollection } from "astro:content";
 import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
 
-const lessons = (await getCollection("lessons")).sort((a, b) => {
+const lessons = (await getCollection("ru-lessons")).sort((a, b) => {
   if (a.data.track === b.data.track) return a.data.order - b.data.order;
   return a.data.track.localeCompare(b.data.track);
 });
 
-const notes = (await getCollection("notes")).sort((a, b) => a.data.order - b.data.order);
-const patches = (await getCollection("patches")).sort((a, b) => a.data.order - b.data.order);
+const notes = (await getCollection("ru-notes")).sort((a, b) => a.data.order - b.data.order);
+const patches = (await getCollection("ru-patches")).sort((a, b) => a.data.order - b.data.order);
 
 const latestLessons = lessons.slice(0, 4);
 const featuredNotes = notes.slice(0, 3);
@@ -63,9 +63,9 @@ const toolCards = [
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
-    { href: "/ru/course", label: "Course" },
-    { href: "/ru/resources", label: "Resources" }
+    { href: "/ru/roadmap", label: "План" },
+    { href: "/ru/course", label: "Курс" },
+    { href: "/ru/resources", label: "Материалы" }
   ]}
   localeSwitch={{ href: "/", label: "EN" }}
 >
@@ -235,7 +235,7 @@ Performance</div>
         <div class="content-grid">
           <div class="content-column">
             <article class="feature-card">
-              <span class="card-kicker">Последние lessons</span>
+              <span class="card-kicker">Последние уроки</span>
               <div class="card-stack">
                 {latestLessons.map((lesson) => (
                   <article class="card">
@@ -271,7 +271,7 @@ Performance</div>
 
           <div class="content-column">
             <article class="feature-card">
-              <span class="card-kicker">Базовые notes</span>
+              <span class="card-kicker">Базовые заметки</span>
               <div class="card-stack">
                 {featuredNotes.map((note) => (
                   <article class="card">

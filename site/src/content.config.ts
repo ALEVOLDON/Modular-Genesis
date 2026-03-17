@@ -38,5 +38,8 @@ const patches = defineCollection({
 export const collections = {
   lessons,
   notes,
-  patches
+  patches,
+  "ru-lessons": lessons,
+  "ru-notes": notes,
+  "ru-patches": patches
 };

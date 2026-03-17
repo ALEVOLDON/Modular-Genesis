@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import { patchCollections } from "../../data/patches";
 import { withBase } from "../../lib/paths";
 
-const patchEntries = await getCollection("patches");
+const patchEntries = await getCollection("ru-patches");
 const groupedEntries = Object.fromEntries(
   patchCollections.map((collection) => [
     collection.key,
@@ -42,7 +42,7 @@ const collectionCopy = {
   lang="ru"
   navItems={[
     { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "Roadmap" },
+    { href: "/ru/roadmap", label: "План" },
     { href: "/ru/course", label: "Курс" },
     { href: "/ru/resources", label: "Материалы" }
   ]}

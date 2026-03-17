@@ -12,7 +12,7 @@ const lessons = (await getCollection("ru-lessons")).sort((a, b) => {
 const notes = (await getCollection("ru-notes")).sort((a, b) => a.data.order - b.data.order);
 const patches = (await getCollection("ru-patches")).sort((a, b) => a.data.order - b.data.order);
 
-const latestLessons = lessons.slice(0, 4);
+const featuredLessons = lessons.slice(0, 3);
 const featuredNotes = notes.slice(0, 3);
 const featuredPatches = patches.slice(0, 3);
 
@@ -88,6 +88,9 @@ const toolCards = [
               <a class="button-secondary" href={withBase("/ru/course")}>Смотреть lessons</a>
               <a class="button-secondary" href={withBase("/ru/resources")}>Читать notes</a>
             </div>
+            <div class="media-frame" style="margin-top: 32px;">
+              <img src={withBase("/images/hero_modular_cables.png")} alt="Макро-снимок модульных кабелей и светящегося интерфейса" />
+            </div>
           </div>
 
           <div class="hero-dashboard">
@@ -98,10 +101,7 @@ const toolCards = [
                 Сайт, lessons, notes и patch entries уже строятся вокруг одного backbone:
                 controller input, modular generation, audio capture и будущего visual synthesis.
               </p>
-              <div class="media-frame" style="margin: 18px 0;">
-                <img src={withBase("/images/hero_modular_cables.png")} alt="Макро-снимок модульных кабелей и светящегося интерфейса" />
-              </div>
-              <div class="code-block" style="margin-top: 0;">Ableton / MIDI
+              <div class="code-block">Ableton / MIDI
   ->
 VCV Rack
   ->
@@ -235,75 +235,63 @@ Performance</div>
           <a class="button-secondary" href={withBase("/ru/course")}>Все lessons</a>
         </div>
 
-        <div class="content-grid">
-          <div class="content-column">
-            <article class="feature-card">
-              <span class="card-kicker">Последние уроки</span>
-              <div class="card-stack">
-                {latestLessons.map((lesson) => (
-                  <article class="card">
-                    <span class="card-kicker">{lesson.data.track}</span>
-                    <h3>{lesson.data.title}</h3>
-                    <p>{lesson.data.summary}</p>
-                    <div class="actions">
-                      <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть lesson</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
+        <div class="roadmap-strip" style="margin: 26px 0 24px;">
+          {tracks.map((track, index) => (
+            <article class="roadmap-step">
+              <span class="index">{index + 1}</span>
+              <h3>{track.title}</h3>
+              <p>{track.description}</p>
             </article>
+          ))}
+        </div>
 
-            <article class="feature-card">
-              <span class="card-kicker">Логика треков</span>
-              <h3>Как растет учебная система</h3>
-              <p>
-                Текущий контент уже идет по стабильной последовательности: от базового сигнала к hybrid и audiovisual output.
-              </p>
-              <ul class="feature-list">
-                {tracks.map((track, index) => (
-                  <li>
-                    <strong>Этап {index + 1}:</strong> {track.title} - {track.description}
-                  </li>
-                ))}
-              </ul>
-              <div class="actions">
-                <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть полный roadmap</a>
-              </div>
-            </article>
-          </div>
+        <div class="cards-3">
+          <article class="feature-card">
+            <span class="card-kicker">Последние уроки</span>
+            <div class="card-stack">
+              {featuredLessons.map((lesson) => (
+                <article class="card">
+                  <span class="card-kicker">{lesson.data.track}</span>
+                  <h3>{lesson.data.title}</h3>
+                  <p>{lesson.data.summary}</p>
+                  <div class="actions">
+                    <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть lesson</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </article>
 
-          <div class="content-column">
-            <article class="feature-card">
-              <span class="card-kicker">Базовые заметки</span>
-              <div class="card-stack">
-                {featuredNotes.map((note) => (
-                  <article class="card">
-                    <h3>{note.data.title}</h3>
-                    <p>{note.data.summary}</p>
-                    <div class="actions">
-                      <a class="button-secondary" href={withBase(`/ru/resources/${note.slug}/`)}>Открыть note</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </article>
+          <article class="feature-card">
+            <span class="card-kicker">Базовые заметки</span>
+            <div class="card-stack">
+              {featuredNotes.map((note) => (
+                <article class="card">
+                  <h3>{note.data.title}</h3>
+                  <p>{note.data.summary}</p>
+                  <div class="actions">
+                    <a class="button-secondary" href={withBase(`/ru/resources/${note.slug}/`)}>Открыть note</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </article>
 
-            <article class="feature-card">
-              <span class="card-kicker">Patch library</span>
-              <div class="card-stack">
-                {featuredPatches.map((patch) => (
-                  <article class="card">
-                    <span class="card-kicker">{patch.data.track}</span>
-                    <h3>{patch.data.title}</h3>
-                    <p>{patch.data.summary}</p>
-                    <div class="actions">
-                      <a class="button-secondary" href={withBase(`/ru/patches/${patch.slug}/`)}>Открыть patch</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </article>
-          </div>
+          <article class="feature-card">
+            <span class="card-kicker">Patch library</span>
+            <div class="card-stack">
+              {featuredPatches.map((patch) => (
+                <article class="card">
+                  <span class="card-kicker">{patch.data.track}</span>
+                  <h3>{patch.data.title}</h3>
+                  <p>{patch.data.summary}</p>
+                  <div class="actions">
+                    <a class="button-secondary" href={withBase(`/ru/patches/${patch.slug}/`)}>Открыть patch</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </article>
         </div>
       </div>
     </section>

@@ -82,6 +82,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
 <!doctype html>
 <html lang={lang}>
   <head>
+    <script>document.documentElement.classList.add('js-enabled');</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
@@ -1444,6 +1445,69 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
           margin-left: 0;
         }
       }
+      /* Scroll Reveal Animations */
+      @keyframes revealUp {
+        0% { opacity: 0; transform: translateY(24px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .js-enabled .feature-card,
+      .js-enabled .mini-card,
+      .js-enabled .section-copy,
+      .js-enabled .display-title,
+      .js-enabled .lede,
+      .js-enabled .terminal-window,
+      .js-enabled .timeline-card,
+      .js-enabled .roadmap-step,
+      .js-enabled .card {
+        opacity: 0;
+        will-change: opacity, transform;
+      }
+
+      .js-enabled .in-view {
+        opacity: 0; /* Fallback before animation applies */
+        animation: revealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .js-enabled .hero-dashboard-grid > *:nth-child(2) { animation-delay: 0.1s; }
+      .js-enabled .hero-dashboard-grid > *:nth-child(3) { animation-delay: 0.2s; }
+      .js-enabled .hero-dashboard-grid > *:nth-child(4) { animation-delay: 0.3s; }
+
+      .js-enabled .stack-grid-4 > *:nth-child(2) { animation-delay: 0.1s; }
+      .js-enabled .stack-grid-4 > *:nth-child(3) { animation-delay: 0.2s; }
+      .js-enabled .stack-grid-4 > *:nth-child(4) { animation-delay: 0.3s; }
+
+      .js-enabled .cards-3 > *:nth-child(2) { animation-delay: 0.15s; }
+      .js-enabled .cards-3 > *:nth-child(3) { animation-delay: 0.3s; }
+
+      /* Hover Micro-interactions */
+      .feature-card, .mini-card, .card, .timeline-card, .roadmap-step {
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .feature-card:hover, .mini-card:hover, .card:hover, .timeline-card:hover, .roadmap-step:hover {
+        transform: translateY(-4px);
+        border-color: rgba(102, 247, 255, 0.25);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(102, 247, 255, 0.03);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .js-enabled .feature-card,
+        .js-enabled .mini-card,
+        .js-enabled .section-copy,
+        .js-enabled .display-title,
+        .js-enabled .lede,
+        .js-enabled .terminal-window,
+        .js-enabled .timeline-card,
+        .js-enabled .roadmap-step,
+        .js-enabled .card {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1544,5 +1608,36 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         </div>
       </div>
     </footer>
+    <script>
+      const initReveal = () => {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        const selectors = [
+          '.feature-card',
+          '.mini-card',
+          '.section-copy',
+          '.display-title',
+          '.lede',
+          '.terminal-window',
+          '.timeline-card',
+          '.roadmap-step',
+          '.card'
+        ];
+
+        document.querySelectorAll(selectors.join(', ')).forEach(el => {
+          observer.observe(el);
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', initReveal);
+      document.addEventListener('astro:page-load', initReveal);
+    </script>
   </body>
 </html>

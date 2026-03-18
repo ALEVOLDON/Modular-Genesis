@@ -845,6 +845,12 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         word-wrap: break-word;
       }
 
+      @keyframes terminalGlitch {
+        0%, 96%, 100% { transform: translate(0); filter: none; }
+        97% { transform: translate(-1px, 1px); filter: drop-shadow(1px 0 0 rgba(255, 95, 86, 0.8)) drop-shadow(-1px 0 0 rgba(102, 247, 255, 0.8)); }
+        98.5% { transform: translate(1px, -1px); filter: drop-shadow(-1px 0 0 rgba(255, 95, 86, 0.8)) drop-shadow(1px 0 0 rgba(102, 247, 255, 0.8)); }
+      }
+
       .terminal-window {
         margin-top: 18px;
         border-radius: 12px;
@@ -858,6 +864,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         backdrop-filter: blur(8px);
         max-width: 100%;
         box-sizing: border-box;
+        animation: terminalGlitch 7s infinite linear;
       }
 
       .terminal-header {
@@ -1491,6 +1498,16 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         transform: translateY(-4px);
         border-color: rgba(102, 247, 255, 0.25);
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(102, 247, 255, 0.03);
+      }
+
+      @keyframes breatheBg {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.04); }
+      }
+
+      .bg-breathe {
+        animation: breatheBg 14s ease-in-out infinite alternate;
+        will-change: transform;
       }
 
       @media (prefers-reduced-motion: reduce) {

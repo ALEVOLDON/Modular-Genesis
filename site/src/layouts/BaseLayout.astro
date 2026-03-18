@@ -296,6 +296,20 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         word-break: break-word;
       }
 
+      /* Prevent nested grid items from blowing out their containers */
+      .split-hero > *,
+      .hero-dashboard > *,
+      .hero-dashboard-grid > *,
+      .content-grid > *,
+      .card-stack > *,
+      .cards-3 > *,
+      .cards-2 > *,
+      .cards-1 > *,
+      .stack-grid > *,
+      .stack-grid-4 > * {
+        min-width: 0;
+      }
+
       .display-title {
         margin-top: 18px;
         font-size: clamp(3.6rem, 9vw, 6.8rem);

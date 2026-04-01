@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
@@ -39,18 +40,22 @@ const pillars = [
 
 const toolCards = [
   {
+    icon: "audio-lines",
     title: "VCV Rack",
     text: "Главная модульная среда для синтеза, секвенсинга, вероятности и работы с сигналом."
   },
   {
+    icon: "radio",
     title: "Ableton Live",
     text: "Аранжировка, маршрутизация, запись, performance-контроль и опорный слой гибридного workflow."
   },
   {
+    icon: "sparkles",
     title: "Visual Layer",
     text: "Three.js, Blender и будущие real-time visual systems, связанные с поведением звука."
   },
   {
+    icon: "folders",
     title: "Repository",
     text: "Документация, патчи, диаграммы и уроки, собранные как единая открытая система знаний."
   }
@@ -77,7 +82,7 @@ const toolCards = [
           <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,13,20,0.5) 0%, rgba(4,10,16,0.95) 100%); z-index: 1;"></div>
           <div class="display-grid" style="position: relative; z-index: 2;">
           <div>
-            <div class="eyebrow">Русская версия v0.1</div>
+            <div class="eyebrow"><Icon name="sparkles" /> Русская версия v0.1</div>
             <h1 class="display-title">
               Открытая <span class="accent">generative</span> система для modular sound и audiovisual practice.
             </h1>
@@ -87,15 +92,15 @@ const toolCards = [
               Русская версия нужна как понятная точка входа без разрыва с уже собранной английской структурой.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
-              <a class="button-secondary" href={withBase("/ru/course")}>Смотреть lessons</a>
-              <a class="button-secondary" href={withBase("/ru/resources")}>Читать notes</a>
+              <a class="button" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
+              <a class="button-secondary" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Смотреть lessons</span></a>
+              <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать notes</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Основной pipeline</span>
+              <span class="section-label"><Icon name="workflow" /> Основной pipeline</span>
               <h3>От control logic к audio и visual output</h3>
               <p>
                 Сайт, lessons, notes и patch entries уже строятся вокруг одного backbone:
@@ -122,28 +127,28 @@ const toolCards = [
             <div class="hero-dashboard-grid">
               <article class="mini-card">
                 <span class="mini-stat">{tracks.length}</span>
-                <h4>Треков уже собрано</h4>
+                <h4><Icon name="audio-lines" /> Треков уже собрано</h4>
                 <p>Foundations, sequencing, generative, hybrid и audiovisual уже оформлены как рабочий каркас.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{lessons.length}</span>
-                <h4>Уроков опубликовано</h4>
+                <h4><Icon name="book-open" /> Уроков опубликовано</h4>
                 <p>На сайте уже есть реальные lesson pages, а не просто syllabus-заглушка.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{notes.length}</span>
-                <h4>Заметок опубликовано</h4>
+                <h4><Icon name="notebook-pen" /> Заметок опубликовано</h4>
                 <p>Опорные заметки объясняют routing, patch logic и общее направление проекта.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{patches.length}</span>
-                <h4>Patch entries готовы</h4>
+                <h4><Icon name="panels-top-left" /> Patch entries готовы</h4>
                 <p>Структура уже готова под реальные `.vcv` артефакты без перестройки сайта.</p>
               </article>
             </div>
 
             <article class="feature-card">
-              <span class="section-label">Что уже работает</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Что уже работает</span>
               <h3>Не только идея, но уже собранный фундамент</h3>
               <ul class="feature-list">
                 <li><strong>Roadmap:</strong> поэтапная структура от signal flow до audiovisual systems.</li>
@@ -160,7 +165,7 @@ const toolCards = [
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Экосистема</span>
+          <span class="section-label"><Icon name="boxes" /> Экосистема</span>
           <h2>Инструменты разделены по роли, но спроектированы как единый организм.</h2>
           <p>
             Проект не делит synthesis, arrangement и visuals на отдельные дисциплины.
@@ -170,7 +175,7 @@ const toolCards = [
         <div class="stack-grid-4" style="margin-top: 26px;">
           {toolCards.map((tool) => (
             <article class="feature-card">
-              <span class="card-kicker">Инструмент</span>
+              <span class="card-kicker"><Icon name={tool.icon} /> Инструмент</span>
               <h3>{tool.title}</h3>
               <p>{tool.text}</p>
             </article>
@@ -186,7 +191,7 @@ const toolCards = [
           <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,10,16,0.95) 0%, rgba(6,13,20,0.4) 100%); z-index: 1;"></div>
           <div class="split-hero" style="position: relative; z-index: 2;">
             <div class="feature-card" style="background: rgba(3, 9, 15, 0.65); backdrop-filter: blur(12px); border-color: rgba(255, 255, 255, 0.08);">
-            <span class="section-label">Почему modular</span>
+            <span class="section-label"><Icon name="sparkles" /> Почему modular</span>
             <h2>Это не просто sound design workflow, а среда для исследования.</h2>
             <p>
               Модульные системы соединяют композицию, логику, импровизацию и инженерию.
@@ -210,7 +215,7 @@ const toolCards = [
     <section class="band band-subtle">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Архитектура</span>
+          <span class="section-label"><Icon name="library-big" /> Архитектура</span>
           <h2>Три устойчивых слоя уже собраны.</h2>
           <p>
             Текущая публичная версия - это еще не завершенный контент, а стабильный проектный каркас:
@@ -238,7 +243,7 @@ const toolCards = [
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Живой контент</span>
+            <span class="section-label"><Icon name="audio-lines" /> Живой контент</span>
             <h2>На сайте уже есть материал, а не просто пустой фасад.</h2>
             <p>Lessons, notes и patch entries разведены по понятным колонкам, чтобы каждый слой читался отдельно.</p>
           </div>

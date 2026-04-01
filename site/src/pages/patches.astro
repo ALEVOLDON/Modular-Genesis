@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { patchCollections } from "../data/patches";
 import { withBase } from "../lib/paths";
@@ -27,7 +28,7 @@ const placeholderCount = patchEntries.filter((entry) => entry.data.status === "p
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Patch Library</div>
+            <div class="eyebrow"><Icon name="panels-top-left" /> Patch Library</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               The <span class="accent">patch layer</span> is already structured for real artifacts.
             </h1>
@@ -36,14 +37,14 @@ const placeholderCount = patchEntries.filter((entry) => entry.data.status === "p
               placeholders with real `.vcv` systems, screenshots, and audio examples.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/course")}>Open lessons</a>
-              <a class="button-secondary" href={withBase("/roadmap")}>View roadmap</a>
+              <a class="button" href={withBase("/course")}><Icon name="book-open" /> <span>Open lessons</span></a>
+              <a class="button-secondary" href={withBase("/roadmap")}><Icon name="map" /> <span>View roadmap</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Library status</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Library status</span>
               <h3>The structure is ahead of the artifacts.</h3>
               <ul class="metric-list">
                 <li>
@@ -78,7 +79,7 @@ const placeholderCount = patchEntries.filter((entry) => entry.data.status === "p
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Collection map</span>
+          <span class="section-label"><Icon name="folders" /> Collection map</span>
           <h2>Each collection corresponds to a different type of patch system.</h2>
           <p>
             The patch library follows the same architecture as the course: foundations, sequencing,
@@ -106,7 +107,7 @@ const placeholderCount = patchEntries.filter((entry) => entry.data.status === "p
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Published entries</span>
+            <span class="section-label"><Icon name="panels-top-left" /> Published entries</span>
             <h2>The current patch entries are grouped cleanly and linked to the repository.</h2>
             <p>This keeps the section useful now, while leaving room for real patch artifacts later.</p>
           </div>
@@ -126,7 +127,7 @@ const placeholderCount = patchEntries.filter((entry) => entry.data.status === "p
                 ))}
               </ul>
               <div class="actions">
-                <a class="button-secondary" href={collection.folder}>Repository folder</a>
+                <a class="button-secondary" href={collection.folder}><Icon name="move-right" /> <span>Repository folder</span></a>
               </div>
             </article>
           ))}

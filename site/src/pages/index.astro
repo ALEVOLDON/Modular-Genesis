@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
@@ -45,18 +46,22 @@ const pillars = [
 
 const toolCards = [
   {
+    icon: "audio-lines",
     title: "VCV Rack",
     text: "Core modular environment for synthesis, sequencing, probability, and signal design."
   },
   {
+    icon: "radio",
     title: "Ableton Live",
     text: "Arrangement, routing, recording, performance control, and hybrid workflow anchor."
   },
   {
+    icon: "sparkles",
     title: "Visual Layer",
     text: "Three.js, Blender, and future real-time visual systems connected to sound behavior."
   },
   {
+    icon: "folders",
     title: "Repository",
     text: "Documentation, patches, diagrams, and lessons built as one public knowledge system."
   }
@@ -76,7 +81,7 @@ const toolCards = [
           <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,13,20,0.5) 0%, rgba(4,10,16,0.95) 100%); z-index: 1;"></div>
           <div class="display-grid" style="position: relative; z-index: 2;">
           <div>
-            <div class="eyebrow">Public Draft v0.1</div>
+            <div class="eyebrow"><Icon name="sparkles" /> Public Draft v0.1</div>
             <h1 class="display-title">
               Build the <span class="accent">generative</span> bridge between modular sound and visual systems.
             </h1>
@@ -86,20 +91,20 @@ const toolCards = [
               publish scattered tutorials, but to build a coherent public system.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
-              <a class="button-secondary" href={withBase("/course")}>Browse lessons</a>
-              <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+              <a class="button" href={withBase("/roadmap")}><Icon name="map" /> <span>Open roadmap</span></a>
+              <a class="button-secondary" href={withBase("/course")}><Icon name="book-open" /> <span>Browse lessons</span></a>
+              <a class="button-secondary" href={withBase("/resources")}><Icon name="notebook-pen" /> <span>Read notes</span></a>
             </div>
             <div class="track-nav">
               {heroSignals.map((signal) => (
-                <span class="track-chip">{signal}</span>
+                <span class="track-chip"><Icon name="sparkles" /> <span>{signal}</span></span>
               ))}
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Core pipeline</span>
+              <span class="section-label"><Icon name="workflow" /> Core pipeline</span>
               <h3>From control logic to performance output</h3>
               <p>
                 The site, lessons, notes, and patch entries already orbit one production backbone:
@@ -126,33 +131,33 @@ const toolCards = [
             <div class="hero-dashboard-grid">
               <article class="mini-card">
                 <span class="mini-stat">{tracks.length}</span>
-                <h4>Structured tracks</h4>
+                <h4><Icon name="audio-lines" /> Structured tracks</h4>
                 <p>Foundations, sequencing, generative, hybrid, and audiovisual are already defined.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{lessons.length}</span>
-                <h4>Published lessons</h4>
+                <h4><Icon name="book-open" /> Published lessons</h4>
                 <p>The course already contains real pages instead of a placeholder syllabus.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{notes.length}</span>
-                <h4>Reference notes</h4>
+                <h4><Icon name="notebook-pen" /> Reference notes</h4>
                 <p>System-level notes explain routing, patch logic, and project direction.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{patches.length}</span>
-                <h4>Patch entries</h4>
+                <h4><Icon name="panels-top-left" /> Patch entries</h4>
                 <p>The repository is prepared for real `.vcv` artifacts without changing site structure.</p>
               </article>
             </div>
 
             <article class="feature-card">
-              <span class="section-label">Current focus</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Current focus</span>
               <h3>What exists now</h3>
               <ul class="feature-list">
-                <li><strong>Roadmap:</strong> staged structure from signal flow to audiovisual systems.</li>
-                <li><strong>Course:</strong> lessons already grouped by track and route.</li>
-                <li><strong>Resources:</strong> concept notes and system diagrams published on-site.</li>
+                <li><strong><Icon name="map" /> Roadmap:</strong> staged structure from signal flow to audiovisual systems.</li>
+                <li><strong><Icon name="book-open" /> Course:</strong> lessons already grouped by track and route.</li>
+                <li><strong><Icon name="notebook-pen" /> Resources:</strong> concept notes and system diagrams published on-site.</li>
               </ul>
             </article>
           </div>
@@ -164,7 +169,7 @@ const toolCards = [
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Ecosystem</span>
+          <span class="section-label"><Icon name="boxes" /> Ecosystem</span>
           <h2>The tools are separated by role, but designed as one organism.</h2>
           <p>
             Instead of treating synthesis, arrangement, and visuals as isolated disciplines, the project
@@ -174,7 +179,7 @@ const toolCards = [
         <div class="stack-grid-4" style="margin-top: 26px;">
           {toolCards.map((tool) => (
             <article class="feature-card">
-              <span class="card-kicker">Tool</span>
+              <span class="card-kicker"><Icon name={tool.icon} /> Tool</span>
               <h3>{tool.title}</h3>
               <p>{tool.text}</p>
             </article>
@@ -190,7 +195,7 @@ const toolCards = [
           <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,10,16,0.95) 0%, rgba(6,13,20,0.4) 100%); z-index: 1;"></div>
           <div class="split-hero" style="position: relative; z-index: 2;">
             <div class="feature-card" style="background: rgba(3, 9, 15, 0.65); backdrop-filter: blur(12px); border-color: rgba(255, 255, 255, 0.08);">
-            <span class="section-label">Why Modular</span>
+            <span class="section-label"><Icon name="sparkles" /> Why Modular</span>
             <h2>Not just a sound design workflow, but a framework for discovery.</h2>
             <p>
               Modular systems create a rare overlap between composition, logic, improvisation, and
@@ -214,7 +219,7 @@ const toolCards = [
     <section class="band band-subtle">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Architecture</span>
+          <span class="section-label"><Icon name="library-big" /> Architecture</span>
           <h2>Three durable outputs are already in place.</h2>
           <p>
             The current public version is not finished content. It is a stable project skeleton:
@@ -223,7 +228,7 @@ const toolCards = [
         </div>
         <div class="timeline-summary" style="margin-top: 26px;">
           <article class="feature-card">
-            <span class="card-kicker">Blueprint</span>
+              <span class="card-kicker"><Icon name="files" /> Blueprint</span>
             <h3>The site is already split into stable layers.</h3>
             <p>
               The current version is strongest when read as infrastructure: one layer explains the system,
@@ -258,11 +263,11 @@ const toolCards = [
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Live Content</span>
+            <span class="section-label"><Icon name="audio-lines" /> Live Content</span>
             <h2>The site already has usable material, not just placeholders.</h2>
             <p>Tracks define the sequence first, then lessons, notes, and patches fill each layer with public material.</p>
           </div>
-          <a class="button-secondary" href={withBase("/course")}>See all lessons</a>
+          <a class="button-secondary" href={withBase("/course")}><Icon name="move-right" /> <span>See all lessons</span></a>
         </div>
 
         <div class="roadmap-strip" style="margin: 26px 0 24px;">
@@ -277,7 +282,7 @@ const toolCards = [
 
         <div class="cards-3">
           <article class="feature-card">
-            <span class="card-kicker">Latest lessons</span>
+            <span class="card-kicker"><Icon name="book-open" /> Latest lessons</span>
             <div class="card-stack">
               {featuredLessons.map((lesson) => (
                 <article class="card">
@@ -285,7 +290,7 @@ const toolCards = [
                   <h3>{lesson.data.title}</h3>
                   <p>{lesson.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}>Open lesson</a>
+                    <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}><Icon name="move-right" /> <span>Open lesson</span></a>
                   </div>
                 </article>
               ))}
@@ -293,14 +298,14 @@ const toolCards = [
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Core notes</span>
+            <span class="card-kicker"><Icon name="notebook-pen" /> Core notes</span>
             <div class="card-stack">
               {featuredNotes.map((note) => (
                 <article class="card">
                   <h3>{note.data.title}</h3>
                   <p>{note.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}>Open note</a>
+                    <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}><Icon name="move-right" /> <span>Open note</span></a>
                   </div>
                 </article>
               ))}
@@ -308,7 +313,7 @@ const toolCards = [
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Patch library</span>
+            <span class="card-kicker"><Icon name="panels-top-left" /> Patch library</span>
             <div class="card-stack">
               {featuredPatches.map((patch) => (
                 <article class="card">
@@ -316,7 +321,7 @@ const toolCards = [
                   <h3>{patch.data.title}</h3>
                   <p>{patch.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}>Open patch</a>
+                    <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}><Icon name="move-right" /> <span>Open patch</span></a>
                   </div>
                 </article>
               ))}

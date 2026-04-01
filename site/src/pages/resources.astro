@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { resources } from "../data/resources";
 import { withBase } from "../lib/paths";
 
@@ -17,7 +18,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Resources</div>
+            <div class="eyebrow"><Icon name="notebook-pen" /> Resources</div>
             <h1 class="display-title">
               The <span class="accent">reference layer</span> behind the lessons, patches, and diagrams.
             </h1>
@@ -26,14 +27,14 @@ const remainingResources = resources.slice(3);
               project vision, and the visual system planning that extends the modular side of the project.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
-              <a class="button-secondary" href={withBase("/course")}>Browse lessons</a>
+              <a class="button" href={withBase("/roadmap")}><Icon name="map" /> <span>Open roadmap</span></a>
+              <a class="button-secondary" href={withBase("/course")}><Icon name="book-open" /> <span>Browse lessons</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Reference scope</span>
+              <span class="section-label"><Icon name="library-big" /> Reference scope</span>
               <h3>Notes explain the system, not just isolated techniques.</h3>
               <ul class="metric-list">
                 <li>
@@ -59,7 +60,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Core notes</span>
+            <span class="section-label"><Icon name="notebook-pen" /> Core notes</span>
             <h2>The first layer focuses on the concepts that hold the project together.</h2>
             <p>These are the notes most directly connected to the current lessons, roadmap, and patch logic.</p>
           </div>
@@ -72,7 +73,7 @@ const remainingResources = resources.slice(3);
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(resource.href)}>Open note</a>
+                <a class="button-secondary" href={withBase(resource.href)}><Icon name="move-right" /> <span>Open note</span></a>
               </div>
             </article>
           ))}
@@ -84,7 +85,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="split-hero">
           <article class="feature-card">
-            <span class="section-label">Hybrid setup reference</span>
+            <span class="section-label"><Icon name="workflow" /> Hybrid setup reference</span>
             <h2>A site-native diagram extracted from the original project thinking.</h2>
             <p>
               This diagram replaces earlier slide material with a cleaner visual language while preserving
@@ -102,7 +103,7 @@ const remainingResources = resources.slice(3);
     <section class="band band-subtle">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Extended notes</span>
+          <span class="section-label"><Icon name="files" /> Extended notes</span>
           <h2>The remaining notes point toward site growth and future system layers.</h2>
           <p>They are less operational than the core workflow notes, but important for where the project is headed.</p>
         </div>
@@ -114,7 +115,7 @@ const remainingResources = resources.slice(3);
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(resource.href)}>Open note</a>
+                <a class="button-secondary" href={withBase(resource.href)}><Icon name="move-right" /> <span>Open note</span></a>
               </div>
             </article>
           ))}

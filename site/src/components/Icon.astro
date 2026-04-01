@@ -1,0 +1,73 @@
+---
+import {
+  AudioLines,
+  BookOpen,
+  Boxes,
+  Files,
+  Folders,
+  GitFork,
+  House,
+  Languages,
+  LibraryBig,
+  Map,
+  MoveRight,
+  NotebookPen,
+  PanelsTopLeft,
+  Radio,
+  Sparkles,
+  SquareChartGantt,
+  Workflow
+} from "lucide-static";
+
+export interface Props {
+  name:
+    | "audio-lines"
+    | "book-open"
+    | "boxes"
+    | "files"
+    | "folders"
+    | "git-fork"
+    | "house"
+    | "languages"
+    | "library-big"
+    | "map"
+    | "move-right"
+    | "notebook-pen"
+    | "panels-top-left"
+    | "radio"
+    | "sparkles"
+    | "square-chart-gantt"
+    | "workflow";
+  label?: string;
+  class?: string;
+}
+
+const { name, label, class: className } = Astro.props;
+
+const icons = {
+  "audio-lines": AudioLines,
+  "book-open": BookOpen,
+  boxes: Boxes,
+  files: Files,
+  folders: Folders,
+  "git-fork": GitFork,
+  house: House,
+  languages: Languages,
+  "library-big": LibraryBig,
+  map: Map,
+  "move-right": MoveRight,
+  "notebook-pen": NotebookPen,
+  "panels-top-left": PanelsTopLeft,
+  radio: Radio,
+  sparkles: Sparkles,
+  "square-chart-gantt": SquareChartGantt,
+  workflow: Workflow
+};
+---
+
+<span
+  class:list={["icon", className]}
+  aria-hidden={label ? undefined : "true"}
+  aria-label={label}
+  set:html={icons[name]}
+/>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
@@ -27,7 +28,7 @@ const totalLessons = lessons.length;
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Course Structure</div>
+            <div class="eyebrow"><Icon name="book-open" /> Course Structure</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               A <span class="accent">documentation-first</span> learning path for modular sound and hybrid systems.
             </h1>
@@ -36,19 +37,19 @@ const totalLessons = lessons.length;
               designed to grow in parallel instead of becoming disconnected tutorials.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/roadmap")}>Open roadmap</a>
-              <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+              <a class="button" href={withBase("/roadmap")}><Icon name="map" /> <span>Open roadmap</span></a>
+              <a class="button-secondary" href={withBase("/resources")}><Icon name="notebook-pen" /> <span>Read notes</span></a>
             </div>
             <div class="track-nav">
               {grouped.map((track) => (
-                <a class="track-chip" href={`#${track.key}`}>{track.title}</a>
+                <a class="track-chip" href={`#${track.key}`}><Icon name="audio-lines" /> <span>{track.title}</span></a>
               ))}
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Course status</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Course status</span>
               <h3>The curriculum already has a stable skeleton.</h3>
               <ul class="metric-list">
                 <li>
@@ -86,7 +87,7 @@ const totalLessons = lessons.length;
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Track map</span>
+          <span class="section-label"><Icon name="map" /> Track map</span>
           <h2>Each track covers a different layer of the same system.</h2>
           <p>
             The course is not split by random topics. It moves from core signal logic into sequencing,
@@ -114,7 +115,7 @@ const totalLessons = lessons.length;
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Published lessons</span>
+            <span class="section-label"><Icon name="book-open" /> Published lessons</span>
             <h2>Live lesson groups are separated by track and remain easy to scan.</h2>
             <p>Each block below can grow independently without collapsing the page into one long mixed list.</p>
           </div>
@@ -143,7 +144,7 @@ const totalLessons = lessons.length;
       <div class="band-shell">
         <div class="split-hero">
           <article class="feature-card">
-            <span class="section-label">Lesson format</span>
+            <span class="section-label"><Icon name="workflow" /> Lesson format</span>
             <h2>Every lesson is designed around one repeatable structure.</h2>
             <ul class="feature-list">
               <li><strong>Theory:</strong> concise explanation of the concept.</li>

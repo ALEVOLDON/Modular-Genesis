@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
+import Icon from "../components/Icon.astro";
 
 export interface Props {
   title?: string;
@@ -77,6 +78,16 @@ const footerCopy = lang === "ru"
       built: "Built in public."
     };
 const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
+
+const getNavIcon = (href: string) => {
+  if (href === "/" || href === "/ru/") return "house";
+  if (href.includes("roadmap")) return "map";
+  if (href.includes("course")) return "book-open";
+  if (href.includes("patches")) return "panels-top-left";
+  if (href.includes("resources")) return "notebook-pen";
+
+  return "files";
+};
 ---
 
 <!doctype html>
@@ -167,6 +178,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         font-size: 0.9rem;
         letter-spacing: 0.14em;
         text-transform: uppercase;
@@ -179,6 +193,12 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         gap: 20px;
         color: var(--muted);
         font-size: 0.92rem;
+      }
+
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .nav-group {
@@ -225,6 +245,8 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       .locale-link {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
+        gap: 8px;
         min-height: 38px;
         padding: 0 14px;
         border-radius: 999px;
@@ -357,6 +379,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       .mini-card h4 {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         margin: 0 0 8px;
         font-size: 1.02rem;
       }
@@ -389,7 +414,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       .section-label {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         margin-bottom: 12px;
         color: var(--accent);
         font-size: 0.78rem;
@@ -660,6 +687,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        gap: 10px;
         min-height: 46px;
         padding: 0 18px;
         border-radius: 999px;
@@ -784,7 +812,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       .card-kicker {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         margin-bottom: 16px;
         color: var(--accent);
         font-size: 0.78rem;
@@ -979,6 +1009,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       }
 
       .footer-links-list a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         color: var(--text);
       }
 
@@ -1016,6 +1049,13 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         gap: 16px;
       }
 
+      .footer-meta-item,
+      .footer-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .track-nav {
         display: flex;
         flex-wrap: wrap;
@@ -1026,6 +1066,7 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
       .track-chip {
         display: inline-flex;
         align-items: center;
+        gap: 8px;
         min-height: 38px;
         padding: 0 14px;
         border-radius: 999px;
@@ -1284,7 +1325,10 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
           gap: 10px;
         }
 
-        .mobile-nav-links a {
+      .mobile-nav-links a {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
           width: 100%;
           padding: 10px 12px;
           border-radius: 14px;
@@ -1438,6 +1482,21 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
         opacity: 0.7;
         margin-bottom: 4px;
       }
+
+      .icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+      }
+
+      .icon :global(svg) {
+        width: 1em;
+        height: 1em;
+        stroke: currentColor;
+        fill: none;
+        vector-effect: non-scaling-stroke;
+      }
       @media (max-width: 500px) {
         .lesson-navigation {
           flex-direction: column;
@@ -1530,15 +1589,24 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
   <body>
     <header class="site-header">
       <div class="shell">
-        <a class="brand" href={brandHref}>Modular Genesis</a>
+        <a class="brand" href={brandHref}>
+          <Icon name="workflow" />
+          <span>Modular Genesis</span>
+        </a>
         <div class="nav-group">
           <nav>
             {navItems.map((item) => (
-              <a href={withBase(item.href)}>{item.label}</a>
+              <a class="nav-link" href={withBase(item.href)}>
+                <Icon name={getNavIcon(item.href)} />
+                <span>{item.label}</span>
+              </a>
             ))}
           </nav>
           {localeSwitch && (
-            <a class="locale-link" href={withBase(localeSwitch.href)}>{localeSwitch.label}</a>
+            <a class="locale-link" href={withBase(localeSwitch.href)}>
+              <Icon name="languages" />
+              <span>{localeSwitch.label}</span>
+            </a>
           )}
         </div>
         <details class="mobile-menu">
@@ -1552,12 +1620,18 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
           <div class="mobile-nav-panel">
             <nav class="mobile-nav-links">
               {navItems.map((item) => (
-                <a href={withBase(item.href)}>{item.label}</a>
+                <a href={withBase(item.href)}>
+                  <Icon name={getNavIcon(item.href)} />
+                  <span>{item.label}</span>
+                </a>
               ))}
             </nav>
             {localeSwitch && (
               <div class="mobile-nav-actions">
-                <a class="locale-link" href={withBase(localeSwitch.href)}>{localeSwitch.label}</a>
+                <a class="locale-link" href={withBase(localeSwitch.href)}>
+                  <Icon name="languages" />
+                  <span>{localeSwitch.label}</span>
+                </a>
               </div>
             )}
           </div>
@@ -1576,7 +1650,10 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
               <h3>{footerCopy.title}</h3>
               <p>{footerCopy.text}</p>
               <div class="actions">
-                <a class="button-secondary" href={repoUrl}>{footerCopy.button}</a>
+                <a class="button-secondary" href={repoUrl}>
+                  <Icon name="git-fork" />
+                  <span>{footerCopy.button}</span>
+                </a>
               </div>
             </article>
 
@@ -1584,7 +1661,12 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
               <span class="card-kicker">{footerCopy.explore}</span>
               <ul class="footer-links-list">
                 {footerNav.map((item) => (
-                  <li><a href={withBase(item.href)}>{item.label}</a></li>
+                  <li>
+                    <a href={withBase(item.href)}>
+                      <Icon name={getNavIcon(item.href)} />
+                      <span>{item.label}</span>
+                    </a>
+                  </li>
                 ))}
               </ul>
             </article>
@@ -1593,19 +1675,19 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
               <span class="card-kicker">{footerCopy.state}</span>
               <div class="footer-status-grid">
                 <div class="footer-mini">
-                  <strong>{tracks.length}</strong>
+                  <strong class="footer-count"><Icon name="audio-lines" /> {tracks.length}</strong>
                   {footerCopy.tracks}
                 </div>
                 <div class="footer-mini">
-                  <strong>{lessons.length}</strong>
+                  <strong class="footer-count"><Icon name="book-open" /> {lessons.length}</strong>
                   {footerCopy.lessons}
                 </div>
                 <div class="footer-mini">
-                  <strong>{notes.length}</strong>
+                  <strong class="footer-count"><Icon name="notebook-pen" /> {notes.length}</strong>
                   {footerCopy.notes}
                 </div>
                 <div class="footer-mini">
-                  <strong>{patches.length}</strong>
+                  <strong class="footer-count"><Icon name="panels-top-left" /> {patches.length}</strong>
                   {footerCopy.patches}
                 </div>
               </div>
@@ -1615,9 +1697,9 @@ const repoUrl = "https://github.com/ALEVOLDON/Modular-Genesis";
           <article class="feature-card">
             <div class="footer-tail">
               <div class="footer-meta-list">
-                <span>{footerCopy.license}</span>
-                <span>{footerCopy.pages}</span>
-                <span>{footerCopy.locales}</span>
+                <span class="footer-meta-item"><Icon name="files" /> {footerCopy.license}</span>
+                <span class="footer-meta-item"><Icon name="library-big" /> {footerCopy.pages}</span>
+                <span class="footer-meta-item"><Icon name="languages" /> {footerCopy.locales}</span>
               </div>
               <div>{footerCopy.built}</div>
             </div>

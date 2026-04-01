@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Icon from "../../../components/Icon.astro";
 import { trackLabelMap } from "../../../data/tracks";
 import { withBase } from "../../../lib/paths";
 
@@ -55,8 +56,8 @@ const siblingPatches = (await getCollection("ru-patches"))
             </h1>
             <p class="lede">{patch.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/patches")}>Назад к патчам</a>
-              <a class="button-secondary" href={withBase("/ru/course")}>Открыть курс</a>
+              <a class="button" href={withBase("/ru/patches")}><Icon name="panels-top-left" /> <span>Назад к патчам</span></a>
+              <a class="button-secondary" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Открыть курс</span></a>
             </div>
           </div>
 
@@ -176,8 +177,8 @@ const siblingPatches = (await getCollection("ru-patches"))
             <h3>Связать patch обратно с системой</h3>
             <p>Patch entries должны связывать repository artifacts, course pages и roadmap logic.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
-              <a class="button-secondary" href={withBase("/ru/resources")}>Читать заметки</a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
+              <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать заметки</span></a>
             </div>
           </article>
         </div>

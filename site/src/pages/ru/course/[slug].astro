@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Icon from "../../../components/Icon.astro";
 import { tracks, trackLabelMap } from "../../../data/tracks";
 import { withBase } from "../../../lib/paths";
 
@@ -91,8 +92,8 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             </h1>
             <p class="lede">{lesson.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/course")}>Назад к курсу</a>
-              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+              <a class="button" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Назад к курсу</span></a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
             </div>
           </div>
 
@@ -111,12 +112,12 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             <div class="hero-dashboard-grid">
               <article class="mini-card">
                 <span class="mini-stat">Урок</span>
-                <h4>Содержательный слой</h4>
+                <h4><Icon name="files" /> Содержательный слой</h4>
                 <p>Теория, структура и практический контекст собираются из content-файлов и остаются связанными.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{relatedPatches.length}</span>
-                <h4>Связанные патчи</h4>
+                <h4><Icon name="panels-top-left" /> Связанные патчи</h4>
                 <p>Для этого трека уже есть конкретные repository anchors и точки привязки в библиотеке.</p>
               </article>
             </div>
@@ -183,8 +184,8 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             <h3>Обзор гибридной маршрутизации</h3>
             <p>Эта системная диаграмма связывает модульный движок, DAW и визуальный вывод в одну читаемую схему.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
-              <a class="button-secondary" href={withBase("/ru/patches")}>Открыть библиотеку патчей</a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
+              <a class="button-secondary" href={withBase("/ru/patches")}><Icon name="panels-top-left" /> <span>Открыть библиотеку патчей</span></a>
             </div>
           </article>
         </div>

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Icon from "../../../components/Icon.astro";
 import { withBase } from "../../../lib/paths";
 
 export async function getStaticPaths() {
@@ -43,8 +44,8 @@ const otherNotes = (await getCollection("ru-notes"))
             </h1>
             <p class="lede">{note.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/resources")}>Назад к материалам</a>
-              <a class="button-secondary" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
+              <a class="button" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Назад к материалам</span></a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
             </div>
           </div>
 
@@ -92,8 +93,8 @@ const otherNotes = (await getCollection("ru-notes"))
             <h3>Продолжить движение по системе</h3>
             <p>Справочные материалы должны возвращать тебя в roadmap, к урокам и в библиотеку патчей.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/ru/course")}>Открыть курс</a>
-              <a class="button-secondary" href={withBase("/ru/patches")}>Открыть патчи</a>
+              <a class="button-secondary" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Открыть курс</span></a>
+              <a class="button-secondary" href={withBase("/ru/patches")}><Icon name="panels-top-left" /> <span>Открыть патчи</span></a>
             </div>
           </article>
         </div>

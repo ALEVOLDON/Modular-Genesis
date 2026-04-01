@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
@@ -79,8 +80,8 @@ const roadmapStages = tracks.map((track, index) => ({
               фаза со своей логикой, уроками, patch direction и ролью внутри общей системы.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/course")}>Открыть lessons</a>
-              <a class="button-secondary" href={withBase("/ru/resources")}>Читать reference notes</a>
+              <a class="button" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Открыть lessons</span></a>
+              <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать reference notes</span></a>
             </div>
           </div>
 
@@ -108,7 +109,7 @@ const roadmapStages = tracks.map((track, index) => ({
               {roadmapStages.slice(0, 4).map((stage) => (
                 <article class="mini-card">
                   <span class="mini-stat" style={`color:${stage.tone};`}>0{stage.index + 1}</span>
-                  <h4>{stage.title}</h4>
+                  <h4><Icon name="audio-lines" /> {stage.title}</h4>
                   <p>{stage.roadmapTopics[0]}</p>
                 </article>
               ))}

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../data/tracks";
 import { withBase } from "../lib/paths";
@@ -29,7 +30,7 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">System Evolution Protocol</div>
+            <div class="eyebrow"><Icon name="workflow" /> System Evolution Protocol</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               Modular <span class="accent">Genesis</span> roadmap from first signal flow to audiovisual systems.
             </h1>
@@ -38,14 +39,14 @@ const roadmapStages = tracks.map((track, index) => ({
               formal phase with its own concepts, lessons, and patch direction.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/course")}>Open lessons</a>
-              <a class="button-secondary" href={withBase("/resources")}>Read reference notes</a>
+              <a class="button" href={withBase("/course")}><Icon name="book-open" /> <span>Open lessons</span></a>
+              <a class="button-secondary" href={withBase("/resources")}><Icon name="notebook-pen" /> <span>Read reference notes</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Current roadmap status</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Current roadmap status</span>
               <h3>Five stages, one connected system.</h3>
               <ul class="metric-list">
                 <li>
@@ -67,19 +68,19 @@ const roadmapStages = tracks.map((track, index) => ({
               {roadmapStages.slice(0, 4).map((stage) => (
                 <article class="mini-card">
                   <span class="mini-stat" style={`color:${stage.tone};`}>0{stage.index + 1}</span>
-                  <h4>{stage.title}</h4>
+                  <h4><Icon name="audio-lines" /> {stage.title}</h4>
                   <p>{stage.roadmapTopics[0]}</p>
                 </article>
               ))}
             </div>
 
             <article class="feature-card">
-              <span class="section-label">Operational view</span>
+              <span class="section-label"><Icon name="workflow" /> Operational view</span>
               <h3>How the roadmap behaves in practice</h3>
               <ul class="feature-list">
-                <li><strong>Lessons:</strong> each stage can expand into a focused lesson cluster.</li>
-                <li><strong>Patches:</strong> stage logic maps directly into patch entries and future `.vcv` files.</li>
-                <li><strong>Docs:</strong> notes and diagrams clarify system transitions between stages.</li>
+                <li><strong><Icon name="book-open" /> Lessons:</strong> each stage can expand into a focused lesson cluster.</li>
+                <li><strong><Icon name="panels-top-left" /> Patches:</strong> stage logic maps directly into patch entries and future `.vcv` files.</li>
+                <li><strong><Icon name="files" /> Docs:</strong> notes and diagrams clarify system transitions between stages.</li>
               </ul>
             </article>
           </div>
@@ -90,7 +91,7 @@ const roadmapStages = tracks.map((track, index) => ({
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Roadmap Timeline</span>
+          <span class="section-label"><Icon name="map" /> Roadmap Timeline</span>
           <h2>Each stage shifts the system from isolated modules toward a full performance organism.</h2>
           <p>
             The progression is not just pedagogical. It also mirrors how the repository, patch library, and site
@@ -144,14 +145,14 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="timeline-summary">
           <div class="feature-card">
-            <span class="section-label">System diagrams</span>
+            <span class="section-label"><Icon name="library-big" /> System diagrams</span>
             <h2>Two diagrams anchor the roadmap visually.</h2>
             <p>
               These diagrams replace the earlier slide language with site-native visuals. They clarify both the
               routing logic and the broader ecosystem around the project.
             </p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/resources")}>Open resources</a>
+              <a class="button-secondary" href={withBase("/resources")}><Icon name="move-right" /> <span>Open resources</span></a>
             </div>
           </div>
 
@@ -171,11 +172,11 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Stage status</span>
+            <span class="section-label"><Icon name="square-chart-gantt" /> Stage status</span>
             <h2>Each phase already has a clear relationship to lessons and patches.</h2>
             <p>This makes the roadmap actionable instead of decorative: every stage can now be expanded into real material.</p>
           </div>
-          <a class="button-secondary" href={withBase("/patches")}>Open patch library</a>
+          <a class="button-secondary" href={withBase("/patches")}><Icon name="panels-top-left" /> <span>Open patch library</span></a>
         </div>
 
         <div class="status-grid">

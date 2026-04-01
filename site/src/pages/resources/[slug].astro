@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
 import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
@@ -30,20 +31,20 @@ const otherNotes = (await getCollection("notes"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Reference Note</div>
+            <div class="eyebrow"><Icon name="notebook-pen" /> Reference Note</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.4rem);">
               {note.data.title}
             </h1>
             <p class="lede">{note.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/resources")}>Back to resources</a>
-              <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap</a>
+              <a class="button" href={withBase("/resources")}><Icon name="notebook-pen" /> <span>Back to resources</span></a>
+              <a class="button-secondary" href={withBase("/roadmap")}><Icon name="map" /> <span>Open roadmap</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Reference role</span>
+              <span class="section-label"><Icon name="library-big" /> Reference role</span>
               <h3>Concept layer for the public system</h3>
               <p>
                 Notes like this exist to explain the stable logic behind lessons, patch references,
@@ -72,7 +73,7 @@ const otherNotes = (await getCollection("notes"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">More notes</span>
+            <span class="card-kicker"><Icon name="files" /> More notes</span>
             <h3>Related references</h3>
             <ul class="feature-list">
               {otherNotes.map((entry) => (
@@ -84,12 +85,12 @@ const otherNotes = (await getCollection("notes"))
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Navigation</span>
+            <span class="card-kicker"><Icon name="move-right" /> Navigation</span>
             <h3>Continue through the system</h3>
             <p>Reference material is meant to feed back into the roadmap, lessons, and patch library.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/course")}>Open course</a>
-              <a class="button-secondary" href={withBase("/patches")}>Open patches</a>
+              <a class="button-secondary" href={withBase("/course")}><Icon name="book-open" /> <span>Open course</span></a>
+              <a class="button-secondary" href={withBase("/patches")}><Icon name="panels-top-left" /> <span>Open patches</span></a>
             </div>
           </article>
         </div>

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
 import { trackLabelMap } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
 
@@ -32,20 +33,20 @@ const siblingPatches = (await getCollection("patches"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">{trackLabelMap[displayTrack]}</div>
+            <div class="eyebrow"><Icon name="panels-top-left" /> {trackLabelMap[displayTrack]}</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
               {patch.data.title}
             </h1>
             <p class="lede">{patch.data.summary}</p>
             <div class="actions">
-              <a class="button" href={withBase("/patches")}>Back to patches</a>
-              <a class="button-secondary" href={withBase("/course")}>Open course</a>
+              <a class="button" href={withBase("/patches")}><Icon name="panels-top-left" /> <span>Back to patches</span></a>
+              <a class="button-secondary" href={withBase("/course")}><Icon name="book-open" /> <span>Open course</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Patch metadata</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Patch metadata</span>
               <h3>{patch.data.filename}</h3>
               <ul class="metric-list">
                 <li>
@@ -68,7 +69,7 @@ const siblingPatches = (await getCollection("patches"))
             </article>
 
             <article class="feature-card">
-              <span class="section-label">Repository path</span>
+              <span class="section-label"><Icon name="folders" /> Repository path</span>
               <h3>Patch file location</h3>
               <p>
                 The current linked patch artifact is stored in the repository and can later be replaced
@@ -85,7 +86,7 @@ const siblingPatches = (await getCollection("patches"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">Media state</span>
+            <span class="card-kicker"><Icon name="files" /> Media state</span>
             <h3>Attached artifact media</h3>
             <ul class="feature-list">
               <li>
@@ -106,7 +107,7 @@ const siblingPatches = (await getCollection("patches"))
             </div>
           ) : (
             <article class="feature-card">
-              <span class="card-kicker">Next artifact</span>
+              <span class="card-kicker"><Icon name="move-right" /> Next artifact</span>
               <h3>Recommended first upload</h3>
               <p>
                 Add one clean patch screenshot in `assets/images/patches/` and wire it into this patch entry.
@@ -116,7 +117,7 @@ const siblingPatches = (await getCollection("patches"))
 
           {patch.data.audio ? (
             <article class="feature-card">
-              <span class="card-kicker">Demo audio</span>
+              <span class="card-kicker"><Icon name="audio-lines" /> Demo audio</span>
               <h3>Patch preview</h3>
               <audio controls preload="none" style="width: 100%; margin-top: 8px;">
                 <source src={withBase(patch.data.audio)} />
@@ -124,7 +125,7 @@ const siblingPatches = (await getCollection("patches"))
             </article>
           ) : (
             <article class="feature-card">
-              <span class="card-kicker">Audio target</span>
+              <span class="card-kicker"><Icon name="audio-lines" /> Audio target</span>
               <h3>Recommended demo</h3>
               <p>
                 Export a short 20-60 second example and place it in `assets/audio/patches/` to make this entry feel real.
@@ -147,7 +148,7 @@ const siblingPatches = (await getCollection("patches"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">Same collection</span>
+            <span class="card-kicker"><Icon name="folders" /> Same collection</span>
             <h3>More patch entries</h3>
             <ul class="feature-list">
               {siblingPatches.map((entry) => (
@@ -159,12 +160,12 @@ const siblingPatches = (await getCollection("patches"))
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Navigation</span>
+            <span class="card-kicker"><Icon name="move-right" /> Navigation</span>
             <h3>Connect the patch back to the system</h3>
             <p>Patch entries are meant to bridge repository artifacts, course pages, and roadmap logic.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/roadmap")}>Open roadmap</a>
-              <a class="button-secondary" href={withBase("/resources")}>Read notes</a>
+              <a class="button-secondary" href={withBase("/roadmap")}><Icon name="map" /> <span>Open roadmap</span></a>
+              <a class="button-secondary" href={withBase("/resources")}><Icon name="notebook-pen" /> <span>Read notes</span></a>
             </div>
           </article>
         </div>

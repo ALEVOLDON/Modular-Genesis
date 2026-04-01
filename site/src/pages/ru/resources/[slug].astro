@@ -82,7 +82,10 @@ const otherNotes = (await getCollection("ru-notes"))
             <ul class="feature-list">
               {otherNotes.map((entry) => (
                 <li>
-                  <a href={withBase(`/ru/resources/${entry.slug}/`)}>{entry.data.title}</a>
+                  <a class="related-link" href={withBase(`/ru/resources/${entry.slug}/`)}>
+                    <Icon name="move-right" />
+                    <span>{entry.data.title}</span>
+                  </a>
                 </li>
               ))}
             </ul>

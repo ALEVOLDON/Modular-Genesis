@@ -166,7 +166,10 @@ const siblingPatches = (await getCollection("ru-patches"))
             <ul class="feature-list">
               {siblingPatches.map((entry) => (
                 <li>
-                  <a href={withBase(`/ru/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                  <a class="related-link" href={withBase(`/ru/patches/${entry.slug}/`)}>
+                    <Icon name="move-right" />
+                    <span>{entry.data.title}</span>
+                  </a>
                 </li>
               ))}
             </ul>

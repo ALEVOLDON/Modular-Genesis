@@ -124,7 +124,10 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             <ul class="feature-list">
               {relatedPatches.map((patch) => (
                 <li>
-                  <a href={withBase(`/patches/${patch.slug}/`)}>{patch.data.title}</a>
+                  <a class="related-link" href={withBase(`/patches/${patch.slug}/`)}>
+                    <Icon name="move-right" />
+                    <span>{patch.data.title}</span>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -137,7 +140,10 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             <ul class="feature-list">
               {siblingLessons.map((entry) => (
                 <li>
-                  <a href={withBase(`/course/${entry.slug}/`)}>{entry.data.title}</a>
+                  <a class="related-link" href={withBase(`/course/${entry.slug}/`)}>
+                    <Icon name="move-right" />
+                    <span>{entry.data.title}</span>
+                  </a>
                 </li>
               ))}
             </ul>

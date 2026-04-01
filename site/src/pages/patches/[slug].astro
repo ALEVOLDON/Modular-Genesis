@@ -153,7 +153,10 @@ const siblingPatches = (await getCollection("patches"))
             <ul class="feature-list">
               {siblingPatches.map((entry) => (
                 <li>
-                  <a href={withBase(`/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                  <a class="related-link" href={withBase(`/patches/${entry.slug}/`)}>
+                    <Icon name="move-right" />
+                    <span>{entry.data.title}</span>
+                  </a>
                 </li>
               ))}
             </ul>

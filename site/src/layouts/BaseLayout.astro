@@ -1468,6 +1468,11 @@ const getNavIcon = (href: string) => {
         padding: 12px 18px;
         line-height: 1.4;
       }
+      .lesson-nav-topline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
       .lesson-nav-link.prev {
         align-items: flex-start;
         text-align: left;
@@ -1481,6 +1486,16 @@ const getNavIcon = (href: string) => {
         font-size: 0.8rem;
         opacity: 0.7;
         margin-bottom: 4px;
+      }
+      .related-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+      }
+      .related-link .icon {
+        color: var(--accent);
+        opacity: 0.9;
       }
 
       .icon {

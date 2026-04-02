@@ -3,6 +3,8 @@ title: "Lesson 04: Envelopes And LFO"
 summary: "Understand the difference between one-shot shaping and repeating modulation, and use both to make a patch feel alive."
 track: "foundations"
 order: 4
+difficulty: "Beginner"
+estimatedTime: "12 min"
 ---
 
 ## What You Will Learn
@@ -111,11 +113,20 @@ If you confuse the two, your patches may still work, but they will be harder to 
 
 A practical beginner example looks like this:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
-LFO -> Filter cutoff
-Gate/Trigger -> Envelope
+```mermaid
+graph LR
+  GATE[Gate/Trigger] -.-> ENV[Envelope]
+  ENV -.->|Level| VCA
+  LFO[LFO] -.->|Cutoff| VCF
+
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV,GATE,LFO mod;
 ```
 
 Here the roles are clear:
@@ -232,3 +243,8 @@ You now have the core foundations of a playable subtractive voice:
 - `LFO`
 
 From here, the next logical expansion is sequencing and timing, where signals stop being only expressive and start becoming structured in rhythm and pitch.
+
+---
+
+### Resources
+- [View Patch Details: Basic Voice v01](/patches/foundations-basic-voice-v01)

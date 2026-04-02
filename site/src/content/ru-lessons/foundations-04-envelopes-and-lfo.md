@@ -3,6 +3,8 @@ title: "Урок 04: Envelopes и LFO"
 summary: "Пойми разницу между одноразовой формой и циклической модуляцией и используй обе, чтобы патч начал жить во времени."
 track: "foundations"
 order: 4
+difficulty: "Beginner"
+estimatedTime: "12 min"
 ---
 
 ## Что ты изучишь
@@ -111,11 +113,20 @@ Envelope обычно не повторяется сама по себе бес�
 
 Хороший базовый пример выглядит так:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
-LFO -> Filter cutoff
-Gate/Trigger -> Envelope
+```mermaid
+graph LR
+  GATE[Gate/Trigger] -.-> ENV[Envelope]
+  ENV -.->|Level| VCA
+  LFO[LFO] -.->|Cutoff| VCF
+
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV,GATE,LFO mod;
 ```
 
 Здесь роли прозрачны:
@@ -232,3 +243,8 @@ envelope формирует события, а `LFO` формирует движ
 - `LFO`
 
 Дальше логично перейти к sequencing и timing, где сигналы перестают быть только выразительными и начинают становиться ритмически и высотно организованными.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Basic Voice v01](/patches/foundations-basic-voice-v01)

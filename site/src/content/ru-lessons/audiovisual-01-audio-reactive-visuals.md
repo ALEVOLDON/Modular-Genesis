@@ -3,6 +3,8 @@ title: "Урок 01: Аудиореактивная визуализация"
 summary: "Изучи базовые принципы привязки звука к графике. Начинаем маппировать акустическое поведение виртуального модуляра в визуальную систему."
 track: "audiovisual"
 order: 1
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -40,10 +42,35 @@ order: 1
 
 Маппинг — это искусство выбора, *что на что* влияет. Хороший маппинг имеет внутреннюю логику:
 
-- энергетика баса (Sub) → масштаб или масса центрального 3D-объекта
-- активность транзиентов (Snare/Hat) → выброс частиц, глитчи или мерцание света (Bloom)
-- интенсивность дрона (Sustain) → фоновое плавное движение камер, турбулентность (Noise scale)
-- управляющий LFO из модульной системы → прямое управление вращением (Rotation) или сдвигом оттенка на экране
+```mermaid
+graph LR
+  subgraph MODULAR[Audio / CV Sources]
+    SUB[Bass Energy / Sub]
+    TRANS[Transient Activity]
+    DRONE[Drone Intensity]
+    LFO[Control LFO]
+  end
+
+  subgraph VISUALS[Visual Engine]
+    SCALE[3D Scale / Mass]
+    PART[Particle Burst / Bloom]
+    CAM[Camera Motion / Turbulence]
+    ROT[Rotation / Hue Shift]
+  end
+
+  SUB -.->|Amplitude envelope| SCALE
+  TRANS -.->|Pulse / Trigger| PART
+  DRONE -.->|Slew / Averaged level| CAM
+  LFO -.->|Direct CV| ROT
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef visual fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA,stroke-dasharray: 4 4;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class SUB,TRANS,DRONE,LFO signal;
+  class SCALE,PART,CAM,ROT visual;
+  class MODULAR,VISUALS env;
+```
 
 ## Проблема "Дерганой Графики" и Сглаживание
 
@@ -76,3 +103,8 @@ order: 1
 ## Следующая связь
 
 Когда принципы привязки "параметр-параметр" понятны, возникает инженерный вопрос: как передать эти значения из программного модуляра без задержек? Это мы разберем в уроке про OSC и MIDI интеграции.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Generative Ambient v01](/patches/generative-generative-ambient-v01)

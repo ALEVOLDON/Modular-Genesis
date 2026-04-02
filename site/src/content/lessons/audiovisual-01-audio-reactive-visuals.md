@@ -3,6 +3,8 @@ title: "Lesson 01: Audio-Reactive Visuals"
 summary: "Learn the basic principles of tying sound to graphics. Start mapping the acoustic behavior of a virtual modular into a visual system."
 track: "audiovisual"
 order: 1
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## What You Will Learn
@@ -40,10 +42,35 @@ To create high-quality audio-reactive visuals, you need to analyze the sound. Us
 
 Mapping is the art of choosing *what affects what*. A good mapping has an internal logic:
 
-- bass energy (Sub) -> scale or mass of the central 3D object
-- transient activity (Snare/Hat) -> particle bursts, glitches, or light bloom
-- drone intensity (Sustain) -> smooth background camera movement, turbulence (Noise scale)
-- control LFO from the modular system -> direct control of rotation or hue shift on the screen
+```mermaid
+graph LR
+  subgraph MODULAR[Audio / CV Sources]
+    SUB[Bass Energy / Sub]
+    TRANS[Transient Activity]
+    DRONE[Drone Intensity]
+    LFO[Control LFO]
+  end
+
+  subgraph VISUALS[Visual Engine]
+    SCALE[3D Scale / Mass]
+    PART[Particle Burst / Bloom]
+    CAM[Camera Motion / Turbulence]
+    ROT[Rotation / Hue Shift]
+  end
+
+  SUB -.->|Amplitude envelope| SCALE
+  TRANS -.->|Pulse / Trigger| PART
+  DRONE -.->|Slew / Averaged level| CAM
+  LFO -.->|Direct CV| ROT
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef visual fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA,stroke-dasharray: 4 4;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class SUB,TRANS,DRONE,LFO signal;
+  class SCALE,PART,CAM,ROT visual;
+  class MODULAR,VISUALS env;
+```
 
 ## The Default Problem: "Jittery Graphics" and Smoothing
 
@@ -76,3 +103,8 @@ Simulate the "Smoothing" (Slew/Lag) effect using internal modules: run a rhythmi
 ## Next Connection
 
 Once the principles of "parameter-to-parameter" mapping are clear, an engineering question arises: how do you transmit these values from a software modular without latency? We will break this down in the lesson on OSC and MIDI integration.
+
+---
+
+### Resources
+- [View Patch Details: Generative Ambient v01](/patches/generative-generative-ambient-v01)

@@ -3,6 +3,8 @@ title: "Урок 02: OSC, MIDI и системный маппинг"
 summary: "Определяем протоколы управления. Учимся передавать данные между модульным звуковым движком и внешней средой для генерации визуализации."
 track: "audiovisual"
 order: 2
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -67,10 +69,34 @@ order: 2
 
 Создайте мини-таблицу ("Маппинг-Лист") с тремя любыми связками в вашем проекте:
 
-**Пример:**
-1. **Исходный сигнал:** MIDI гейт от секвенсора барабанов -> **Целевой параметр графики:** Интенсивность белой вспышки (Bloom) -> **Поведение:** Резкая вспышка и спад (Flash)
-2. **Исходный сигнал:** Сигнал LFO баса -> **Целевой параметр графики:** Вращение камеры (Pan) -> **Протокол:** OSC для плавности.
-3. **Исходный сигнал:** Крутилка "Плотность шума" на MIDI пульте -> **Целевой параметр:** Распад частиц 3D объекта.
+**Пример маппинг-листа:**
+
+```mermaid
+graph LR
+  subgraph PROTOCOL[Transport Layer]
+    MIDI_GATE[MIDI Gate]
+    OSC_LFO[OSC Float / LFO]
+    MIDI_CC[MIDI CC Knob]
+  end
+
+  subgraph VISUALS[Visual Engine]
+    BLOOM[Bloom Intensity]
+    CAM[Camera Rotation]
+    PART[Particle Decay]
+  end
+
+  MIDI_GATE ==>|Sharp Flash| BLOOM
+  OSC_LFO -.->|Smooth Pan| CAM
+  MIDI_CC -.->|Density Control| PART
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef visual fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA,stroke-dasharray: 4 4;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class MIDI_GATE,OSC_LFO,MIDI_CC signal;
+  class BLOOM,CAM,PART visual;
+  class PROTOCOL,VISUALS env;
+```
 
 Подумайте, на каком протоколе эти 3 сигнала лучше было бы передать.
 
@@ -81,3 +107,8 @@ order: 2
 ## Следующая связь
 
 Когда каналы установлены и мы умеем общаться с визуальными средствами, пора собирать все воедино — настраивать стейджем и готовить цельную АудиоВизуальную живую "Сцену", что мы и разберем в финальном уроке секции.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

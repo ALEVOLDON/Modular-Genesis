@@ -3,6 +3,8 @@ title: "Lesson 03: Performance Scene Design"
 summary: "Turn disparate layers: modular generative sound, DAW routing, and the visual engine — into a single coherent, optimized live scene."
 track: "audiovisual"
 order: 3
+difficulty: "Advanced"
+estimatedTime: "20 min"
 ---
 
 ## What You Will Learn
@@ -29,6 +31,45 @@ When all this works harmoniously and is ready to be performed in real-time, we c
 ## Structure of an Optimized Scene
 
 A working (stable) scene is rarely a "mess" of plugins. It has a clear division of roles:
+
+```mermaid
+graph TD
+  subgraph CONTROL[Performance Control & Sync]
+    MIDI[MIDI Controller / Macro Knobs]
+    CLOCK[Master Clock & Transport]
+  end
+
+  subgraph AUDIO[Audio Flow]
+    VCV[VCV Rack Generative Engine]
+    MIX[DAW Post-Effects & Mixing]
+  end
+
+  subgraph VISUAL[Visual Flow]
+    VIS[Visual Engine]
+    OUT((Screen Output))
+  end
+
+  CLOCK ==>|BPM / Play / Stop| VCV
+  CLOCK ==>|Sync| VIS
+  
+  MIDI -.->|Macro CCs| VCV
+  MIDI -.->|Effect Sends| MIX
+  
+  VCV ==>|Dry Multitrack Audio| MIX
+  VCV -.->|OSC Data Mapping| VIS
+  
+  VIS ==>|Render| OUT
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class CONTROL,AUDIO,VISUAL env;
+  class CLOCK,MIDI logic;
+  class VCV,MIX signal;
+  class VIS,OUT accent;
+```
 
 1. **A Single Synchronization Source (Master Clock):**
 Usually, a DAW (Ableton) or a hardware sequencer sets the tempo (BPM) and sends Play/Stop commands to all other nodes (visuals and the virtual modular).
@@ -86,3 +127,8 @@ Imagine the worst — your MIDI controller suddenly disconnects via USB. Will yo
 ## Finale
 
 Congratulations! You have mastered the core concepts of building modern audiovisual environments: from cables and oscillators to preparing a full-fledged multimedia live scene. Now it's time to experiment!
+
+---
+
+### Resources
+- [View Patch Details: Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

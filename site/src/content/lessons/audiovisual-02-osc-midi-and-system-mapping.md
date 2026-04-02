@@ -3,6 +3,8 @@ title: "Lesson 02: OSC, MIDI, And System Mapping"
 summary: "Define control protocols. Learn how to transmit data between a modular sound engine and an external environment to generate visuals."
 track: "audiovisual"
 order: 2
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## What You Will Learn
@@ -67,10 +69,34 @@ If you send audio frequencies (44,100 data points per second) over OSC, the netw
 
 Create a mini-table ("Mapping List") with any three connections in your project:
 
-**Example:**
-1. **Source signal:** MIDI gate from the drum sequencer -> **Target graphics parameter:** Intensity of a white flash (Bloom) -> **Behavior:** Sharp flash and decay
-2. **Source signal:** Bass LFO signal -> **Target graphics parameter:** Camera rotation (Pan) -> **Protocol:** OSC for smoothness.
-3. **Source signal:** "Noise Density" knob on the MIDI controller -> **Target parameter:** Particle decay of a 3D object.
+**Example Mapping List:**
+
+```mermaid
+graph LR
+  subgraph PROTOCOL[Transport Layer]
+    MIDI_GATE[MIDI Gate]
+    OSC_LFO[OSC Float / LFO]
+    MIDI_CC[MIDI CC Knob]
+  end
+
+  subgraph VISUALS[Visual Engine]
+    BLOOM[Bloom Intensity]
+    CAM[Camera Rotation]
+    PART[Particle Decay]
+  end
+
+  MIDI_GATE ==>|Sharp Flash| BLOOM
+  OSC_LFO -.->|Smooth Pan| CAM
+  MIDI_CC -.->|Density Control| PART
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef visual fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA,stroke-dasharray: 4 4;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class MIDI_GATE,OSC_LFO,MIDI_CC signal;
+  class BLOOM,CAM,PART visual;
+  class PROTOCOL,VISUALS env;
+```
 
 Think about which protocol would be best to transmit these 3 signals.
 
@@ -81,3 +107,8 @@ Try connecting your smartphone to your computer via OSC apps (e.g., "TouchOSC").
 ## Next Connection
 
 Once channels are established and we know how to communicate with visual tools, it is time to put everything together—setting up the stage and preparing a complete Audiovisual Live "Scene", which we will analyze in the final lesson of this section.
+
+---
+
+### Resources
+- [View Patch Details: Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

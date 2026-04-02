@@ -3,6 +3,8 @@ title: "Урок 03: Дизайн сцены для перформанса"
 summary: "Превращаем разрозненные слои: модульный генеративный звук, маршрутизацию DAW и визуальный движок — в единую целостную, оптимизированную живую сцену."
 track: "audiovisual"
 order: 3
+difficulty: "Advanced"
+estimatedTime: "20 min"
 ---
 
 ## Что ты изучишь
@@ -29,6 +31,45 @@ order: 3
 ## Структура оптимизированной сцены
 
 Рабочая (стабильная) сцена редко бывает "кашей" из плагинов. Она имеет четкое разделение ролей:
+
+```mermaid
+graph TD
+  subgraph CONTROL[Performance Control & Sync]
+    MIDI[MIDI Controller / Macro Knobs]
+    CLOCK[Master Clock & Transport]
+  end
+
+  subgraph AUDIO[Audio Flow]
+    VCV[VCV Rack Generative Engine]
+    MIX[DAW Post-Effects & Mixing]
+  end
+
+  subgraph VISUAL[Visual Flow]
+    VIS[Visual Engine]
+    OUT((Screen Output))
+  end
+
+  CLOCK ==>|BPM / Play / Stop| VCV
+  CLOCK ==>|Sync| VIS
+  
+  MIDI -.->|Macro CCs| VCV
+  MIDI -.->|Effect Sends| MIX
+  
+  VCV ==>|Dry Multitrack Audio| MIX
+  VCV -.->|OSC Data Mapping| VIS
+  
+  VIS ==>|Render| OUT
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class CONTROL,AUDIO,VISUAL env;
+  class CLOCK,MIDI logic;
+  class VCV,MIX signal;
+  class VIS,OUT accent;
+```
 
 1. **Единый источник синхронизации (Master Clock):**
 Как правило, DAW (Ableton) или железный секвенсор задают темп (BPM) и командуют Play/Stop всем остальным узлам (визуализации и виртуальному модуляру).
@@ -86,3 +127,8 @@ order: 3
 ## Финал
 
 Поздравляем! Ты прошел базовые концепции построения современных аудиовизуальных сред: от проводов и осцилляторов до подготовки полноценной мультимедийной живой сцены. Теперь время экспериментов!
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

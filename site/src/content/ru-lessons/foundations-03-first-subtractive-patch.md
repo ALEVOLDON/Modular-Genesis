@@ -3,6 +3,8 @@ title: "Урок 03: Первый субтрактивный патч"
 summary: "Собери первый полноценный subtractive voice и пойми, как осциллятор, фильтр, envelope и VCA работают как одна система."
 track: "foundations"
 order: 3
+difficulty: "Beginner"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -21,9 +23,16 @@ order: 3
 
 В модульной логике классический базовый voice выглядит так:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
+```mermaid
+graph LR
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+  ENV[Envelope] -.->|Level| VCA
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV mod;
 ```
 
 Это одна из самых важных patch models во всём проекте.
@@ -55,8 +64,13 @@ Envelope -> VCA level
 
 Базовая субтрактивная цепь выглядит так:
 
-```text
-Oscillator -> Filter -> VCA -> Output
+```mermaid
+graph LR
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
 ```
 
 Каждый блок отвечает на свой вопрос.
@@ -105,10 +119,18 @@ Envelope — это слой управления, который превращ
 
 Минимальная playable-версия выглядит так:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
-Gate/Trigger -> Envelope
+```mermaid
+graph LR
+  GATE[Gate/Trigger] -.-> ENV[Envelope]
+  ENV -.->|Level| VCA
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV,GATE mod;
 ```
 
 Здесь envelope не является audio. Это control shape.
@@ -162,10 +184,19 @@ Gate/Trigger -> Envelope
 
 Когда базовый патч уже работает, попробуй такое расширение:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
-Envelope -> Filter cutoff
+```mermaid
+graph LR
+  GATE[Gate/Trigger] -.-> ENV[Envelope]
+  ENV -.->|Cutoff| VCF
+  ENV -.->|Level| VCA
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV,GATE mod;
 ```
 
 Теперь одна envelope формирует сразу:
@@ -231,3 +262,8 @@ Envelope -> Filter cutoff
 Следующий урок расширит этот voice через envelopes и `LFO` как отдельные инструменты модуляции.
 
 Именно там subtractive patch перестаёт быть просто рабочим и начинает становиться выразительным.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Basic Voice v01](/patches/foundations-basic-voice-v01)

@@ -3,6 +3,8 @@ title: "Lesson 03: First Subtractive Patch"
 summary: "Build a complete first subtractive voice and understand how oscillator, filter, envelope, and VCA work together."
 track: "foundations"
 order: 3
+difficulty: "Beginner"
+estimatedTime: "15 min"
 ---
 
 ## What You Will Learn
@@ -21,9 +23,16 @@ Subtractive synthesis begins with a signal that already contains harmonic conten
 
 In modular terms, the classic beginner voice looks like this:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
+```mermaid
+graph LR
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+  ENV[Envelope] -.->|Level| VCA
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV mod;
 ```
 
 This is one of the most important patch models in the whole project.
@@ -55,8 +64,13 @@ That is why this lesson matters so much. It is not just a beginner exercise. It 
 
 The base subtractive chain is:
 
-```text
-Oscillator -> Filter -> VCA -> Output
+```mermaid
+graph LR
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
 ```
 
 Each block answers a different question.
@@ -105,10 +119,18 @@ The envelope is the control layer that turns the subtractive voice into somethin
 
 A minimal playable version looks like this:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
-Gate/Trigger -> Envelope
+```mermaid
+graph LR
+  GATE[Gate/Trigger] -.-> ENV[Envelope]
+  ENV -.->|Level| VCA
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV,GATE mod;
 ```
 
 Here the envelope is not audio. It is a control shape.
@@ -162,10 +184,19 @@ This kind of listening is important. You are training yourself to hear the job o
 
 Once the basic patch works, try this extension:
 
-```text
-Oscillator -> Filter -> VCA -> Output
-Envelope -> VCA level
-Envelope -> Filter cutoff
+```mermaid
+graph LR
+  GATE[Gate/Trigger] -.-> ENV[Envelope]
+  ENV -.->|Cutoff| VCF
+  ENV -.->|Level| VCA
+  OSC[Oscillator] ==> VCF[Filter] ==> VCA ==> OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class ENV,GATE mod;
 ```
 
 Now one envelope shapes both:
@@ -231,3 +262,8 @@ That is how you learn what each part of the voice is actually responsible for.
 The next lesson should expand this voice with envelopes and `LFO`s as separate modulation tools.
 
 That is where the subtractive patch stops being only functional and starts becoming expressive.
+
+---
+
+### Resources
+- [View Patch Details: Basic Voice v01](/patches/foundations-basic-voice-v01)

@@ -3,6 +3,8 @@ title: "Урок 03: Feedback и Slow Modulation"
 summary: "Выйди за пределы коротких циклов, формируя патч на длинных временных масштабах и позволяя системе реагировать на собственное поведение."
 track: "generative"
 order: 3
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -108,10 +110,30 @@ Output signal или его почти прямая версия возвращ�
 
 Практичный beginner patch может выглядеть так:
 
-```text
-Voice output -> Envelope follower -> Probability amount
-Slow LFO -> Filter cutoff / density / space
-Clocked generative core -> Voice
+```mermaid
+graph TD
+  CORE[Generative Core] -.->|Triggers / Pitch| VOICE[Voice]
+  
+  LFO[Slow LFO<br/>Minutes Scale] -.->|Cutoff / Space| VOICE
+  LFO -.->|Density| CORE
+  
+  VOICE ==>|Audio| OUT((Output))
+  VOICE -.->|Audio Copy| ENVF[Envelope Follower]
+  
+  ENVF -.->|Derived CV| PROB{Probability/Mutation}
+  PROB -.->|Feedback Modulation| CORE
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+  classDef feedback fill:#744210,stroke:#B7791F,stroke-width:2px,color:#FEFCBF,stroke-dasharray: 2 2;
+
+  class VOICE signal;
+  class OUT accent;
+  class CORE,LFO mod;
+  class PROB logic;
+  class ENVF feedback;
 ```
 
 Здесь роли разделены:
@@ -222,3 +244,8 @@ Feedback создаёт более богатое поведение или на
 - feedback
 
 Дальше логично либо переходить к hybrid integration, audiovisual behavior, либо собирать из этих идей более крупные performance systems.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Feedback Texture v01](/patches/generative-feedback-texture-v01)

@@ -3,6 +3,8 @@ title: "Lesson 02: Probability And Mutation"
 summary: "Use conditional behavior and controlled variation to keep a system evolving without losing its identity."
 track: "generative"
 order: 2
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## What You Will Learn
@@ -116,10 +118,30 @@ A strong generative patch often uses both:
 
 A practical beginner patch might look like this:
 
-```text
-Clock -> Probability gate -> Trigger stream
-Trigger stream -> Sequencer / Envelope / Event logic
-Random or logic event -> Occasional mutation input
+```mermaid
+graph LR
+  CLK[Clock] -.->|Pulse| COIN{Probability<br/>Gate}
+  
+  COIN -.->|Pass| TRIG[Trigger Stream]
+  COIN -.->|Block| NULL[Skipped]
+  
+  TRIG -.->|Fire| ENV[Envelope / Voice]
+  TRIG -.->|Advance| SEQ[Sequencer]
+  
+  RND[Random Event] -.->|Occasional| MUT[Pattern Mutation]
+  MUT -.-> SEQ
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef time fill:#2C5282,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 2 2;
+  classDef rand fill:#702459,stroke:#97266D,stroke-width:2px,color:#FFE5F4,stroke-dasharray: 4 4;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+
+  class NULL signal;
+  class ENV,SEQ,TRIG mod;
+  class CLK time;
+  class RND rand;
+  class COIN,MUT logic;
 ```
 
 Here the roles are clear:
@@ -239,3 +261,8 @@ small conditional changes are often stronger than large uncontrolled ones.
 Once probability and mutation are working, the next step is to explore feedback and slower modulation systems that reshape the patch over longer spans of time.
 
 That is where generative design begins to feel truly environmental and evolving.
+
+---
+
+### Resources
+- [View Patch Details: Probability Grid v01](/patches/generative-probability-grid-v01)

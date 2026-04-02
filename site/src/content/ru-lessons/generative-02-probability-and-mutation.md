@@ -3,6 +3,8 @@ title: "Урок 02: Probability и Mutation"
 summary: "Используй условное поведение и контролируемую вариативность, чтобы система эволюционировала, не теряя собственной идентичности."
 track: "generative"
 order: 2
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -116,10 +118,30 @@ Mutation отвечает на вопрос:
 
 Практичный beginner patch может выглядеть так:
 
-```text
-Clock -> Probability gate -> Trigger stream
-Trigger stream -> Sequencer / Envelope / Event logic
-Random or logic event -> Occasional mutation input
+```mermaid
+graph LR
+  CLK[Clock] -.->|Pulse| COIN{Probability<br/>Gate}
+  
+  COIN -.->|Pass| TRIG[Trigger Stream]
+  COIN -.->|Block| NULL[Skipped]
+  
+  TRIG -.->|Fire| ENV[Envelope / Voice]
+  TRIG -.->|Advance| SEQ[Sequencer]
+  
+  RND[Random Event] -.->|Occasional| MUT[Pattern Mutation]
+  MUT -.-> SEQ
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef time fill:#2C5282,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 2 2;
+  classDef rand fill:#702459,stroke:#97266D,stroke-width:2px,color:#FFE5F4,stroke-dasharray: 4 4;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+
+  class NULL signal;
+  class ENV,SEQ,TRIG mod;
+  class CLK time;
+  class RND rand;
+  class COIN,MUT logic;
 ```
 
 Здесь роли ясны:
@@ -239,3 +261,8 @@ Variation наиболее осмысленна, когда есть что-то
 Когда probability и mutation уже работают, следующий шаг — исследовать feedback и более медленные modulation systems, которые перестраивают патч на длинных временных промежутках.
 
 Именно там generative design начинает ощущаться по-настоящему средовым и эволюционирующим.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Probability Grid v01](/patches/generative-probability-grid-v01)

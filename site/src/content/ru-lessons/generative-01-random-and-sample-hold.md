@@ -3,6 +3,8 @@ title: "Урок 01: Random и Sample & Hold"
 summary: "Пойми, как свободная случайность становится музыкально полезной, когда она семплируется, удерживается и ограничивается во времени."
 track: "generative"
 order: 1
+difficulty: "Intermediate"
+estimatedTime: "12 min"
 ---
 
 ## Что ты изучишь
@@ -90,10 +92,30 @@ Random source может двигаться постоянно и непреры
 
 Основной патч выглядит так:
 
-```text
-Random -> Sample & Hold -> Quantizer -> Voice pitch
-Clock  -> Sample & Hold trigger
-Trigger/Gate -> Envelope -> VCA
+```mermaid
+graph LR
+  RND[Random<br/>Source] -.->|Continuous| SNH[Sample & Hold]
+  CLK[Clock<br/>Pulse] -.->|Capture| SNH
+  
+  SNH -.->|Stepped CV| QNT[Quantizer]
+  QNT -.->|Pitch| OSC[Oscillator]
+  
+  TRIG[Trigger/Gate] -.-> ENV[Envelope]
+  ENV -.->|Level| VCA
+  
+  OSC ==>|Audio| VCA ==>|Audio| OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef time fill:#2C5282,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 2 2;
+  classDef rand fill:#702459,stroke:#97266D,stroke-width:2px,color:#FFE5F4,stroke-dasharray: 4 4;
+  
+  class OSC,VCA signal;
+  class OUT accent;
+  class QNT,ENV,TRIG mod;
+  class CLK,SNH time;
+  class RND rand;
 ```
 
 В этом патче:
@@ -213,3 +235,8 @@ Trigger/Gate -> Envelope -> VCA
 Следующий шаг — управлять тем, как часто происходят события и насколько вероятны разные варианты.
 
 Это естественно ведёт к probability и mutation.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Generative Ambient v01](/patches/generative-generative-ambient-v01)

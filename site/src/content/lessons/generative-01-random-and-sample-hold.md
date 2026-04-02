@@ -3,6 +3,8 @@ title: "Lesson 01: Random And Sample & Hold"
 summary: "Learn how free randomness becomes musically usable when it is sampled, held, and constrained in time."
 track: "generative"
 order: 1
+difficulty: "Intermediate"
+estimatedTime: "12 min"
 ---
 
 ## What You Will Learn
@@ -90,10 +92,30 @@ This is why it is such a powerful module. It creates discrete steps from a conti
 
 The core patch looks like this:
 
-```text
-Random -> Sample & Hold -> Quantizer -> Voice pitch
-Clock  -> Sample & Hold trigger
-Trigger/Gate -> Envelope -> VCA
+```mermaid
+graph LR
+  RND[Random<br/>Source] -.->|Continuous| SNH[Sample & Hold]
+  CLK[Clock<br/>Pulse] -.->|Capture| SNH
+  
+  SNH -.->|Stepped CV| QNT[Quantizer]
+  QNT -.->|Pitch| OSC[Oscillator]
+  
+  TRIG[Trigger/Gate] -.-> ENV[Envelope]
+  ENV -.->|Level| VCA
+  
+  OSC ==>|Audio| VCA ==>|Audio| OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef time fill:#2C5282,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 2 2;
+  classDef rand fill:#702459,stroke:#97266D,stroke-width:2px,color:#FFE5F4,stroke-dasharray: 4 4;
+  
+  class OSC,VCA signal;
+  class OUT accent;
+  class QNT,ENV,TRIG mod;
+  class CLK,SNH time;
+  class RND rand;
 ```
 
 In this patch:
@@ -211,3 +233,8 @@ separate the source of unpredictability from the rules that shape it.
 Now that you can turn randomness into stepped melodic behavior, the next step is to shape how often things happen and how likely certain events are.
 
 That leads naturally into probability and mutation.
+
+---
+
+### Resources
+- [View Patch Details: Generative Ambient v01](/patches/generative-generative-ambient-v01)

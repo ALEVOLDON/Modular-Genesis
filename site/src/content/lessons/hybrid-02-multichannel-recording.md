@@ -3,6 +3,8 @@ title: "Lesson 02: Multichannel Recording"
 summary: "Learn how to split modular voices into separate recorded channels so mixing, arrangement, and editing stay flexible inside the DAW."
 track: "hybrid"
 order: 2
+difficulty: "Intermediate"
+estimatedTime: "12 min"
 ---
 
 ## What You Will Learn
@@ -121,20 +123,34 @@ The point is useful control.
 
 ## A Simple Routing Model
 
-```text
-Voice 1 -> Output 1 -> Ableton Track 1
-Voice 2 -> Output 2 -> Ableton Track 2
-Voice 3 -> Output 3 -> Ableton Track 3
-Voice 4 -> Output 4 -> Ableton Track 4
-```
+```mermaid
+graph LR
+  subgraph MODULAR[VCV Rack Voices]
+    KICK[Kick]
+    BASS[Bass]
+    MEL[Melody]
+    TEX[Texture]
+  end
 
-In a real session, that might mean:
+  subgraph DAW[Ableton Live Tracks]
+    T1[Track 1: Kick]
+    T2[Track 2: Bass]
+    T3[Track 3: Melody]
+    T4[Track 4: Texture]
+  end
 
-```text
-Kick -> Out 1
-Bass -> Out 2
-Melody -> Out 3
-Texture -> Out 4
+  KICK -.->|Out 1| T1
+  BASS -.->|Out 2| T2
+  MEL -.->|Out 3| T3
+  TEX -.->|Out 4| T4
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class KICK,BASS,MEL,TEX signal;
+  class T1,T2,T3,T4 accent;
+  class MODULAR,DAW env;
 ```
 
 Each output then becomes its own audio track in Ableton.
@@ -219,3 +235,8 @@ Compare them by asking:
 Once routing and channel planning are clear, the next step is making the DAW and the modular system feel rhythmically connected.
 
 That leads directly into clock sync and transport relationships between hardware, VCV Rack, and Ableton.
+
+---
+
+### Resources
+- [View Patch Details: Modular Jam Router v01](/patches/performances-modular-jam-router-v01)

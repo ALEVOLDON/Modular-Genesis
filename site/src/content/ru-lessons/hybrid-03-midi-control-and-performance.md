@@ -3,6 +3,8 @@ title: "Урок 03: MIDI-управление и перформанс"
 summary: "Подключаем клавиатуры и контроллеры к модульной системе для живого взаимодействия, макро-контроля и создания выразительных перформансов."
 track: "hybrid"
 order: 3
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -79,11 +81,31 @@ MIDI в модульной среде — это мост между твоим�
 
 В VCV Rack или при использовании аппаратных модулей типа "MIDI to CV", базовая схема маппинга выглядит так:
 
-```text
-MIDI-Клавиатура -> [MIDI to CV модуль] 
-   -> V/Oct -> Oscillator Pitch
-   -> Gate  -> Envelope Trigger
-   -> Mod (CC 1) -> Filter Cutoff
+```mermaid
+graph LR
+  subgraph HW[Hardware / DAW]
+    MIDI[MIDI Controller]
+  end
+
+  subgraph RACK[VCV Rack]
+    MIDICV[MIDI to CV Module]
+    
+    MIDI ==>|Events & CC| MIDICV
+    
+    MIDICV -.->|V/Oct| OSC[Oscillator Pitch]
+    MIDICV -.->|Gate| ENV[Envelope Trigger]
+    MIDICV -.->|Mod Wheel CC1| FLT[Filter Cutoff]
+  end
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class MIDI,MIDICV logic;
+  class OSC,ENV signal;
+  class FLT mod;
+  class HW,RACK env;
 ```
 
 ## Типичные ошибки новичков
@@ -111,3 +133,8 @@ MIDI выдает значения от 0 до 127, что обычно конв
 ## Следующая связь
 
 Когда мы понимаем, как контролировать звук с помощью внешних событий и макросов, следующим логичным шагом становится аудиовизуальная интеграция. Те же управляющие сигналы, что открывают фильтр, могут расширять геометрию графики.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

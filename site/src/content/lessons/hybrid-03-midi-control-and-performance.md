@@ -3,6 +3,8 @@ title: "Lesson 03: MIDI Control And Performance"
 summary: "Connect keyboards and controllers to the modular system for live interaction, macro control, and expressive performances."
 track: "hybrid"
 order: 3
+difficulty: "Intermediate"
+estimatedTime: "15 min"
 ---
 
 ## What You Will Learn
@@ -79,11 +81,31 @@ All these changes happen from *one* physical turn of your MIDI controller knob!
 
 In VCV Rack or when using hardware modules like "MIDI to CV", the basic mapping scheme looks like this:
 
-```text
-MIDI Keyboard -> [MIDI to CV module] 
-   -> V/Oct -> Oscillator Pitch
-   -> Gate  -> Envelope Trigger
-   -> Mod (CC 1) -> Filter Cutoff
+```mermaid
+graph LR
+  subgraph HW[Hardware / DAW]
+    MIDI[MIDI Controller]
+  end
+
+  subgraph RACK[VCV Rack]
+    MIDICV[MIDI to CV Module]
+    
+    MIDI ==>|Events & CC| MIDICV
+    
+    MIDICV -.->|V/Oct| OSC[Oscillator Pitch]
+    MIDICV -.->|Gate| ENV[Envelope Trigger]
+    MIDICV -.->|Mod Wheel CC1| FLT[Filter Cutoff]
+  end
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef logic fill:#9B2C2C,stroke:#C53030,stroke-width:2px,color:#FFF5F5;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class MIDI,MIDICV logic;
+  class OSC,ENV signal;
+  class FLT mod;
+  class HW,RACK env;
 ```
 
 ## Typical Beginner Mistakes
@@ -111,3 +133,8 @@ Try using `Velocity` (key pressing force) for routing to the Decay Time of the e
 ## Next Connection
 
 Once we understand how to control sound using external events and macros, the next logical step is audiovisual integration. The same control signals that open a filter can expand the geometry of graphics.
+
+---
+
+### Resources
+- [View Patch Details: Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

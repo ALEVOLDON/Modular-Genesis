@@ -3,6 +3,8 @@ title: "Урок 02: Многоканальная запись"
 summary: "Разбери, как разделять голоса modular-патча по отдельным каналам записи, чтобы сохранить гибкость для сведения, аранжировки и редактирования в DAW."
 track: "hybrid"
 order: 2
+difficulty: "Intermediate"
+estimatedTime: "12 min"
 ---
 
 ## Что ты изучишь
@@ -121,20 +123,34 @@ DAW становится гораздо полезнее, когда кажды�
 
 ## Простая модель маршрутизации
 
-```text
-Voice 1 -> Output 1 -> Ableton Track 1
-Voice 2 -> Output 2 -> Ableton Track 2
-Voice 3 -> Output 3 -> Ableton Track 3
-Voice 4 -> Output 4 -> Ableton Track 4
-```
+```mermaid
+graph LR
+  subgraph MODULAR[VCV Rack Voices]
+    KICK[Kick]
+    BASS[Bass]
+    MEL[Melody]
+    TEX[Texture]
+  end
 
-В реальной сессии это может выглядеть так:
+  subgraph DAW[Ableton Live Tracks]
+    T1[Track 1: Kick]
+    T2[Track 2: Bass]
+    T3[Track 3: Melody]
+    T4[Track 4: Texture]
+  end
 
-```text
-Kick -> Out 1
-Bass -> Out 2
-Melody -> Out 3
-Texture -> Out 4
+  KICK -.->|Out 1| T1
+  BASS -.->|Out 2| T2
+  MEL -.->|Out 3| T3
+  TEX -.->|Out 4| T4
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
+
+  class KICK,BASS,MEL,TEX signal;
+  class T1,T2,T3,T4 accent;
+  class MODULAR,DAW env;
 ```
 
 После этого каждый выход становится отдельным audio track в Ableton.
@@ -219,3 +235,8 @@ Texture -> Out 4
 Когда routing и channel planning уже ясны, следующий шаг - заставить DAW и modular system чувствовать общий ритм.
 
 Это напрямую ведёт к теме clock sync и transport relationships между hardware, VCV Rack и Ableton.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Modular Jam Router v01](/patches/performances-modular-jam-router-v01)

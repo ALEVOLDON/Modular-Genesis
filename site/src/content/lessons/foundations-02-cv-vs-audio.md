@@ -3,6 +3,8 @@ title: "Lesson 02: CV Vs Audio"
 summary: "Learn how to separate heard sound from control signals and why that distinction changes the way you patch."
 track: "foundations"
 order: 2
+difficulty: "Beginner"
+estimatedTime: "12 min"
 ---
 
 ## What You Will Learn
@@ -107,12 +109,21 @@ If the answer is "it should change something else," you are probably dealing wit
 
 Consider this patch:
 
-```text
-LFO -> Filter cutoff
-Oscillator -> Filter input
-Filter -> VCA
-Envelope -> VCA level
-VCA -> Audio output
+```mermaid
+graph TD
+  LFO[LFO<br/>Modulation] -.->|Control| VCF
+  ENV[Envelope<br/>Modulation] -.->|Control| VCA
+
+  OSC[Oscillator<br/>Audio Source] ==>|Audio| VCF[Filter<br/>Timbre]
+  VCF ==>|Audio| VCA[VCA<br/>Level]
+  VCA ==>|Audio| OUT((Audio<br/>Output))
+
+  classDef audio fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef output fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef control fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 5 5;
+  class OSC,VCF,VCA audio;
+  class OUT output;
+  class LFO,ENV control;
 ```
 
 Here the roles are different:
@@ -208,3 +219,8 @@ This exercise trains your ear to connect signal type with behavioral outcome.
 The next lesson should make this distinction practical by building a complete first subtractive patch.
 
 That is where `audio` and `CV` stop being abstract categories and start working together as a playable instrument.
+
+---
+
+### Resources
+- [View Patch Details: Basic Voice v01](/patches/foundations-basic-voice-v01)

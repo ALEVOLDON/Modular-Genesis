@@ -3,6 +3,8 @@ title: "Урок 02: CV и Audio"
 summary: "Пойми разницу между слышимым звуком и управляющими сигналами и почему именно она делает патч осмысленным."
 track: "foundations"
 order: 2
+difficulty: "Beginner"
+estimatedTime: "12 min"
 ---
 
 ## Что ты изучишь
@@ -107,12 +109,21 @@ order: 2
 
 Рассмотрим такой патч:
 
-```text
-LFO -> Filter cutoff
-Oscillator -> Filter input
-Filter -> VCA
-Envelope -> VCA level
-VCA -> Audio output
+```mermaid
+graph TD
+  LFO[LFO<br/>Modulation] -.->|Control| VCF
+  ENV[Envelope<br/>Modulation] -.->|Control| VCA
+
+  OSC[Oscillator<br/>Audio Source] ==>|Audio| VCF[Filter<br/>Timbre]
+  VCF ==>|Audio| VCA[VCA<br/>Level]
+  VCA ==>|Audio| OUT((Audio<br/>Output))
+
+  classDef audio fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef output fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef control fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 5 5;
+  class OSC,VCF,VCA audio;
+  class OUT output;
+  class LFO,ENV control;
 ```
 
 Здесь роли распределяются так:
@@ -208,3 +219,8 @@ Pitch — только один вид управления. `CV` может в�
 Следующий урок должен сделать это различие практическим: мы соберём первый полноценный subtractive patch.
 
 Именно там `audio` и `CV` перестают быть абстрактными категориями и начинают работать вместе как playable instrument.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Basic Voice v01](/patches/foundations-basic-voice-v01)

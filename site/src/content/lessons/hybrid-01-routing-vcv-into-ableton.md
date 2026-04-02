@@ -3,6 +3,8 @@ title: "Lesson 01: Routing VCV Rack Into Ableton"
 summary: "Understand how to route audio cleanly between VCV Rack and Ableton by deciding which tool generates sound, which tool hosts audio, and which tool records."
 track: "hybrid"
 order: 1
+difficulty: "Intermediate"
+estimatedTime: "10 min"
 ---
 
 ## What You Will Learn
@@ -105,14 +107,25 @@ That single distinction explains a lot of routing confusion.
 
 A basic standalone routing idea looks like this:
 
-```text
-VCV Rack -> virtual audio route -> Ableton track
-```
+```mermaid
+graph LR
+  subgraph VCV[VCV Rack Environment]
+    VOICE[Modular Voice] ==>|Audio| OUTMOD[Output Module]
+  end
+  
+  OUTMOD == "Virtual Audio / Plugin Bridge" ==> INMOD
+  
+  subgraph DAW[Ableton Live Environment]
+    INMOD[Ableton Audio Track] ==>|Record & Mix| MASTER((Master Out))
+  end
 
-In a little more detail:
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef env fill:none,stroke:#4A5568,stroke-width:1px,stroke-dasharray: 2 2;
 
-```text
-VCV Rack voice -> Rack output module -> virtual route / plugin path -> Ableton audio track
+  class VOICE,OUTMOD,INMOD signal;
+  class MASTER accent;
+  class VCV,DAW env;
 ```
 
 The important thing is not the exact software utility first.
@@ -189,3 +202,8 @@ For each version, ask:
 Once routing is clear, the next hybrid step is capturing and organizing more than one signal path at a time.
 
 That leads naturally into multichannel recording and more structured studio integration.
+
+---
+
+### Resources
+- [View Patch Details: Hybrid Live Set v01](/patches/performances-hybrid-live-set-v01)

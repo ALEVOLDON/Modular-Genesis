@@ -1753,5 +1753,66 @@ const getNavIcon = (href: string) => {
       document.addEventListener('DOMContentLoaded', initReveal);
       document.addEventListener('astro:page-load', initReveal);
     </script>
+    <script is:inline>
+      (function() {
+        function loadMermaid() {
+          var script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+          script.onload = function() {
+            window.mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+            renderAll();
+          };
+          document.head.appendChild(script);
+        }
+
+        async function renderAll() {
+          await new Promise(r => setTimeout(r, 100));
+          // Astro/Shiki renders mermaid blocks as <pre class="astro-code"><code>
+          // without preserving the language-mermaid class — so we detect by content
+          var mermaidKeywords = ['graph ', 'sequenceDiagram', 'classDiagram', 'stateDiagram', 'gantt', 'pie ', 'flowchart '];
+          var allPre = document.querySelectorAll('pre.astro-code, pre[class*="shiki"]');
+          var counter = 0;
+          for (var i = 0; i < allPre.length; i++) {
+            var pre = allPre[i];
+            if (pre.dataset.mermaidDone) continue;
+            var codeEl = pre.querySelector('code');
+            if (!codeEl) continue;
+            var text = codeEl.textContent.trim();
+            var isMermaid = mermaidKeywords.some(function(k) { return text.startsWith(k); });
+            if (!isMermaid) continue;
+            var id = 'mg' + counter++ + '_' + Date.now();
+            try {
+              var result = await window.mermaid.render(id, text);
+              var wrapper = document.createElement('div');
+              wrapper.className = 'mermaid-diagram';
+              wrapper.innerHTML = result.svg;
+              pre.parentNode.insertBefore(wrapper, pre);
+              pre.style.display = 'none';
+              pre.dataset.mermaidDone = '1';
+            } catch(e) {
+              console.warn('Mermaid render error:', e);
+            }
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMermaid);
+        document.addEventListener('astro:page-load', loadMermaid);
+      })();
+    </script>
+    <style is:inline>
+      .mermaid-diagram {
+        display: flex;
+        justify-content: center;
+        margin: 1.5rem 0;
+        padding: 1rem;
+        border-radius: 12px;
+        background: rgba(10, 22, 35, 0.6);
+        border: 1px solid rgba(102, 247, 255, 0.15);
+      }
+      .mermaid-diagram svg {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
   </body>
 </html>

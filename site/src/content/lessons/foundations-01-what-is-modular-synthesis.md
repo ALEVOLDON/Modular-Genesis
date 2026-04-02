@@ -3,6 +3,8 @@ title: "Lesson 01: What Is Modular Synthesis"
 summary: "A practical introduction to modular synthesis as a system of roles, signal flow, and deliberate patch construction."
 track: "foundations"
 order: 1
+difficulty: "Beginner"
+estimatedTime: "10 min"
 ---
 
 ## What You Will Learn
@@ -71,8 +73,15 @@ This is the real mindset shift. Modular work is not only about cables. It is abo
 
 A very small beginner patch can be described like this:
 
-```text
-VCO -> VCF -> VCA -> AUDIO
+```mermaid
+graph LR
+  VCO[VCO<br/>Sound Source] --> VCF[VCF<br/>Timbre]
+  VCF --> VCA[VCA<br/>Level]
+  VCA --> AUDIO((AUDIO<br/>Output))
+  classDef default fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  class VCO,VCF,VCA default;
+  class AUDIO accent;
 ```
 
 This is not the only correct structure, but it is a useful first model.
@@ -187,8 +196,13 @@ If you can explain those four modules clearly, you already understand the first 
 
 Build the simplest possible patch using the model below:
 
-```text
-VCO -> VCF -> VCA -> AUDIO
+```mermaid
+graph LR
+  VCO[VCO] --> VCF[VCF] --> VCA[VCA] --> AUDIO((AUDIO))
+  classDef default fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  class VCO,VCF,VCA default;
+  class AUDIO accent;
 ```
 
 Then ask yourself:
@@ -206,3 +220,8 @@ The next lesson should make one distinction much clearer:
 - `CV` vs `audio`
 
 This is the point where modular patches stop looking like a chain of boxes and start reading like an actual signal system.
+
+---
+
+### Resources
+- [View Patch Details: Basic Voice v01](/patches/foundations-basic-voice-v01)

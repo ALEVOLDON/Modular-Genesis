@@ -3,6 +3,8 @@ title: "Урок 01: Что такое модульный синтез"
 summary: "Практическое введение в модульный синтез как в систему ролей, сигналов и осознанной сборки патча."
 track: "foundations"
 order: 1
+difficulty: "Beginner"
+estimatedTime: "10 min"
 ---
 
 ## Что ты изучишь
@@ -71,8 +73,15 @@ order: 1
 
 Очень простой стартовый патч можно описать так:
 
-```text
-VCO -> VCF -> VCA -> AUDIO
+```mermaid
+graph LR
+  VCO[VCO<br/>Sound Source] --> VCF[VCF<br/>Timbre]
+  VCF --> VCA[VCA<br/>Level]
+  VCA --> AUDIO((AUDIO<br/>Output))
+  classDef default fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  class VCO,VCF,VCA default;
+  class AUDIO accent;
 ```
 
 Это не единственно правильная структура, но это полезная первая модель.
@@ -187,8 +196,13 @@ VCO -> VCF -> VCA -> AUDIO
 
 Собери самый простой патч по модели:
 
-```text
-VCO -> VCF -> VCA -> AUDIO
+```mermaid
+graph LR
+  VCO[VCO] --> VCF[VCF] --> VCA[VCA] --> AUDIO((AUDIO))
+  classDef default fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  class VCO,VCF,VCA default;
+  class AUDIO accent;
 ```
 
 А затем ответь себе на вопросы:
@@ -206,3 +220,8 @@ VCO -> VCF -> VCA -> AUDIO
 - `CV` и `audio`
 
 Именно в этот момент модульная система перестаёт выглядеть как цепочка коробок и начинает читаться как настоящая сигнальная архитектура.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Basic Voice v01](/patches/foundations-basic-voice-v01)

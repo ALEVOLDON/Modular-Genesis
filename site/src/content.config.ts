@@ -6,7 +6,9 @@ const lessons = defineCollection({
     title: z.string(),
     summary: z.string(),
     track: z.enum(["foundations", "sequencing", "generative", "hybrid", "audiovisual"]),
-    order: z.number()
+    order: z.number(),
+    difficulty: z.enum(["Beginner", "Intermediate", "Advanced"]).optional(),
+    estimatedTime: z.string().optional()
   })
 });
 

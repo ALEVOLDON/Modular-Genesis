@@ -3,6 +3,8 @@ title: "Lesson 02: Sequencer And Quantizer"
 summary: "Use ordered voltage and scale-aware pitch correction to turn timing into stable melodic motion."
 track: "sequencing"
 order: 2
+difficulty: "Beginner"
+estimatedTime: "15 min"
 ---
 
 ## What You Will Learn
@@ -25,9 +27,14 @@ Together they turn timing structure into note behavior.
 
 The core signal path often looks like this:
 
-```text
-Clock -> Sequencer -> Quantizer -> Voice pitch
-Trigger/Gate -> Envelope -> VCA
+```mermaid
+graph LR
+  CLK[Clock] -.-> SEQ[Sequencer] -.-> QNT[Quantizer] -.->|Pitch| VOICE[Voice]
+  TRIG[Gate/Trigger] -.-> ENV[Envelope] -.->|Level| VOICE
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class VOICE signal;
+  class CLK,SEQ,QNT,TRIG,ENV mod;
 ```
 
 This is one of the most important modular music structures because it connects:
@@ -123,13 +130,23 @@ A useful way to say it:
 
 A simple beginner chain looks like this:
 
-```text
-Clock -> Sequencer clock input
-Sequencer CV -> Quantizer input
-Quantizer output -> Oscillator pitch
-Trigger/Gate -> Envelope
-Envelope -> VCA level
-Oscillator -> Filter -> VCA -> Output
+```mermaid
+graph LR
+  CLK[Clock] -.-> SEQ[Sequencer] 
+  SEQ -.->|CV| QNT[Quantizer] 
+  QNT -.->|Pitch| OSC
+  
+  TRIG[Trigger/Gate] -.-> ENV[Envelope] 
+  ENV -.->|Level| VCA
+  
+  OSC[Oscillator] ==>|Audio| VCF[Filter] ==>|Audio| VCA ==>|Audio| OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class CLK,SEQ,QNT,TRIG,ENV mod;
 ```
 
 In this patch:
@@ -228,3 +245,8 @@ You now have the core of a basic sequencing voice:
 - playable voice
 
 From here, the next step is to move from stable sequencing into variation, mutation, and more generative behavior.
+
+---
+
+### Resources
+- [View Patch Details: Clock Quantizer Demo v01](/patches/sequencing-clock-quantizer-demo-v01)

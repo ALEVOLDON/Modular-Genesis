@@ -3,6 +3,8 @@ title: "Урок 02: Sequencer и Quantizer"
 summary: "Используй упорядоченное voltage и scale-aware pitch correction, чтобы превратить timing в устойчивое мелодическое движение."
 track: "sequencing"
 order: 2
+difficulty: "Beginner"
+estimatedTime: "15 min"
 ---
 
 ## Что ты изучишь
@@ -25,9 +27,14 @@ Quantizer берёт эти значения и отображает их в д�
 
 Базовый signal path часто выглядит так:
 
-```text
-Clock -> Sequencer -> Quantizer -> Voice pitch
-Trigger/Gate -> Envelope -> VCA
+```mermaid
+graph LR
+  CLK[Clock] -.-> SEQ[Sequencer] -.-> QNT[Quantizer] -.->|Pitch| VOICE[Voice]
+  TRIG[Gate/Trigger] -.-> ENV[Envelope] -.->|Level| VOICE
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class VOICE signal;
+  class CLK,SEQ,QNT,TRIG,ENV mod;
 ```
 
 Это одна из самых важных музыкальных структур в modular synthesis, потому что она соединяет:
@@ -123,13 +130,23 @@ Quantizer отвечает на вопрос:
 
 Простая beginner chain выглядит так:
 
-```text
-Clock -> Sequencer clock input
-Sequencer CV -> Quantizer input
-Quantizer output -> Oscillator pitch
-Trigger/Gate -> Envelope
-Envelope -> VCA level
-Oscillator -> Filter -> VCA -> Output
+```mermaid
+graph LR
+  CLK[Clock] -.-> SEQ[Sequencer] 
+  SEQ -.->|CV| QNT[Quantizer] 
+  QNT -.->|Pitch| OSC
+  
+  TRIG[Trigger/Gate] -.-> ENV[Envelope] 
+  ENV -.->|Level| VCA
+  
+  OSC[Oscillator] ==>|Audio| VCF[Filter] ==>|Audio| VCA ==>|Audio| OUT((Output))
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef accent fill:#2C7A7B,stroke:#319795,stroke-width:2px,color:#E6FFFA;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  class OSC,VCF,VCA signal;
+  class OUT accent;
+  class CLK,SEQ,QNT,TRIG,ENV mod;
 ```
 
 В этом патче:
@@ -228,3 +245,8 @@ Quantizer нужен не только чтобы "исправлять" нот�
 - playable voice
 
 Следующий шаг после этого — движение от стабильного sequencing к variation, mutation и более generative behavior.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Clock Quantizer Demo v01](/patches/sequencing-clock-quantizer-demo-v01)

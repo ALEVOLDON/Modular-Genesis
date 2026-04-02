@@ -3,6 +3,8 @@ title: "Lesson 01: Clock, Trigger, Gate"
 summary: "Learn the timing logic behind modular sequencing by understanding clock pulses, triggers, and gates as different control events."
 track: "sequencing"
 order: 1
+difficulty: "Beginner"
+estimatedTime: "12 min"
 ---
 
 ## What You Will Learn
@@ -128,12 +130,24 @@ This is not a full technical definition, but it is a very useful working model.
 
 A simple patch might look like this:
 
-```text
-Clock -> Sequencer step advance
-Trigger -> Envelope trigger
-Gate -> Sustained note behavior
-Pitch CV -> Oscillator pitch
-Envelope -> VCA level
+```mermaid
+graph LR
+  CLK[Clock<br/>Pulse] -.->|Advance| SEQ[Sequencer]
+  
+  SEQ -.->|Trigger| ENV[Envelope]
+  SEQ -.->|Gate| HOLD[Note Hold Behavior]
+  SEQ -.->|Pitch CV| OSC[Oscillator]
+  
+  ENV -.->|Level| VCA
+  OSC ==>|Audio| VCA
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef time fill:#2C5282,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 2 2;
+  
+  class OSC,VCA,HOLD signal;
+  class SEQ,ENV mod;
+  class CLK time;
 ```
 
 Here the roles are separated:
@@ -241,3 +255,8 @@ Then write one sentence for each:
 Once `clock`, `trigger`, and `gate` are clear, the next step is sequencing actual pitch material.
 
 That is where sequencers and quantizers start turning timing structure into musical note patterns.
+
+---
+
+### Resources
+- [View Patch Details: Trigger & Gate Comparison v01](/patches/sequencing-trigger-gate-comparison-v01)

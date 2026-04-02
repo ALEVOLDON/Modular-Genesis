@@ -3,6 +3,8 @@ title: "Урок 01: Clock, Trigger, Gate"
 summary: "Пойми логику времени в модульном секвенсинге через clock, trigger и gate как три разных типа управляющих событий."
 track: "sequencing"
 order: 1
+difficulty: "Beginner"
+estimatedTime: "12 min"
 ---
 
 ## Что ты изучишь
@@ -128,12 +130,24 @@ Gate отвечает на вопрос:
 
 Простой патч может выглядеть так:
 
-```text
-Clock -> Sequencer step advance
-Trigger -> Envelope trigger
-Gate -> Sustained note behavior
-Pitch CV -> Oscillator pitch
-Envelope -> VCA level
+```mermaid
+graph LR
+  CLK[Clock<br/>Pulse] -.->|Advance| SEQ[Sequencer]
+  
+  SEQ -.->|Trigger| ENV[Envelope]
+  SEQ -.->|Gate| HOLD[Note Hold Behavior]
+  SEQ -.->|Pitch CV| OSC[Oscillator]
+  
+  ENV -.->|Level| VCA
+  OSC ==>|Audio| VCA
+
+  classDef signal fill:#1A202C,stroke:#2D3748,stroke-width:2px,color:#E2E8F0;
+  classDef mod fill:#2A4365,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 4 4;
+  classDef time fill:#2C5282,stroke:#2B6CB0,stroke-width:2px,color:#EBF8FF,stroke-dasharray: 2 2;
+  
+  class OSC,VCA,HOLD signal;
+  class SEQ,ENV mod;
+  class CLK time;
 ```
 
 Здесь роли разделены:
@@ -241,3 +255,8 @@ Clock — только reference pulse. Ритм появляется тогда
 Когда `clock`, `trigger` и `gate` становятся понятны, следующий шаг — секвенсинг уже конкретного pitch material.
 
 Именно там sequencer и quantizer начинают превращать временную структуру в музыкальные паттерны нот.
+
+---
+
+### Файлы к уроку
+- [Перейти к обзору патча Trigger & Gate Comparison v01](/patches/sequencing-trigger-gate-comparison-v01)

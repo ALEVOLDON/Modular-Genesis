@@ -1311,13 +1311,17 @@ const getNavIcon = (href: string) => {
           margin-left: auto;
         }
 
-        .mobile-menu[open] .menu-toggle {
+        .mobile-menu.is-open .menu-toggle {
           background: rgba(102, 247, 255, 0.08);
           border-color: rgba(102, 247, 255, 0.24);
         }
 
+        html.lock-scroll, html.lock-scroll body {
+          overflow: hidden !important;
+        }
+
         .mobile-nav-panel {
-          display: grid;
+          display: none;
           gap: 12px;
           margin-top: 10px;
           padding: 16px;
@@ -1329,6 +1333,10 @@ const getNavIcon = (href: string) => {
           position: absolute;
           right: 0;
           top: calc(100% + 8px);
+        }
+
+        .mobile-menu.is-open .mobile-nav-panel {
+          display: grid;
         }
 
         .mobile-nav-links {
@@ -1635,15 +1643,15 @@ const getNavIcon = (href: string) => {
             </a>
           )}
         </div>
-        <details class="mobile-menu">
-          <summary class="menu-toggle" aria-label="Open navigation menu">
+        <div class="mobile-menu" id="mobile-menu-container">
+          <button class="menu-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-nav-panel" aria-label="Open navigation menu">
             <span class="menu-toggle-bars" aria-hidden="true">
               <span></span>
               <span></span>
               <span></span>
             </span>
-          </summary>
-          <div class="mobile-nav-panel">
+          </button>
+          <div class="mobile-nav-panel" id="mobile-nav-panel">
             <nav class="mobile-nav-links">
               {navItems.map((item) => (
                 <a href={withBase(item.href)}>
@@ -1661,7 +1669,7 @@ const getNavIcon = (href: string) => {
               </div>
             )}
           </div>
-        </details>
+        </div>
       </div>
     </header>
     <main class="shell">
@@ -1734,6 +1742,55 @@ const getNavIcon = (href: string) => {
       </div>
     </footer>
     <script>
+      const initMobileMenu = () => {
+        const container = document.getElementById('mobile-menu-container');
+        const toggle = document.getElementById('mobile-menu-toggle');
+        const panel = document.getElementById('mobile-nav-panel');
+        if (!container || !toggle || !panel) return;
+
+        let isOpen = false;
+
+        const closeMenu = (returnFocus = false) => {
+          if (!isOpen) return;
+          isOpen = false;
+          container.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          document.documentElement.classList.remove('lock-scroll');
+          if (returnFocus) toggle.focus();
+        };
+
+        const openMenu = () => {
+          if (isOpen) return;
+          isOpen = true;
+          container.classList.add('is-open');
+          toggle.setAttribute('aria-expanded', 'true');
+          document.documentElement.classList.add('lock-scroll');
+        };
+
+        toggle.addEventListener('click', () => {
+          if (isOpen) closeMenu();
+          else openMenu();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && isOpen) {
+            closeMenu(true);
+          }
+        });
+
+        document.addEventListener('click', (e) => {
+          if (isOpen && e.target instanceof Node && !container.contains(e.target)) {
+            closeMenu();
+          }
+        });
+
+        panel.addEventListener('click', (e) => {
+          if (e.target instanceof Element && e.target.closest('a')) {
+            closeMenu();
+          }
+        });
+      };
+
       const initReveal = () => {
         const observer = new IntersectionObserver((entries, obs) => {
           entries.forEach(entry => {
@@ -1761,8 +1818,13 @@ const getNavIcon = (href: string) => {
         });
       };
 
-      document.addEventListener('DOMContentLoaded', initReveal);
-      document.addEventListener('astro:page-load', initReveal);
+      const initLogic = () => {
+        initReveal();
+        initMobileMenu();
+      };
+
+      document.addEventListener('DOMContentLoaded', initLogic);
+      document.addEventListener('astro:page-load', initLogic);
     </script>
     <script is:inline>
       (function() {

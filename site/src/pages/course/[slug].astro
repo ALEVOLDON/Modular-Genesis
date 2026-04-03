@@ -17,18 +17,19 @@ export async function getStaticPaths() {
 const { lesson } = Astro.props;
 const { Content } = await render(lesson);
 const track = tracks.find((entry) => entry.key === lesson.data.track);
+const lessons = await getCollection("lessons");
+
 const relatedPatches = (await getCollection("patches"))
   .filter((patch) => patch.data.track === lesson.data.track)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const siblingLessons = (await getCollection("lessons"))
+const siblingLessons = lessons
   .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const allLessons = await getCollection("lessons");
-const sortedLessons = allLessons.sort((a, b) => {
+const sortedLessons = [...lessons].sort((a, b) => {
   const trackIndexA = tracks.findIndex(t => t.key === a.data.track);
   const trackIndexB = tracks.findIndex(t => t.key === b.data.track);
   if (trackIndexA !== trackIndexB) return trackIndexA - trackIndexB;

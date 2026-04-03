@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Icon from "../../../components/Icon.astro";
-import { tracks, trackLabelMap } from "../../../data/tracks";
+import { tracks } from "../../../data/tracks";
 import { withBase } from "../../../lib/paths";
 
 export async function getStaticPaths() {
@@ -46,18 +46,19 @@ const trackCopyMap = {
 
 const translatedTrack = trackCopyMap[lesson.data.track as keyof typeof trackCopyMap] || trackCopyMap.foundations;
 
+const lessons = await getCollection("ru-lessons");
+
 const relatedPatches = (await getCollection("ru-patches"))
   .filter((patch) => patch.data.track === lesson.data.track)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const siblingLessons = (await getCollection("ru-lessons"))
+const siblingLessons = lessons
   .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const allLessons = await getCollection("ru-lessons");
-const sortedLessons = allLessons.sort((a, b) => {
+const sortedLessons = [...lessons].sort((a, b) => {
   const trackIndexA = tracks.findIndex(t => t.key === a.data.track);
   const trackIndexB = tracks.findIndex(t => t.key === b.data.track);
   if (trackIndexA !== trackIndexB) return trackIndexA - trackIndexB;

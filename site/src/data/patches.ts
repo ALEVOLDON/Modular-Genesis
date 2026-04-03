@@ -27,4 +27,4 @@ export const patchCollections = [
     examples: ["hybrid-live-set-v01.vcv", "drone-performance-core-v01.vcv", "modular-jam-router-v01.vcv"],
     folder: "https://github.com/ALEVOLDON/Modular-Genesis/tree/main/patches/performances"
   }
-];
+] as const;

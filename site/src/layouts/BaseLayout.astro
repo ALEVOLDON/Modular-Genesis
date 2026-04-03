@@ -26,16 +26,27 @@ const {
 } = Astro.props;
 
 const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
-const lessons = await getCollection("lessons");
-const notes = await getCollection("notes");
-const patches = await getCollection("patches");
+type LocalizedCollectionMap = {
+  lessons: "lessons" | "ru-lessons";
+  notes: "notes" | "ru-notes";
+  patches: "patches" | "ru-patches";
+};
+
+const localizedCollectionMap: LocalizedCollectionMap = lang === "ru"
+  ? { lessons: "ru-lessons", notes: "ru-notes", patches: "ru-patches" }
+  : { lessons: "lessons", notes: "notes", patches: "patches" };
+
+// Keep footer counters aligned with the current locale content.
+const lessons = await getCollection(localizedCollectionMap.lessons);
+const notes = await getCollection(localizedCollectionMap.notes);
+const patches = await getCollection(localizedCollectionMap.patches);
 
 const footerNav = lang === "ru"
   ? [
-      { href: "/ru/roadmap", label: "Roadmap" },
-      { href: "/ru/course", label: "Course" },
-      { href: "/ru/patches", label: "Patches" },
-      { href: "/ru/resources", label: "Resources" }
+      { href: "/ru/roadmap", label: "План" },
+      { href: "/ru/course", label: "Курс" },
+      { href: "/ru/patches", label: "Патчи" },
+      { href: "/ru/resources", label: "Материалы" }
     ]
   : [
       { href: "/roadmap", label: "Roadmap" },

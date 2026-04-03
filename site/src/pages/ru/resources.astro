@@ -53,15 +53,15 @@ const remainingResources = resources.slice(3);
           <div>
             <div class="eyebrow">Материалы</div>
             <h1 class="display-title">
-              <span class="accent">Слой материалов</span> за lessons, patches и diagrams.
+              <span class="accent">Слой материалов</span> за уроками, патчами и диаграммами.
             </h1>
             <p class="lede">
               Эти заметки фиксируют устойчивые идеи проекта: hybrid workflow, generative structure,
               project vision и visual system planning, который расширяет модульную сторону проекта.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/roadmap")}>Открыть roadmap</a>
-              <a class="button-secondary" href={withBase("/ru/course")}>Смотреть lessons</a>
+              <a class="button" href={withBase("/ru/roadmap")}>Открыть план</a>
+              <a class="button-secondary" href={withBase("/ru/course")}>Смотреть уроки</a>
             </div>
           </div>
 
@@ -95,7 +95,7 @@ const remainingResources = resources.slice(3);
           <div class="section-copy">
             <span class="section-label">Основные заметки</span>
             <h2>Первый слой концентрируется на идеях, которые держат проект вместе.</h2>
-            <p>Это заметки, которые сильнее всего связаны с текущими lessons, roadmap и patch logic.</p>
+            <p>Это заметки, которые сильнее всего связаны с текущими уроками, планом и логикой патчей.</p>
           </div>
         </div>
 
@@ -106,7 +106,7 @@ const remainingResources = resources.slice(3);
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть note</a>
+                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть материал</a>
               </div>
             </article>
           ))}
@@ -148,7 +148,7 @@ const remainingResources = resources.slice(3);
               <h3>{resource.title}</h3>
               <p>{resource.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть note</a>
+                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть материал</a>
               </div>
             </article>
           ))}

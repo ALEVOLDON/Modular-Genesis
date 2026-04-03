@@ -79,7 +79,7 @@ const siblingPatches = (await getCollection("ru-patches"))
                 </li>
                 <li>
                   <strong>{patch.data.version ?? "v0.1"}</strong>
-                  версия patch entry
+                  версия патча
                 </li>
               </ul>
             </article>
@@ -177,9 +177,9 @@ const siblingPatches = (await getCollection("ru-patches"))
           <article class="feature-card">
             <span class="card-kicker">Навигация</span>
             <h3>Связать patch обратно с системой</h3>
-            <p>Patch entries должны связывать repository artifacts, course pages и roadmap logic.</p>
+            <p>Карточки патчей должны связывать артефакты репозитория, страницы курса и логику плана.</p>
             <div class="actions">
-              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть план</span></a>
               <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать заметки</span></a>
             </div>
           </article>

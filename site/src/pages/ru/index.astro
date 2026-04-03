@@ -92,9 +92,9 @@ const toolCards = [
               Русская версия нужна как понятная точка входа без разрыва с уже собранной английской структурой.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
-              <a class="button-secondary" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Смотреть lessons</span></a>
-              <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать notes</span></a>
+              <a class="button" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть план</span></a>
+              <a class="button-secondary" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Смотреть уроки</span></a>
+              <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать материалы</span></a>
             </div>
           </div>
 
@@ -133,7 +133,7 @@ const toolCards = [
               <article class="mini-card">
                 <span class="mini-stat">{lessons.length}</span>
                 <h4><Icon name="book-open" /> Уроков опубликовано</h4>
-                <p>На сайте уже есть реальные lesson pages, а не просто syllabus-заглушка.</p>
+                <p>На сайте уже есть реальные страницы уроков, а не просто syllabus-заглушка.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{notes.length}</span>
@@ -142,7 +142,7 @@ const toolCards = [
               </article>
               <article class="mini-card">
                 <span class="mini-stat">{patches.length}</span>
-                <h4><Icon name="panels-top-left" /> Patch entries готовы</h4>
+                <h4><Icon name="panels-top-left" /> Карточки патчей готовы</h4>
                 <p>Структура уже готова под реальные `.vcv` артефакты без перестройки сайта.</p>
               </article>
             </div>
@@ -151,9 +151,9 @@ const toolCards = [
               <span class="section-label"><Icon name="square-chart-gantt" /> Что уже работает</span>
               <h3>Не только идея, но уже собранный фундамент</h3>
               <ul class="feature-list">
-                <li><strong>Roadmap:</strong> поэтапная структура от signal flow до audiovisual systems.</li>
-                <li><strong>Course:</strong> lessons уже сгруппированы по трекам и маршрутам.</li>
-                <li><strong>Resources:</strong> concept notes и system diagrams уже опубликованы.</li>
+                <li><strong>План:</strong> поэтапная структура от signal flow до audiovisual systems.</li>
+                <li><strong>Курс:</strong> уроки уже сгруппированы по трекам и маршрутам.</li>
+                <li><strong>Материалы:</strong> концептуальные заметки и диаграммы уже опубликованы.</li>
               </ul>
             </article>
           </div>
@@ -245,9 +245,9 @@ const toolCards = [
           <div class="section-copy">
             <span class="section-label"><Icon name="audio-lines" /> Живой контент</span>
             <h2>На сайте уже есть материал, а не просто пустой фасад.</h2>
-            <p>Lessons, notes и patch entries разведены по понятным колонкам, чтобы каждый слой читался отдельно.</p>
+            <p>Уроки, материалы и карточки патчей разведены по понятным колонкам, чтобы каждый слой читался отдельно.</p>
           </div>
-          <a class="button-secondary" href={withBase("/ru/course")}>Все lessons</a>
+          <a class="button-secondary" href={withBase("/ru/course")}>Все уроки</a>
         </div>
 
         <div class="roadmap-strip" style="margin: 26px 0 24px;">
@@ -270,7 +270,7 @@ const toolCards = [
                   <h3>{lesson.data.title}</h3>
                   <p>{lesson.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть lesson</a>
+                    <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть урок</a>
                   </div>
                 </article>
               ))}
@@ -285,7 +285,7 @@ const toolCards = [
                   <h3>{note.data.title}</h3>
                   <p>{note.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/resources/${note.slug}/`)}>Открыть note</a>
+                    <a class="button-secondary" href={withBase(`/ru/resources/${note.slug}/`)}>Открыть материал</a>
                   </div>
                 </article>
               ))}
@@ -293,7 +293,7 @@ const toolCards = [
           </article>
 
           <article class="feature-card">
-            <span class="card-kicker">Patch library</span>
+            <span class="card-kicker">Библиотека патчей</span>
             <div class="card-stack">
               {featuredPatches.map((patch) => (
                 <article class="card">
@@ -301,7 +301,7 @@ const toolCards = [
                   <h3>{patch.data.title}</h3>
                   <p>{patch.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/patches/${patch.slug}/`)}>Открыть patch</a>
+                    <a class="button-secondary" href={withBase(`/ru/patches/${patch.slug}/`)}>Открыть патч</a>
                   </div>
                 </article>
               ))}

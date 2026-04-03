@@ -1565,7 +1565,6 @@ const getNavIcon = (href: string) => {
       }
 
       .js-enabled .in-view {
-        opacity: 0; /* Fallback before animation applies */
         animation: revealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
@@ -1580,8 +1579,8 @@ const getNavIcon = (href: string) => {
       .js-enabled .cards-3 > *:nth-child(2) { animation-delay: 0.15s; }
       .js-enabled .cards-3 > *:nth-child(3) { animation-delay: 0.3s; }
 
-      /* Hover Micro-interactions */
-      .feature-card, .mini-card, .card, .timeline-card, .roadmap-step {
+      /* Hover Micro-interactions — only after reveal animation completes */
+      .in-view.feature-card, .in-view.mini-card, .in-view.card, .in-view.timeline-card, .in-view.roadmap-step {
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
                     box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
                     border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1799,7 +1798,7 @@ const getNavIcon = (href: string) => {
               obs.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
 
         const selectors = [
           '.feature-card',

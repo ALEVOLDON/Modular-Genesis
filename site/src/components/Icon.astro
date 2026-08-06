@@ -1,5 +1,6 @@
 ---
 import {
+  ArrowUp,
   AudioLines,
   BookOpen,
   Boxes,
@@ -21,6 +22,7 @@ import {
 
 export interface Props {
   name:
+    | "arrow-up"
     | "audio-lines"
     | "book-open"
     | "boxes"
@@ -45,6 +47,7 @@ export interface Props {
 const { name, label, class: className } = Astro.props;
 
 const icons = {
+  "arrow-up": ArrowUp,
   "audio-lines": AudioLines,
   "book-open": BookOpen,
   boxes: Boxes,

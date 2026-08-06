@@ -25,7 +25,6 @@ const {
   localeSwitch = null
 } = Astro.props;
 
-const currentPath = Astro.url.pathname;
 const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
 type LocalizedCollectionMap = {
   lessons: "lessons" | "ru-lessons";
@@ -173,12 +172,11 @@ const getNavIcon = (href: string) => {
         position: sticky;
         top: 0;
         z-index: 100;
-        backdrop-filter: blur(18px) saturate(180%);
-        -webkit-backdrop-filter: blur(18px) saturate(180%);
-        background: rgba(5, 14, 24, 0.82);
-        border-bottom: 1px solid rgba(102, 247, 255, 0.14);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background: rgba(5, 13, 19, 0.82);
+        border-bottom: 1px solid var(--line);
+        transition: background 0.3s ease, border-color 0.3s ease;
       }
 
       .site-header .shell {
@@ -186,7 +184,7 @@ const getNavIcon = (href: string) => {
         align-items: center;
         justify-content: space-between;
         gap: 24px;
-        padding: 12px 0;
+        padding: 14px 0;
       }
 
       .mobile-menu {
@@ -196,103 +194,31 @@ const getNavIcon = (href: string) => {
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.16em;
+        gap: 10px;
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: #ffffff;
-        text-decoration: none;
-        transition: transform 0.25s ease, opacity 0.25s ease;
-      }
-
-      .brand:hover {
-        transform: translateY(-1px);
-        opacity: 0.95;
-      }
-
-      .brand-icon-wrap {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, rgba(102, 247, 255, 0.18), rgba(168, 85, 247, 0.18));
-        border: 1px solid rgba(102, 247, 255, 0.35);
-        box-shadow: 0 0 14px rgba(102, 247, 255, 0.25);
-        color: #66f7ff;
-        transition: all 0.3s ease;
-      }
-
-      .brand:hover .brand-icon-wrap {
-        box-shadow: 0 0 20px rgba(102, 247, 255, 0.5);
-        border-color: rgba(102, 247, 255, 0.7);
-        color: #ffffff;
-        transform: rotate(5deg) scale(1.05);
-      }
-
-      .brand-text {
-        background: linear-gradient(135deg, #ffffff 0%, #66f7ff 50%, #c084fc 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 20px rgba(102, 247, 255, 0.25);
-        font-weight: 800;
+        color: var(--accent);
       }
 
       nav {
         display: flex;
-        align-items: center;
-        gap: 6px;
+        flex-wrap: wrap;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 0.92rem;
       }
 
       .nav-link {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 7px 16px;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: #94a3b8;
-        text-decoration: none;
-        border: 1px solid transparent;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .nav-link:hover {
-        color: #f8fafc;
-        background: rgba(102, 247, 255, 0.08);
-        border-color: rgba(102, 247, 255, 0.22);
-        box-shadow: 0 0 16px rgba(102, 247, 255, 0.12);
-        transform: translateY(-1px);
-      }
-
-      .nav-link.active {
-        color: #66f7ff;
-        background: linear-gradient(135deg, rgba(102, 247, 255, 0.14) 0%, rgba(168, 85, 247, 0.1) 100%);
-        border-color: rgba(102, 247, 255, 0.4);
-        box-shadow: 0 0 16px rgba(102, 247, 255, 0.25);
-        font-weight: 600;
-      }
-
-      .nav-link svg,
-      .nav-link :global(svg) {
-        transition: transform 0.25s ease, color 0.25s ease, filter 0.25s ease;
-      }
-
-      .nav-link:hover svg,
-      .nav-link:hover :global(svg),
-      .nav-link.active svg,
-      .nav-link.active :global(svg) {
-        color: #66f7ff;
-        filter: drop-shadow(0 0 6px rgba(102, 247, 255, 0.6));
       }
 
       .nav-group {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 18px;
       }
 
       .mobile-nav-panel {
@@ -335,26 +261,13 @@ const getNavIcon = (href: string) => {
         align-items: center;
         justify-content: center;
         gap: 8px;
-        min-height: 36px;
-        padding: 0 16px;
+        min-height: 38px;
+        padding: 0 14px;
         border-radius: 999px;
-        border: 1px solid rgba(102, 247, 255, 0.35);
-        color: #e2e8f0;
-        background: linear-gradient(135deg, rgba(102, 247, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-decoration: none;
-        box-shadow: 0 0 14px rgba(102, 247, 255, 0.15);
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .locale-link:hover {
-        color: #ffffff;
-        background: linear-gradient(135deg, rgba(102, 247, 255, 0.22) 0%, rgba(168, 85, 247, 0.2) 100%);
-        border-color: rgba(102, 247, 255, 0.6);
-        box-shadow: 0 0 22px rgba(102, 247, 255, 0.35);
-        transform: translateY(-1px);
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.02);
+        font-size: 0.88rem;
       }
 
       main {
@@ -1713,23 +1626,17 @@ const getNavIcon = (href: string) => {
     <header class="site-header">
       <div class="shell">
         <a class="brand" href={brandHref}>
-          <span class="brand-icon-wrap">
-            <Icon name="workflow" />
-          </span>
-          <span class="brand-text">Modular Genesis</span>
+          <Icon name="workflow" />
+          <span>Modular Genesis</span>
         </a>
         <div class="nav-group">
           <nav>
-            {navItems.map((item) => {
-              const hrefPath = withBase(item.href);
-              const isActive = currentPath === hrefPath || currentPath === hrefPath + "/" || (item.href !== "/" && item.href !== "/ru/" && currentPath.includes(item.href));
-              return (
-                <a class={`nav-link ${isActive ? 'active' : ''}`} href={hrefPath}>
-                  <Icon name={getNavIcon(item.href)} />
-                  <span>{item.label}</span>
-                </a>
-              );
-            })}
+            {navItems.map((item) => (
+              <a class="nav-link" href={withBase(item.href)}>
+                <Icon name={getNavIcon(item.href)} />
+                <span>{item.label}</span>
+              </a>
+            ))}
           </nav>
           {localeSwitch && (
             <a class="locale-link" href={withBase(localeSwitch.href)}>

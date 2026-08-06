@@ -609,7 +609,87 @@ const getNavIcon = (href: string) => {
         display: grid;
         grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
         gap: 28px;
-        align-items: start;
+        align-items: stretch;
+      }
+
+      .blueprint-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .blueprint-widget {
+        margin-top: 24px;
+        padding: 20px;
+        border-radius: 18px;
+        background: rgba(4, 12, 20, 0.75);
+        border: 1px solid var(--line);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      .widget-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .widget-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .widget-badge {
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        background: rgba(102, 247, 255, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(102, 247, 255, 0.2);
+      }
+
+      .widget-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .widget-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .widget-item .label {
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .widget-item .value {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .widget-action {
+        display: flex;
+        justify-content: flex-start;
       }
 
       .status-grid {

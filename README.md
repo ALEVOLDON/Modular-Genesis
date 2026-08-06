@@ -2,6 +2,8 @@
 
 # 🎛️ Modular Genesis
 
+![Modular Genesis Cover](assets/cover.jpg)
+
 **Documentation-first project about modular synthesis, generative music, hybrid workflows, and audiovisual systems.**
 
 [![Deploy Status](https://github.com/ALEVOLDON/Modular-Genesis/actions/workflows/deploy-pages.yml/badge.svg)](https://alevoldon.github.io/Modular-Genesis/)

@@ -227,18 +227,48 @@ const toolCards = [
           </p>
         </div>
         <div class="timeline-summary" style="margin-top: 26px;">
-          <article class="feature-card">
+          <article class="feature-card blueprint-card">
+            <div>
               <span class="card-kicker"><Icon name="files" /> Blueprint</span>
-            <h3>The site is already split into stable layers.</h3>
-            <p>
-              The current version is strongest when read as infrastructure: one layer explains the system,
-              one layer teaches the workflow, and one layer stores the patch library that future real artifacts will use.
-            </p>
-            <ul class="feature-list">
-              <li><strong>System layer:</strong> diagrams, notes, and roadmap define the structure.</li>
-              <li><strong>Learning layer:</strong> lessons are grouped by track, not published as disconnected pages.</li>
-              <li><strong>Repository layer:</strong> patch entries already map to folders and future media artifacts.</li>
-            </ul>
+              <h3>The site is already split into stable layers.</h3>
+              <p>
+                The current version is strongest when read as infrastructure: one layer explains the system,
+                one layer teaches the workflow, and one layer stores the patch library that future real artifacts will use.
+              </p>
+              <ul class="feature-list">
+                <li><strong>System layer:</strong> diagrams, notes, and roadmap define the structure.</li>
+                <li><strong>Learning layer:</strong> lessons are grouped by track, not published as disconnected pages.</li>
+                <li><strong>Repository layer:</strong> patch entries already map to folders and future media artifacts.</li>
+              </ul>
+            </div>
+
+            <div class="blueprint-widget">
+              <div class="widget-header">
+                <span class="widget-title"><Icon name="cpu" /> Infrastructure Specs</span>
+                <span class="widget-badge">v0.2.0</span>
+              </div>
+              <div class="widget-grid">
+                <div class="widget-item">
+                  <span class="label">Engine</span>
+                  <span class="value">VCV Rack + Ableton</span>
+                </div>
+                <div class="widget-item">
+                  <span class="label">Generative</span>
+                  <span class="value">Probability & Markov</span>
+                </div>
+                <div class="widget-item">
+                  <span class="label">Routing</span>
+                  <span class="value">Multichannel CV/MIDI</span>
+                </div>
+                <div class="widget-item">
+                  <span class="label">Visuals</span>
+                  <span class="value">Audio-Reactive OSC</span>
+                </div>
+              </div>
+              <div class="widget-action">
+                <a class="button-secondary" href={withBase("/roadmap")}><Icon name="map" /> <span>Explore System Roadmap</span></a>
+              </div>
+            </div>
           </article>
 
           <div class="card-stack">

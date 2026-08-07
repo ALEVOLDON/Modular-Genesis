@@ -6,12 +6,11 @@
 
 **Documentation-first project about modular synthesis, generative music, hybrid workflows, and audiovisual systems.**
 
-[![Deploy Status](https://github.com/ALEVOLDON/Modular-Genesis/actions/workflows/deploy-pages.yml/badge.svg)](https://alevoldon.github.io/Modular-Genesis/)
-[![Website](https://img.shields.io/badge/website-live-brightgreen)](https://alevoldon.github.io/Modular-Genesis/)
+[![Website](https://img.shields.io/badge/website-live-brightgreen)](https://modular-genesis.netlify.app)
 [![Netlify Status](https://img.shields.io/badge/Netlify-live-00C7B7?logo=netlify&logoColor=white)](https://modular-genesis.netlify.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**[🇬🇧 English Site](https://alevoldon.github.io/Modular-Genesis/)** | **[🇷🇺 Русский Сайт](https://alevoldon.github.io/Modular-Genesis/ru/)**
+**[🇬🇧 English Site](https://modular-genesis.netlify.app/)** | **[🇷🇺 Русский Сайт](https://modular-genesis.netlify.app/ru/)**
 
 
 

@@ -39,26 +39,26 @@ This repository is organized to act as both a **course platform** and a **source
 
 The core of the project is a statically generated site built with [Astro](https://astro.build/).
 
-- 📂 `**[site/src/content/lessons/](./site/src/content/lessons/)`** — English lesson markdown files.
-- 📂 `**[site/src/content/ru-lessons/](./site/src/content/ru-lessons/)**` — Russian lesson markdown files.
-- 📂 `**[site/src/content/notes/](./site/src/content/notes/)**` — Architectural & conceptual notes.
-- 📂 `**[site/src/content/patches/](./site/src/content/patches/)**` — Metadata for the patch library.
+- 📂 **[`site/src/content/lessons/`](./site/src/content/lessons/)** — English lesson markdown files.
+- 📂 **[`site/src/content/ru-lessons/`](./site/src/content/ru-lessons/)** — Russian lesson markdown files.
+- 📂 **[`site/src/content/notes/`](./site/src/content/notes/)** — Architectural & conceptual notes.
+- 📂 **[`site/src/content/patches/`](./site/src/content/patches/)** — Metadata for the patch library.
 
 ### 2️⃣ Patches & Assets (`/patches`, `/ableton`, `/visuals`)
 
 The actual working files that the lessons teach you to build:
 
-- 🎛️ `**[patches/](./patches)**` — `.vcv` files organized by learning track.
-- 🎚️ `**[ableton/](./ableton)**` — Live sets, routing templates, and effect racks.
-- 👁️ `**[visuals/](./visuals)**` — Blender models, Three.js experiments, and TouchDesigner networks.
+- 🎛️ **[`patches/`](./patches)** — `.vcv` files organized by learning track.
+- 🎚️ **[`ableton/`](./ableton)** — Live sets, routing templates, and effect racks.
+- 👁️ **[`visuals/`](./visuals)** — Blender models, Three.js experiments, and TouchDesigner networks.
 
 ### 3️⃣ System Documentation (`/docs`)
 
 Deep-dive architectural documentation for contributors and advanced users:
 
-- 🏗️ `**[PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md)**` — Full repository layout and philosophy.
-- 📸 `**[ARTIFACT_WORKFLOW.md](./docs/ARTIFACT_WORKFLOW.md)**` — Guide on how to add new patches, audio demos, and screenshots.
-- 🗺️ `**[docs/diagrams/](./docs/diagrams)**` — Source files for system routing diagrams.
+- 🏗️ **[`PROJECT_STRUCTURE.md`](./PROJECT_STRUCTURE.md)** — Full repository layout and philosophy.
+- 📸 **[`ARTIFACT_WORKFLOW.md`](./docs/ARTIFACT_WORKFLOW.md)** — Guide on how to add new patches, audio demos, and screenshots.
+- 🗺️ **[`docs/diagrams/`](./docs/diagrams)** — Source files for system routing diagrams.
 
 ---
 

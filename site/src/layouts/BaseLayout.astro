@@ -16,14 +16,24 @@ const {
   title = "Modular Genesis",
   description = "Open modular synthesis, generative music, and audiovisual systems.",
   lang = "en",
-  navItems = [
-    { href: "/roadmap", label: "Roadmap" },
-    { href: "/course", label: "Course" },
-    { href: "/patches", label: "Patches" },
-    { href: "/resources", label: "Resources" }
-  ],
   localeSwitch = null
 } = Astro.props;
+
+const defaultNav = lang === "ru"
+  ? [
+      { href: "/ru/roadmap", label: "План" },
+      { href: "/ru/course", label: "Курс" },
+      { href: "/ru/patches", label: "Патчи" },
+      { href: "/ru/resources", label: "Материалы" }
+    ]
+  : [
+      { href: "/roadmap", label: "Roadmap" },
+      { href: "/course", label: "Course" },
+      { href: "/patches", label: "Patches" },
+      { href: "/resources", label: "Resources" }
+    ];
+
+const navItems = Astro.props.navItems ?? defaultNav;
 
 const brandHref = withBase(lang === "ru" ? "/ru/" : "/");
 type LocalizedCollectionMap = {
@@ -99,6 +109,18 @@ const getNavIcon = (href: string) => {
 
   return "files";
 };
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) => {
+  const target = withBase(href);
+  const normalizedCurrent = currentPath.endsWith("/") && currentPath !== "/" && currentPath !== "/ru/" ? currentPath.slice(0, -1) : currentPath;
+  const normalizedTarget = target.endsWith("/") && target !== "/" && target !== "/ru/" ? target.slice(0, -1) : target;
+  
+  if (normalizedTarget === withBase("/") || normalizedTarget === withBase("/ru/")) {
+    return normalizedCurrent === normalizedTarget;
+  }
+  return normalizedCurrent === normalizedTarget || normalizedCurrent.startsWith(normalizedTarget + "/");
+};
 ---
 
 <!doctype html>
@@ -108,6 +130,16 @@ const getNavIcon = (href: string) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Modular Genesis" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(withBase("/images/cover.jpg"), Astro.url.origin).toString()} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(withBase("/images/cover.jpg"), Astro.url.origin).toString()} />
     <title>{title}</title>
     <style is:global>
       :root {
@@ -213,6 +245,50 @@ const getNavIcon = (href: string) => {
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: var(--muted);
+        transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        border: 1px solid transparent;
+      }
+
+      .nav-link:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-link.active {
+        color: var(--accent);
+        background: rgba(102, 247, 255, 0.08);
+        border-color: rgba(102, 247, 255, 0.2);
+        font-weight: 500;
+      }
+
+      .copy-pill-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        font-size: 0.84rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .copy-pill-btn:hover {
+        background: rgba(102, 247, 255, 0.1);
+        border-color: rgba(102, 247, 255, 0.3);
+        color: var(--accent);
+      }
+
+      .copy-pill-btn[data-copied="true"] {
+        background: rgba(102, 255, 178, 0.15);
+        border-color: rgba(102, 255, 178, 0.4);
+        color: #66ffb2;
       }
 
       .nav-group {
@@ -1829,6 +1905,19 @@ const getNavIcon = (href: string) => {
       }
 
       @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+
+        .bg-breathe {
+          animation: none !important;
+        }
+
         .js-enabled .feature-card,
         .js-enabled .mini-card,
         .js-enabled .section-copy,
@@ -1855,7 +1944,11 @@ const getNavIcon = (href: string) => {
         <div class="nav-group">
           <nav>
             {navItems.map((item) => (
-              <a class="nav-link" href={withBase(item.href)}>
+              <a
+                class:list={["nav-link", { active: isCurrent(item.href) }]}
+                href={withBase(item.href)}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+              >
                 <Icon name={getNavIcon(item.href)} />
                 <span>{item.label}</span>
               </a>
@@ -1879,7 +1972,11 @@ const getNavIcon = (href: string) => {
           <div class="mobile-nav-panel" id="mobile-nav-panel">
             <nav class="mobile-nav-links">
               {navItems.map((item) => (
-                <a href={withBase(item.href)}>
+                <a
+                  class:list={[{ active: isCurrent(item.href) }]}
+                  href={withBase(item.href)}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
+                >
                   <Icon name={getNavIcon(item.href)} />
                   <span>{item.label}</span>
                 </a>
@@ -2085,10 +2182,28 @@ const getNavIcon = (href: string) => {
         });
       };
 
+      const initCopyButtons = () => {
+        document.querySelectorAll('[data-copy-btn]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const text = btn.getAttribute('data-copy-value') || btn.textContent || '';
+            try {
+              await navigator.clipboard.writeText(text);
+              btn.setAttribute('data-copied', 'true');
+              setTimeout(() => {
+                btn.removeAttribute('data-copied');
+              }, 2000);
+            } catch (e) {
+              console.error('Clipboard copy failed:', e);
+            }
+          });
+        });
+      };
+
       const initLogic = () => {
         initReveal();
         initMobileMenu();
         initBackToTop();
+        initCopyButtons();
       };
 
       document.addEventListener('DOMContentLoaded', initLogic);

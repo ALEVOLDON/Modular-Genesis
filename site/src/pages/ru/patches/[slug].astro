@@ -33,15 +33,9 @@ const siblingPatches = (await getCollection("ru-patches"))
 ---
 
 <BaseLayout
-  title={`${patch.data.title} | Modular Genesis | RU`}
+  title={`${patch.data.title} | Modular Genesis`}
   description={patch.data.summary}
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/course", label: "Курс" },
-    { href: "/ru/resources", label: "Материалы" }
-  ]}
   localeSwitch={{ href: `/patches/${patch.slug}/`, label: "EN" }}
 >
   <div class="page-stack">
@@ -49,7 +43,7 @@ const siblingPatches = (await getCollection("ru-patches"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">{translatedTrackTitle}</div>
+            <div class="eyebrow"><Icon name="panels-top-left" /> {translatedTrackTitle}</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
               {patch.data.title}
             </h1>
@@ -62,7 +56,7 @@ const siblingPatches = (await getCollection("ru-patches"))
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Метаданные патча</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Метаданные патча</span>
               <h3>{patch.data.filename}</h3>
               <ul class="metric-list">
                 <li>
@@ -85,13 +79,31 @@ const siblingPatches = (await getCollection("ru-patches"))
             </article>
 
             <article class="feature-card">
-              <span class="section-label">Путь в репозитории</span>
+              <span class="section-label"><Icon name="folders" /> Путь в репозитории</span>
               <h3>Расположение patch file</h3>
               <p>
                 Связанный patch artifact лежит в репозитории и позже может быть заменен реальным `VCV Rack` patch
                 без изменения site route.
               </p>
-              <div class="code-block">{`patches/${patch.data.track}/${patch.data.filename}`}</div>
+              <div class="code-block" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <code>{`patches/${patch.data.track}/${patch.data.filename}`}</code>
+                <button type="button" class="copy-pill-btn" data-copy-btn data-copy-value={`patches/${patch.data.track}/${patch.data.filename}`}>
+                  <Icon name="copy" />
+                  <span>Скопировать путь</span>
+                </button>
+              </div>
+              <div style="margin-top: 12px;">
+                <a
+                  class="button-secondary"
+                  href={`https://github.com/ALEVOLDON/Modular-Genesis/blob/main/patches/${patch.data.track}/${patch.data.filename}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="width: 100%; justify-content: center;"
+                >
+                  <Icon name="git-fork" />
+                  <span>Открыть .vcv на GitHub</span>
+                </a>
+              </div>
             </article>
           </div>
         </div>
@@ -102,7 +114,7 @@ const siblingPatches = (await getCollection("ru-patches"))
       <div class="band-shell">
         <div class="stack-grid">
           <article class="feature-card">
-            <span class="card-kicker">Состояние медиа</span>
+            <span class="card-kicker"><Icon name="files" /> Состояние медиа</span>
             <h3>Подключенные материалы</h3>
             <ul class="feature-list">
               <li>
@@ -123,7 +135,7 @@ const siblingPatches = (await getCollection("ru-patches"))
             </div>
           ) : (
             <article class="feature-card">
-              <span class="card-kicker">Следующий артефакт</span>
+              <span class="card-kicker"><Icon name="move-right" /> Следующий артефакт</span>
               <h3>Рекомендуемый первый файл</h3>
               <p>Добавь один clean patch screenshot в `assets/images/patches/` и подключи его к этому entry.</p>
             </article>
@@ -131,7 +143,7 @@ const siblingPatches = (await getCollection("ru-patches"))
 
           {patch.data.audio ? (
             <article class="feature-card">
-              <span class="card-kicker">Демо-аудио</span>
+              <span class="card-kicker"><Icon name="audio-lines" /> Демо-аудио</span>
               <h3>Предпросмотр патча</h3>
               <audio controls preload="none" style="width: 100%; margin-top: 8px;">
                 <source src={withBase(patch.data.audio)} />
@@ -139,7 +151,7 @@ const siblingPatches = (await getCollection("ru-patches"))
             </article>
           ) : (
             <article class="feature-card">
-              <span class="card-kicker">Аудиоцель</span>
+              <span class="card-kicker"><Icon name="audio-lines" /> Аудиоцель</span>
               <h3>Рекомендуемое демо</h3>
               <p>Экспортируй короткий 20-60 second example и положи его в `assets/audio/patches/`.</p>
             </article>

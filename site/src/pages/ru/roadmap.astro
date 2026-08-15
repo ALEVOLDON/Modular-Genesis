@@ -5,9 +5,9 @@ import { getCollection } from "astro:content";
 import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
 
-const lessons = await getCollection("lessons");
-const patches = await getCollection("patches");
-const notes = await getCollection("notes");
+const lessons = await getCollection("ru-lessons");
+const patches = await getCollection("ru-patches");
+const notes = await getCollection("ru-notes");
 
 const trackTones = ["#66f7ff", "#7cf0c9", "#ff5fcb", "#ffe45c", "#66d9ff"];
 
@@ -55,15 +55,9 @@ const roadmapStages = tracks.map((track, index) => ({
 ---
 
 <BaseLayout
-  title="Roadmap | Modular Genesis | RU"
-  description="Русская roadmap-страница проекта Modular Genesis."
+  title="План развития | Modular Genesis"
+  description="Русскоязычный план развития и эволюция архитектуры проекта Modular Genesis."
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/resources", label: "Материалы" },
-    { href: "/ru/course", label: "Курс" }
-  ]}
   localeSwitch={{ href: "/roadmap", label: "EN" }}
 >
   <div class="page-stack">
@@ -71,7 +65,7 @@ const roadmapStages = tracks.map((track, index) => ({
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Протокол эволюции системы</div>
+            <div class="eyebrow"><Icon name="map" /> План эволюции системы</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               Roadmap проекта <span class="accent">Modular Genesis</span> от first signal flow до audiovisual systems.
             </h1>

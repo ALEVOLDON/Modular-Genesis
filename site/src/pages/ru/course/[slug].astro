@@ -71,15 +71,9 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
 ---
 
 <BaseLayout
-  title={`${lesson.data.title} | Modular Genesis | RU`}
+  title={`${lesson.data.title} | Modular Genesis`}
   description={lesson.data.summary}
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/course", label: "Курс" },
-    { href: "/ru/resources", label: "Материалы" }
-  ]}
   localeSwitch={{ href: `/course/${lesson.slug}/`, label: "EN" }}
 >
   <div class="page-stack">
@@ -87,7 +81,7 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">{translatedTrack.title}</div>
+            <div class="eyebrow"><Icon name="book-open" /> {translatedTrack.title}</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.6rem);">
               {lesson.data.title}
             </h1>
@@ -100,7 +94,7 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Контекст трека</span>
+              <span class="section-label"><Icon name="audio-lines" /> Контекст трека</span>
               <h3>{translatedTrack.title}</h3>
               <p>{translatedTrack.description}</p>
               <ul class="feature-list">

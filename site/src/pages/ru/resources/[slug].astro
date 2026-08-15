@@ -22,15 +22,9 @@ const otherNotes = (await getCollection("ru-notes"))
 ---
 
 <BaseLayout
-  title={`${note.data.title} | Modular Genesis | RU`}
+  title={`${note.data.title} | Modular Genesis`}
   description={note.data.summary}
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/course", label: "Курс" },
-    { href: "/ru/resources", label: "Материалы" }
-  ]}
   localeSwitch={{ href: `/resources/${note.slug}/`, label: "EN" }}
 >
   <div class="page-stack">
@@ -38,20 +32,20 @@ const otherNotes = (await getCollection("ru-notes"))
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Опорная заметка</div>
+            <div class="eyebrow"><Icon name="notebook-pen" /> Опорная заметка</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.1rem, 7vw, 5.4rem);">
               {note.data.title}
             </h1>
             <p class="lede">{note.data.summary}</p>
             <div class="actions">
               <a class="button" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Назад к материалам</span></a>
-              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть roadmap</span></a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть план</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Роль заметки</span>
+              <span class="section-label"><Icon name="library-big" /> Роль заметки</span>
               <h3>Концептуальный слой для публичной системы</h3>
               <p>Такие заметки объясняют устойчивую логику за уроками, патчами и дальнейшим ростом сайта.</p>
               <ul class="feature-list">

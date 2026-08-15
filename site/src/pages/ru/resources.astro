@@ -1,49 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection } from "astro:content";
 import { withBase } from "../../lib/paths";
 
-const resources = [
-  {
-    title: "Hybrid Workflow",
-    summary: "Ключевая заметка о том, как Ableton Live и VCV Rack разделяют роли внутри проекта.",
-    href: "/resources/hybrid-workflow/"
-  },
-  {
-    title: "Generative Patch Design",
-    summary: "Системный разбор clock, probability, quantization и feedback как grammar generative systems.",
-    href: "/resources/generative-patch-design/"
-  },
-  {
-    title: "Course And Repository Vision",
-    summary: "Почему Modular Genesis строится как documentation-first course, patch library и public reference system.",
-    href: "/resources/course-and-repository-vision/"
-  },
-  {
-    title: "Site And Visual Map",
-    summary: "Как сайт должен показывать diagrams, lessons, notes и system structure.",
-    href: "/resources/site-and-visual-map/"
-  },
-  {
-    title: "3D Lab Concept",
-    summary: "Долгосрочная идея для spatial WebGL learning environment и интерактивной лаборатории.",
-    href: "/resources/3d-lab-concept/"
-  }
-];
-
-const featuredResources = resources.slice(0, 3);
-const remainingResources = resources.slice(3);
+const notes = (await getCollection("ru-notes")).sort((a, b) => a.data.order - b.data.order);
+const featuredResources = notes.slice(0, 3);
+const remainingResources = notes.slice(3);
 ---
 
 <BaseLayout
-  title="Resources | Modular Genesis | RU"
-  description="Русскоязычный обзор reference notes проекта Modular Genesis."
+  title="Материалы | Modular Genesis"
+  description="Русскоязычный обзор опорных заметок проекта Modular Genesis."
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/resources", label: "Материалы" },
-    { href: "/ru/course", label: "Курс" }
-  ]}
   localeSwitch={{ href: "/resources", label: "EN" }}
 >
   <div class="page-stack">
@@ -51,7 +20,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Материалы</div>
+            <div class="eyebrow"><Icon name="notebook-pen" /> Материалы</div>
             <h1 class="display-title">
               <span class="accent">Слой материалов</span> за уроками, патчами и диаграммами.
             </h1>
@@ -60,19 +29,19 @@ const remainingResources = resources.slice(3);
               project vision и visual system planning, который расширяет модульную сторону проекта.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/roadmap")}>Открыть план</a>
-              <a class="button-secondary" href={withBase("/ru/course")}>Смотреть уроки</a>
+              <a class="button" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть план</span></a>
+              <a class="button-secondary" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Смотреть уроки</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Охват заметок</span>
+              <span class="section-label"><Icon name="library-big" /> Охват заметок</span>
               <h3>Заметки объясняют систему, а не только отдельные техники.</h3>
               <ul class="metric-list">
                 <li>
-                  <strong>{resources.length}</strong>
-                  concept notes уже опубликовано
+                  <strong>{notes.length}</strong>
+                  опорных заметок уже опубликовано
                 </li>
                 <li>
                   <strong>Workflow</strong>
@@ -93,7 +62,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Основные заметки</span>
+            <span class="section-label"><Icon name="notebook-pen" /> Основные заметки</span>
             <h2>Первый слой концентрируется на идеях, которые держат проект вместе.</h2>
             <p>Это заметки, которые сильнее всего связаны с текущими уроками, планом и логикой патчей.</p>
           </div>
@@ -103,10 +72,10 @@ const remainingResources = resources.slice(3);
           {featuredResources.map((resource) => (
             <article class="feature-card">
               <span class="card-kicker">Материал</span>
-              <h3>{resource.title}</h3>
-              <p>{resource.summary}</p>
+              <h3>{resource.data.title}</h3>
+              <p>{resource.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть материал</a>
+                <a class="button-secondary" href={withBase(`/ru/resources/${resource.slug}/`)}><Icon name="move-right" /> <span>Открыть материал</span></a>
               </div>
             </article>
           ))}
@@ -118,7 +87,7 @@ const remainingResources = resources.slice(3);
       <div class="band-shell">
         <div class="split-hero">
           <article class="feature-card">
-            <span class="section-label">Гибридный setup: справочник</span>
+            <span class="section-label"><Icon name="workflow" /> Гибридный setup: справочник</span>
             <h2>Site-native diagram, извлеченная из исходного проектного мышления.</h2>
             <p>
               Эта схема заменяет старый slide material более чистым языком сайта, но сохраняет структурную идею:
@@ -136,7 +105,7 @@ const remainingResources = resources.slice(3);
     <section class="band band-subtle">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Дополнительные заметки</span>
+          <span class="section-label"><Icon name="files" /> Дополнительные заметки</span>
           <h2>Оставшиеся notes указывают на рост сайта и будущие слои системы.</h2>
           <p>Они менее операционные, чем workflow notes, но важны для того, куда проект идет дальше.</p>
         </div>
@@ -145,10 +114,10 @@ const remainingResources = resources.slice(3);
           {remainingResources.map((resource) => (
             <article class="card">
               <span class="card-kicker">Материал</span>
-              <h3>{resource.title}</h3>
-              <p>{resource.summary}</p>
+              <h3>{resource.data.title}</h3>
+              <p>{resource.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(`/ru${resource.href}`)}>Открыть материал</a>
+                <a class="button-secondary" href={withBase(`/ru/resources/${resource.slug}/`)}><Icon name="move-right" /> <span>Открыть материал</span></a>
               </div>
             </article>
           ))}

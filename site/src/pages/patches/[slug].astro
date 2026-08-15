@@ -75,7 +75,25 @@ const siblingPatches = (await getCollection("patches"))
                 The current linked patch artifact is stored in the repository and can later be replaced
                 with a real `VCV Rack` patch without changing the site route.
               </p>
-              <div class="code-block">{`patches/${patch.data.track}/${patch.data.filename}`}</div>
+              <div class="code-block" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <code>{`patches/${patch.data.track}/${patch.data.filename}`}</code>
+                <button type="button" class="copy-pill-btn" data-copy-btn data-copy-value={`patches/${patch.data.track}/${patch.data.filename}`}>
+                  <Icon name="copy" />
+                  <span>Copy path</span>
+                </button>
+              </div>
+              <div style="margin-top: 12px;">
+                <a
+                  class="button-secondary"
+                  href={`https://github.com/ALEVOLDON/Modular-Genesis/blob/main/patches/${patch.data.track}/${patch.data.filename}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="width: 100%; justify-content: center;"
+                >
+                  <Icon name="git-fork" />
+                  <span>View .vcv on GitHub</span>
+                </a>
+              </div>
             </article>
           </div>
         </div>

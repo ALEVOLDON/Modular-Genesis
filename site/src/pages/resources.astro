@@ -1,11 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
-import { resources } from "../data/resources";
+import { getCollection } from "astro:content";
 import { withBase } from "../lib/paths";
 
-const featuredResources = resources.slice(0, 3);
-const remainingResources = resources.slice(3);
+const notes = (await getCollection("notes")).sort((a, b) => a.data.order - b.data.order);
+const featuredResources = notes.slice(0, 3);
+const remainingResources = notes.slice(3);
 ---
 
 <BaseLayout
@@ -38,7 +39,7 @@ const remainingResources = resources.slice(3);
               <h3>Notes explain the system, not just isolated techniques.</h3>
               <ul class="metric-list">
                 <li>
-                  <strong>{resources.length}</strong>
+                  <strong>{notes.length}</strong>
                   concept notes currently published
                 </li>
                 <li>
@@ -70,10 +71,10 @@ const remainingResources = resources.slice(3);
           {featuredResources.map((resource) => (
             <article class="feature-card">
               <span class="card-kicker">Reference</span>
-              <h3>{resource.title}</h3>
-              <p>{resource.summary}</p>
+              <h3>{resource.data.title}</h3>
+              <p>{resource.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(resource.href)}><Icon name="move-right" /> <span>Open note</span></a>
+                <a class="button-secondary" href={withBase(`/resources/${resource.slug}/`)}><Icon name="move-right" /> <span>Open note</span></a>
               </div>
             </article>
           ))}
@@ -112,10 +113,10 @@ const remainingResources = resources.slice(3);
           {remainingResources.map((resource) => (
             <article class="card">
               <span class="card-kicker">Reference</span>
-              <h3>{resource.title}</h3>
-              <p>{resource.summary}</p>
+              <h3>{resource.data.title}</h3>
+              <p>{resource.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(resource.href)}><Icon name="move-right" /> <span>Open note</span></a>
+                <a class="button-secondary" href={withBase(`/resources/${resource.slug}/`)}><Icon name="move-right" /> <span>Open note</span></a>
               </div>
             </article>
           ))}

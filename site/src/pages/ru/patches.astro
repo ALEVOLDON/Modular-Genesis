@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { patchCollections } from "../../data/patches";
 import { withBase } from "../../lib/paths";
@@ -37,15 +38,9 @@ const collectionCopy = {
 ---
 
 <BaseLayout
-  title="Patches | Modular Genesis | RU"
+  title="Патчи | Modular Genesis"
   description="Русскоязычный обзор библиотеки патчей проекта Modular Genesis."
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/course", label: "Курс" },
-    { href: "/ru/resources", label: "Материалы" }
-  ]}
   localeSwitch={{ href: "/patches", label: "EN" }}
 >
   <div class="page-stack">
@@ -53,7 +48,7 @@ const collectionCopy = {
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Библиотека патчей</div>
+            <div class="eyebrow"><Icon name="panels-top-left" /> Библиотека патчей</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               <span class="accent">Слой патчей</span> уже структурирован под реальные артефакты.
             </h1>
@@ -62,14 +57,14 @@ const collectionCopy = {
               на реальные `.vcv` systems, скриншоты и аудиопримеры.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/course")}>Открыть уроки</a>
-              <a class="button-secondary" href={withBase("/ru/roadmap")}>Смотреть план</a>
+              <a class="button" href={withBase("/ru/course")}><Icon name="book-open" /> <span>Открыть уроки</span></a>
+              <a class="button-secondary" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Смотреть план</span></a>
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Состояние библиотеки</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Состояние библиотеки</span>
               <h3>Структура опережает артефакты.</h3>
               <ul class="metric-list">
                 <li>
@@ -104,7 +99,7 @@ const collectionCopy = {
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Карта коллекций</span>
+          <span class="section-label"><Icon name="folders" /> Карта коллекций</span>
           <h2>Каждая collection соответствует своему типу patch system.</h2>
           <p>
             Библиотека патчей следует той же архитектуре, что и курс: foundations, sequencing,
@@ -132,7 +127,7 @@ const collectionCopy = {
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Опубликованные entries</span>
+            <span class="section-label"><Icon name="panels-top-left" /> Опубликованные entries</span>
             <h2>Текущие patch entries уже чисто сгруппированы и связаны с репозиторием.</h2>
             <p>Секция уже полезна сейчас и оставляет место для реальных patch artifacts позже.</p>
           </div>
@@ -147,12 +142,18 @@ const collectionCopy = {
               <ul class="feature-list">
                 {groupedEntries[collection.key]?.map((entry) => (
                   <li>
-                    <a href={withBase(`/ru/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                    <a class="related-link" href={withBase(`/ru/patches/${entry.slug}/`)}>
+                      <Icon name="move-right" />
+                      <span>{entry.data.title}</span>
+                    </a>
                   </li>
                 ))}
               </ul>
               <div class="actions">
-                <a class="button-secondary" href={collection.folder}>Папка в репозитории</a>
+                <a class="button-secondary" href={collection.folder} target="_blank" rel="noopener noreferrer">
+                  <Icon name="git-fork" />
+                  <span>Папка в репозитории</span>
+                </a>
               </div>
             </article>
           ))}

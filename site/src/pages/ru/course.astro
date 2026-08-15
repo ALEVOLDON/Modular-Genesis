@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
 import { getCollection } from "astro:content";
 import { tracks } from "../../data/tracks";
 import { withBase } from "../../lib/paths";
@@ -46,15 +47,9 @@ const trackCopyMap = {
 ---
 
 <BaseLayout
-  title="Course | Modular Genesis | RU"
-  description="Русская обзорная страница course-структуры проекта Modular Genesis."
+  title="Курс | Modular Genesis"
+  description="Русскоязычная структура обучающих треков и уроков проекта Modular Genesis."
   lang="ru"
-  navItems={[
-    { href: "/ru/", label: "Главная" },
-    { href: "/ru/roadmap", label: "План" },
-    { href: "/ru/course", label: "Курс" },
-    { href: "/ru/resources", label: "Материалы" }
-  ]}
   localeSwitch={{ href: "/course", label: "EN" }}
 >
   <div class="page-stack">
@@ -62,7 +57,7 @@ const trackCopyMap = {
       <div class="band-shell">
         <div class="display-grid">
           <div>
-            <div class="eyebrow">Структура курса</div>
+            <div class="eyebrow"><Icon name="book-open" /> Структура курса</div>
             <h1 class="display-title" style="max-width: 8ch; font-size: clamp(3.2rem, 8vw, 6rem);">
               Documentation-first <span class="accent">learning path</span> для modular sound и hybrid systems.
             </h1>
@@ -71,24 +66,24 @@ const trackCopyMap = {
               не превращаясь в длинный список disconnected tutorials.
             </p>
             <div class="actions">
-              <a class="button" href={withBase("/ru/roadmap")}>Открыть план</a>
-              <a class="button-secondary" href={withBase("/ru/resources")}>Читать материалы</a>
+              <a class="button" href={withBase("/ru/roadmap")}><Icon name="map" /> <span>Открыть план</span></a>
+              <a class="button-secondary" href={withBase("/ru/resources")}><Icon name="notebook-pen" /> <span>Читать материалы</span></a>
             </div>
             <div class="track-nav">
               {grouped.map((track) => (
-                <a class="track-chip" href={`#${track.key}`}>{trackCopyMap[track.key].title}</a>
+                <a class="track-chip" href={`#${track.key}`}><Icon name="audio-lines" /> <span>{trackCopyMap[track.key].title}</span></a>
               ))}
             </div>
           </div>
 
           <div class="hero-dashboard">
             <article class="feature-card">
-              <span class="section-label">Состояние курса</span>
+              <span class="section-label"><Icon name="square-chart-gantt" /> Состояние курса</span>
               <h3>У curriculum уже есть стабильный каркас.</h3>
               <ul class="metric-list">
                 <li>
                   <strong>{tracks.length}</strong>
-                  tracks определены от foundations до audiovisual
+                  треков определены от foundations до audiovisual
                 </li>
                 <li>
                   <strong>{totalLessons}</strong>
@@ -96,7 +91,7 @@ const trackCopyMap = {
                 </li>
                 <li>
                   <strong>{populatedTracks.length}</strong>
-                  tracks уже наполнены живым контентом
+                  треков уже наполнены живым контентом
                 </li>
               </ul>
             </article>
@@ -104,12 +99,12 @@ const trackCopyMap = {
             <div class="hero-dashboard-grid">
               <article class="mini-card">
                 <span class="mini-stat">Теория</span>
-                <h4>Концепция первая</h4>
+                <h4><Icon name="files" /> Концепция первая</h4>
                 <p>Каждый урок начинается с модели идеи, еще до файла патча и практики.</p>
               </article>
               <article class="mini-card">
                 <span class="mini-stat">Патч</span>
-                <h4>Якорь репозитория</h4>
+                <h4><Icon name="panels-top-left" /> Якорь репозитория</h4>
                 <p>Уроки связаны с карточками патчей, поэтому контент и артефакты растут вместе.</p>
               </article>
             </div>
@@ -121,7 +116,7 @@ const trackCopyMap = {
     <section class="band band-deep">
       <div class="band-shell">
         <div class="section-copy">
-          <span class="section-label">Карта треков</span>
+          <span class="section-label"><Icon name="map" /> Карта треков</span>
           <h2>Каждый трек покрывает отдельный слой одной и той же системы.</h2>
           <p>
             Курс разделен не по случайным темам, а движется от core signal logic к sequencing,
@@ -149,7 +144,7 @@ const trackCopyMap = {
       <div class="band-shell">
         <div class="section-head">
           <div class="section-copy">
-            <span class="section-label">Опубликованные уроки</span>
+            <span class="section-label"><Icon name="book-open" /> Опубликованные уроки</span>
             <h2>Группы уроков разделены по трекам и остаются читаемыми.</h2>
             <p>Каждый блок может расти независимо, не превращая страницу в одну длинную смешанную ленту.</p>
           </div>
@@ -164,7 +159,10 @@ const trackCopyMap = {
               <ul class="feature-list">
                 {track.lessons.map((lesson) => (
                   <li>
-                    <a href={withBase(`/ru/course/${lesson.slug}/`)}>{lesson.data.title}</a>
+                    <a class="related-link" href={withBase(`/ru/course/${lesson.slug}/`)}>
+                      <Icon name="move-right" />
+                      <span>{lesson.data.title}</span>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -178,7 +176,7 @@ const trackCopyMap = {
       <div class="band-shell">
         <div class="split-hero">
           <article class="feature-card">
-            <span class="section-label">Формат урока</span>
+            <span class="section-label"><Icon name="workflow" /> Формат урока</span>
             <h2>Каждый урок строится вокруг одной повторяемой структуры.</h2>
             <ul class="feature-list">
               <li><strong>Theory:</strong> короткое объяснение концепта.</li>

@@ -159,7 +159,7 @@ const trackCopyMap = {
               <ul class="feature-list">
                 {track.lessons.map((lesson) => (
                   <li>
-                    <a class="related-link" href={withBase(`/ru/course/${lesson.slug}/`)}>
+                    <a class="related-link" href={withBase(`/ru/course/${lesson.id}/`)}>
                       <Icon name="move-right" />
                       <span>{lesson.data.title}</span>
                     </a>

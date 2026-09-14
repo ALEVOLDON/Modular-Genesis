@@ -320,7 +320,7 @@ const toolCards = [
                   <h3>{lesson.data.title}</h3>
                   <p>{lesson.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/course/${lesson.slug}/`)}><Icon name="move-right" /> <span>Open lesson</span></a>
+                    <a class="button-secondary" href={withBase(`/course/${lesson.id}/`)}><Icon name="move-right" /> <span>Open lesson</span></a>
                   </div>
                 </article>
               ))}
@@ -335,7 +335,7 @@ const toolCards = [
                   <h3>{note.data.title}</h3>
                   <p>{note.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/resources/${note.slug}/`)}><Icon name="move-right" /> <span>Open note</span></a>
+                    <a class="button-secondary" href={withBase(`/resources/${note.id}/`)}><Icon name="move-right" /> <span>Open note</span></a>
                   </div>
                 </article>
               ))}
@@ -351,7 +351,7 @@ const toolCards = [
                   <h3>{patch.data.title}</h3>
                   <p>{patch.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/patches/${patch.slug}/`)}><Icon name="move-right" /> <span>Open patch</span></a>
+                    <a class="button-secondary" href={withBase(`/patches/${patch.id}/`)}><Icon name="move-right" /> <span>Open patch</span></a>
                   </div>
                 </article>
               ))}

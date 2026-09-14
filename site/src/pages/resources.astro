@@ -74,7 +74,7 @@ const remainingResources = notes.slice(3);
               <h3>{resource.data.title}</h3>
               <p>{resource.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(`/resources/${resource.slug}/`)}><Icon name="move-right" /> <span>Open note</span></a>
+                <a class="button-secondary" href={withBase(`/resources/${resource.id}/`)}><Icon name="move-right" /> <span>Open note</span></a>
               </div>
             </article>
           ))}
@@ -116,7 +116,7 @@ const remainingResources = notes.slice(3);
               <h3>{resource.data.title}</h3>
               <p>{resource.data.summary}</p>
               <div class="actions">
-                <a class="button-secondary" href={withBase(`/resources/${resource.slug}/`)}><Icon name="move-right" /> <span>Open note</span></a>
+                <a class="button-secondary" href={withBase(`/resources/${resource.id}/`)}><Icon name="move-right" /> <span>Open note</span></a>
               </div>
             </article>
           ))}

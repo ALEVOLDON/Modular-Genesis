@@ -122,7 +122,7 @@ const placeholderCount = patchEntries.filter((entry) => entry.data.status === "p
               <ul class="feature-list">
                 {groupedEntries[collection.key]?.map((entry) => (
                   <li>
-                    <a href={withBase(`/patches/${entry.slug}/`)}>{entry.data.title}</a>
+                    <a href={withBase(`/patches/${entry.id}/`)}>{entry.data.title}</a>
                   </li>
                 ))}
               </ul>

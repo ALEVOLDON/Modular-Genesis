@@ -130,7 +130,7 @@ const totalLessons = lessons.length;
               <ul class="feature-list">
                 {track.lessons.map((lesson) => (
                   <li>
-                    <a href={withBase(`/course/${lesson.slug}/`)}>{lesson.data.title}</a>
+                    <a href={withBase(`/course/${lesson.id}/`)}>{lesson.data.title}</a>
                   </li>
                 ))}
               </ul>

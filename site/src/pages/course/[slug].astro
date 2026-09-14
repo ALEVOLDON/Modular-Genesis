@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const lessons = await getCollection("lessons");
 
   return lessons.map((lesson) => ({
-    params: { slug: lesson.slug },
+    params: { slug: lesson.id },
     props: { lesson }
   }));
 }
@@ -25,7 +25,7 @@ const relatedPatches = (await getCollection("patches"))
   .slice(0, 3);
 
 const siblingLessons = lessons
-  .filter((entry) => entry.data.track === lesson.data.track && entry.slug !== lesson.slug)
+  .filter((entry) => entry.data.track === lesson.data.track && entry.id !== lesson.id)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
@@ -36,7 +36,7 @@ const sortedLessons = [...lessons].sort((a, b) => {
   return a.data.order - b.data.order;
 });
 
-const currentIndex = sortedLessons.findIndex(l => l.slug === lesson.slug);
+const currentIndex = sortedLessons.findIndex(l => l.id === lesson.id);
 const prevLesson = currentIndex > 0 ? sortedLessons[currentIndex - 1] : null;
 const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[currentIndex + 1] : null;
 ---
@@ -44,7 +44,7 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
 <BaseLayout
   title={`${lesson.data.title} | Modular Genesis`}
   description={lesson.data.summary}
-  localeSwitch={{ href: `/ru/course/${lesson.slug}/`, label: "RU" }}
+  localeSwitch={{ href: `/ru/course/${lesson.id}/`, label: "RU" }}
 >
   <div class="page-stack">
     <section class="band band-hero">
@@ -98,14 +98,14 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
 
           <div class="lesson-navigation">
             {prevLesson ? (
-              <a href={withBase(`/course/${prevLesson.slug}/`)} class="button-secondary lesson-nav-link prev">
+              <a href={withBase(`/course/${prevLesson.id}/`)} class="button-secondary lesson-nav-link prev">
                 <span class="lesson-nav-label">← Previous Lesson</span>
                 <span>{prevLesson.data.title}</span>
               </a>
             ) : <div />}
             
             {nextLesson ? (
-              <a href={withBase(`/course/${nextLesson.slug}/`)} class="button lesson-nav-link next">
+              <a href={withBase(`/course/${nextLesson.id}/`)} class="button lesson-nav-link next">
                 <span class="lesson-nav-label">Next Lesson →</span>
                 <span>{nextLesson.data.title}</span>
               </a>
@@ -125,7 +125,7 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             <ul class="feature-list">
               {relatedPatches.map((patch) => (
                 <li>
-                  <a class="related-link" href={withBase(`/patches/${patch.slug}/`)}>
+                  <a class="related-link" href={withBase(`/patches/${patch.id}/`)}>
                     <Icon name="move-right" />
                     <span>{patch.data.title}</span>
                   </a>
@@ -141,7 +141,7 @@ const nextLesson = currentIndex < sortedLessons.length - 1 ? sortedLessons[curre
             <ul class="feature-list">
               {siblingLessons.map((entry) => (
                 <li>
-                  <a class="related-link" href={withBase(`/course/${entry.slug}/`)}>
+                  <a class="related-link" href={withBase(`/course/${entry.id}/`)}>
                     <Icon name="move-right" />
                     <span>{entry.data.title}</span>
                   </a>

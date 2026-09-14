@@ -309,7 +309,7 @@ const toolCards = [
                   <h3>{lesson.data.title}</h3>
                   <p>{lesson.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/course/${lesson.slug}/`)}>Открыть урок</a>
+                    <a class="button-secondary" href={withBase(`/ru/course/${lesson.id}/`)}>Открыть урок</a>
                   </div>
                 </article>
               ))}
@@ -324,7 +324,7 @@ const toolCards = [
                   <h3>{note.data.title}</h3>
                   <p>{note.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/resources/${note.slug}/`)}>Открыть материал</a>
+                    <a class="button-secondary" href={withBase(`/ru/resources/${note.id}/`)}>Открыть материал</a>
                   </div>
                 </article>
               ))}
@@ -340,7 +340,7 @@ const toolCards = [
                   <h3>{patch.data.title}</h3>
                   <p>{patch.data.summary}</p>
                   <div class="actions">
-                    <a class="button-secondary" href={withBase(`/ru/patches/${patch.slug}/`)}>Открыть патч</a>
+                    <a class="button-secondary" href={withBase(`/ru/patches/${patch.id}/`)}>Открыть патч</a>
                   </div>
                 </article>
               ))}

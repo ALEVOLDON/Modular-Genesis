@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const notes = await getCollection("notes");
 
   return notes.map((note) => ({
-    params: { slug: note.slug },
+    params: { slug: note.id },
     props: { note }
   }));
 }
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { note } = Astro.props;
 const { Content } = await render(note);
 const otherNotes = (await getCollection("notes"))
-  .filter((entry) => entry.slug !== note.slug)
+  .filter((entry) => entry.id !== note.id)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 ---
@@ -24,7 +24,7 @@ const otherNotes = (await getCollection("notes"))
 <BaseLayout
   title={`${note.data.title} | Modular Genesis`}
   description={note.data.summary}
-  localeSwitch={{ href: `/ru/resources/${note.slug}/`, label: "RU" }}
+  localeSwitch={{ href: `/ru/resources/${note.id}/`, label: "RU" }}
 >
   <div class="page-stack">
     <section class="band band-hero">
@@ -78,7 +78,7 @@ const otherNotes = (await getCollection("notes"))
             <ul class="feature-list">
               {otherNotes.map((entry) => (
                 <li>
-                  <a class="related-link" href={withBase(`/resources/${entry.slug}/`)}>
+                  <a class="related-link" href={withBase(`/resources/${entry.id}/`)}>
                     <Icon name="move-right" />
                     <span>{entry.data.title}</span>
                   </a>

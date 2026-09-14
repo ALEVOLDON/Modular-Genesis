@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const patches = await getCollection("patches");
 
   return patches.map((patch) => ({
-    params: { slug: patch.slug },
+    params: { slug: patch.id },
     props: { patch }
   }));
 }
@@ -18,7 +18,7 @@ const { patch } = Astro.props;
 const { Content } = await render(patch);
 const displayTrack = patch.data.track === "performances" ? "hybrid" : patch.data.track;
 const siblingPatches = (await getCollection("patches"))
-  .filter((entry) => entry.data.track === patch.data.track && entry.slug !== patch.slug)
+  .filter((entry) => entry.data.track === patch.data.track && entry.id !== patch.id)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 ---
@@ -26,7 +26,7 @@ const siblingPatches = (await getCollection("patches"))
 <BaseLayout
   title={`${patch.data.title} | Modular Genesis`}
   description={patch.data.summary}
-  localeSwitch={{ href: `/ru/patches/${patch.slug}/`, label: "RU" }}
+  localeSwitch={{ href: `/ru/patches/${patch.id}/`, label: "RU" }}
 >
   <div class="page-stack">
     <section class="band band-hero">
@@ -171,7 +171,7 @@ const siblingPatches = (await getCollection("patches"))
             <ul class="feature-list">
               {siblingPatches.map((entry) => (
                 <li>
-                  <a class="related-link" href={withBase(`/patches/${entry.slug}/`)}>
+                  <a class="related-link" href={withBase(`/patches/${entry.id}/`)}>
                     <Icon name="move-right" />
                     <span>{entry.data.title}</span>
                   </a>
